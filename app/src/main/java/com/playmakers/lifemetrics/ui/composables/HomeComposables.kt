@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,11 +36,12 @@ fun ProgressBar(){
             CircularProgressIndicator(
                 progress = 1f,
                 strokeWidth = 10.dp,
-                color = Color.LightGray
+                color = MaterialTheme.colorScheme.scrim
             )
             CircularProgressIndicator(
                 progress = 0.4f,
                 strokeWidth = 10.dp,
+                color = MaterialTheme.colorScheme.primary
             )
             Column(
                 Modifier.fillMaxSize(),
@@ -46,10 +49,12 @@ fun ProgressBar(){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Hello 1"
+                    text = "3 Days",
+                    style = MaterialTheme.typography.displaySmall,
+                    modifier = Modifier.padding(bottom = 15.dp)
                 )
                 Text(
-                    text = "Hello 2"
+                    text = "06:57:07"
                 )
             }
         }
