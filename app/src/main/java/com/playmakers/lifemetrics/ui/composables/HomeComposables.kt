@@ -4,19 +4,27 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -24,6 +32,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -64,7 +73,7 @@ fun ProgressBar(){
             CircularProgressIndicator(
                 progress = 1f,
                 strokeWidth = 10.dp,
-                color = MaterialTheme.colorScheme.scrim
+                color = MaterialTheme.colorScheme.onPrimary
             )
             CircularProgressIndicator(
                 progress = 0.4f,
@@ -89,7 +98,41 @@ fun ProgressBar(){
     }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun ActionButtons(){
+    Row(
+        Modifier.fillMaxWidth().padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ){
+        OutlinedButton(
+            onClick = { /* Do something! */ },
+            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+        ) {
+            Icon(
+                Icons.Filled.Delete,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(ButtonDefaults.IconSize)
+            )
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Text("Clear Data")
+        }
+
+        Button(
+            onClick = { /* Do something! */ },
+            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+        ) {
+            Icon(
+                Icons.Filled.Refresh,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(ButtonDefaults.IconSize)
+            )
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Text("Gave Up")
+        }
+    }
+}
+
+@Preview(name = "Top Bar Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun TopBarPreview(){
     LifeMetricsTheme {
@@ -97,12 +140,19 @@ fun TopBarPreview(){
     }
 }
 
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Progress Bar Dark",uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ProgressBarPreview(){
     LifeMetricsTheme {
         ProgressBar()
+    }
+}
+
+@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun ActionButtonsPreview(){
+    LifeMetricsTheme {
+        ActionButtons()
     }
 }
 
