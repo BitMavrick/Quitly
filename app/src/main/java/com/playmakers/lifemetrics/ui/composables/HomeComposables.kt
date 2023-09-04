@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
@@ -38,28 +37,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopBar(){
-    TopAppBar(
-        title = {
-            Text(
-                "LifeMetrics",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        },
-        actions = {
-            IconButton(onClick = { /* doSomething() */ }) {
-                Icon(
-                    imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Localized description"
-                )
-            }
-        },
-    )
-}
 
 @Composable
 fun ProgressBar(){
@@ -149,29 +126,9 @@ fun Quote(){
     }
 }
 
-@Composable
-fun NavigationBar(){
-    NavigationBar {
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = null)},
-            selected = true,
-            onClick = {}
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.BarChart, contentDescription = null)},
-            selected = false,
-            onClick = {}
-        )
-    }
-}
 
-@Preview(name = "Top Bar Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun TopBarPreview(){
-    LifeMetricsTheme {
-        TopBar()
-    }
-}
+
+
 
 @Preview(name = "Progress Bar Dark",uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
@@ -197,11 +154,5 @@ fun QuotePreview(){
     }
 }
 
-@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun NavigationBarPreview(){
-    LifeMetricsTheme {
-        NavigationBar()
-    }
-}
+
 
