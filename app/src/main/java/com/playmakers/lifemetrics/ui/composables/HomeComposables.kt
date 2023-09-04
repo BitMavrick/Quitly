@@ -12,28 +12,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
@@ -80,8 +72,7 @@ fun ProgressBar(){
 fun ActionButtons(){
     Row(
         Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
         OutlinedButton(
@@ -115,20 +106,15 @@ fun ActionButtons(){
 @Composable
 fun Quote(){
     Row(
-        Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+        Modifier.fillMaxWidth().padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.Center
     ){
         Text(
-            text = "Believe you can, and you are halfway there!"
+            text = "Believe you can, and you are halfway there!",
+            textAlign = TextAlign.Center
         )
     }
 }
-
-
-
-
 
 @Preview(name = "Progress Bar Dark",uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
