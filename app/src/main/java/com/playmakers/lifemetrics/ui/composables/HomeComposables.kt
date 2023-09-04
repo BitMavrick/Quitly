@@ -97,7 +97,9 @@ fun ProgressBar(){
 @Composable
 fun ActionButtons(){
     Row(
-        Modifier.fillMaxWidth().padding(vertical = 8.dp),
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
         OutlinedButton(
@@ -128,6 +130,21 @@ fun ActionButtons(){
     }
 }
 
+
+@Composable
+fun Quote(){
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.Center
+    ){
+        Text(
+            text = "Believe you can, and you are halfway there!"
+        )
+    }
+}
+
 @Preview(name = "Top Bar Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun TopBarPreview(){
@@ -149,6 +166,14 @@ fun ProgressBarPreview(){
 fun ActionButtonsPreview(){
     LifeMetricsTheme {
         ActionButtons()
+    }
+}
+
+@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun QuotePreview(){
+    LifeMetricsTheme {
+        Quote()
     }
 }
 
