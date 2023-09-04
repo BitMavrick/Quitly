@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -135,23 +136,6 @@ fun ActionButtons(){
 }
 
 @Composable
-fun NavigationBar(){
-    NavigationBar {
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = null)},
-            selected = true,
-            onClick = {}
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Info, contentDescription = null)},
-            selected = false,
-            onClick = {}
-        )
-    }
-}
-
-
-@Composable
 fun Quote(){
     Row(
         Modifier
@@ -161,6 +145,22 @@ fun Quote(){
     ){
         Text(
             text = "Believe you can, and you are halfway there!"
+        )
+    }
+}
+
+@Composable
+fun NavigationBar(){
+    NavigationBar {
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Home, contentDescription = null)},
+            selected = true,
+            onClick = {}
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.BarChart, contentDescription = null)},
+            selected = false,
+            onClick = {}
         )
     }
 }
