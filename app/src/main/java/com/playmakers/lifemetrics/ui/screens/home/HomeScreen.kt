@@ -20,6 +20,7 @@ import com.playmakers.lifemetrics.ui.composables.NavigationBar
 import com.playmakers.lifemetrics.ui.composables.ProgressBar
 import com.playmakers.lifemetrics.ui.composables.Quote
 import com.playmakers.lifemetrics.ui.composables.TopBar
+import com.playmakers.lifemetrics.ui.screens.states.StatesScreen
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,22 +48,7 @@ fun HomeScreen(
                     Quote()
                 }
             }else{
-                Column(
-                    modifier = Modifier
-                        .padding(innerPadding)
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp),
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ){
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ){
-                        Text(
-                            text = "This is the states screen",
-                        )
-                    }
-                }
+                StatesScreen(innerPadding)
             }
         },
         bottomBar = {
