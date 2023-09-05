@@ -17,12 +17,13 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 @Composable
 fun StatesScreen(paddingValues: PaddingValues){
     LazyColumn(
-        modifier = Modifier.consumeWindowInsets(paddingValues),
+        modifier = Modifier.consumeWindowInsets(paddingValues).padding(16.dp),
         contentPadding = paddingValues
     ){
-
+        item{
+            OverviewCard()
+        }
     }
-
 }
 
 @Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)

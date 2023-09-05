@@ -18,7 +18,7 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 @Composable
 fun OverviewCard(){
     Card(
-        Modifier.fillMaxWidth()
+        Modifier.fillMaxWidth().padding(vertical = 8.dp)
     ){
         Column(
             Modifier
