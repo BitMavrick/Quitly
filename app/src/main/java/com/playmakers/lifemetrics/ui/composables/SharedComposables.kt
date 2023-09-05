@@ -14,6 +14,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,17 +41,19 @@ fun TopBar(){
 }
 
 @Composable
-fun NavigationBar(){
+fun NavigationBar(
+    homeViewModel: HomeViewModel = viewModel()
+){
     androidx.compose.material3.NavigationBar {
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Home, contentDescription = null) },
-            selected = true,
-            onClick = {}
+            selected = !homeViewModel.isShowStateScreen.value,
+            onClick = { homeViewModel.showHomeScreen() }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.BarChart, contentDescription = null) },
-            selected = false,
-            onClick = {}
+            selected = homeViewModel.isShowStateScreen.value,
+            onClick = { homeViewModel.showStateScreen() }
         )
     }
 }
