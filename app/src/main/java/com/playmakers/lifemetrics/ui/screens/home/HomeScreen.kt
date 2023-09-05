@@ -1,6 +1,5 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,7 +46,8 @@ fun HomeScreen(){
     )
 }
 
-@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+// @Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview
 @Composable
 fun HomeScreenPreview(){
     LifeMetricsTheme {
