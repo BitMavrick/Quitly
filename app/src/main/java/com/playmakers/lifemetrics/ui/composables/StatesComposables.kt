@@ -36,7 +36,7 @@ fun OverviewCard(){
     Card(
         Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(bottom = 8.dp)
     ){
         Column(
             Modifier
@@ -118,7 +118,7 @@ fun GraphCard(){
                     Point(1f, 10f),
                     Point(2f, 30f),
                     Point(3f, 15f),
-                    Point(4f, 30f),
+                    Point(4f, 35f),
                 )
 
                 val xAxisData = AxisData.Builder()
@@ -138,7 +138,6 @@ fun GraphCard(){
                     .axisLineColor(MaterialTheme.colorScheme.tertiary)
                     .axisLabelColor(MaterialTheme.colorScheme.tertiary)
                     .build()
-
 
                 val lineCharData = LineChartData(
                     linePlotData = LinePlotData(
@@ -180,7 +179,6 @@ fun GraphCard(){
                 )
             }
         }
-
     }
 }
 
