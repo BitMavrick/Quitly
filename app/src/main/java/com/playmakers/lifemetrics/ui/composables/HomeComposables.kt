@@ -43,7 +43,7 @@ fun ProgressBar(){
             CircularProgressIndicator(
                 progress = 1f,
                 strokeWidth = 10.dp,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.inversePrimary
             )
             CircularProgressIndicator(
                 progress = 0.4f,

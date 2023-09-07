@@ -112,7 +112,7 @@ fun GraphCard(){
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            Card(){
+            Card {
                 // Dummy Data for the chart
                 val steps = 5
                 val pointsData = listOf(
