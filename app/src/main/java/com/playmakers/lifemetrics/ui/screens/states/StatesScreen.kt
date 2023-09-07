@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.playmakers.lifemetrics.ui.composables.GraphCard
 import com.playmakers.lifemetrics.ui.composables.OverviewCard
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
@@ -17,11 +18,17 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 @Composable
 fun StatesScreen(paddingValues: PaddingValues){
     LazyColumn(
-        modifier = Modifier.consumeWindowInsets(paddingValues).padding(16.dp),
+        modifier = Modifier
+            .consumeWindowInsets(paddingValues)
+            .padding(16.dp),
         contentPadding = paddingValues
     ){
         item{
             OverviewCard()
+        }
+
+        item{
+            GraphCard()
         }
     }
 }
