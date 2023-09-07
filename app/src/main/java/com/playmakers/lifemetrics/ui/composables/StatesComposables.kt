@@ -72,10 +72,27 @@ fun OverviewCard(){
     }
 }
 
+@Composable
+fun GraphCard(){
+    Card(
+        Modifier.fillMaxWidth().padding(vertical = 8.dp)
+    ){
+
+    }
+}
+
 @Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun OverviewCardPreview(){
     LifeMetricsTheme {
         OverviewCard()
+    }
+}
+
+@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun GraphCardPreview(){
+    LifeMetricsTheme {
+        GraphCard()
     }
 }

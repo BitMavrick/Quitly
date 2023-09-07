@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
-    val isShowStateScreen = mutableStateOf(true)
+    val isShowStateScreen = mutableStateOf(false)
 
     fun showStateScreen(){
         isShowStateScreen.value = true

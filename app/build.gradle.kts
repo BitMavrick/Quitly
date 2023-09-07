@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.playmakers.lifemetrics"
-        minSdk = 22
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -72,4 +72,7 @@ dependencies {
 
     // View Model
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
+    // Ycharts
+    implementation("co.yml:ycharts:2.1.0")
 }
