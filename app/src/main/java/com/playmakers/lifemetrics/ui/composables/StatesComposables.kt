@@ -65,13 +65,13 @@ fun OverviewCard(){
             Row{
                 Text(
                     text = "Current Best: ",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 3.dp)
                 )
 
                 Text(
                     text = "Scout",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
             }
@@ -79,12 +79,12 @@ fun OverviewCard(){
             Row{
                 Text(
                     text = "Total Give Ups: ",
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.bodyMedium
                 )
 
                 Text(
                     text = "3 Times",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
             }
@@ -107,8 +107,8 @@ fun GraphCard(){
 
             Text(
                 text = "Struggle Graph",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -198,13 +198,14 @@ fun AchievementCard(){
         ) {
             Text(
                 text = "Achievements",
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.primary,
             )
 
             Text(
                 text = "Upcoming: Corporal",
-                modifier = Modifier.padding(vertical = 8.dp)
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(bottom = 12.dp)
             )
 
             LinearProgressIndicator(
@@ -219,8 +220,14 @@ fun AchievementCard(){
                 Modifier.fillMaxWidth().padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "Scout")
-                Text(text = "Corporal")
+                Text(
+                    text = "Scout",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    text = "Corporal",
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
         }
     }
