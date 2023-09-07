@@ -114,13 +114,18 @@ fun GraphCard(){
 
             Card {
                 // Dummy Data for the chart
-                val steps = 5
+                val steps = 10
                 val pointsData = listOf(
                     Point(0f, 0f),
                     Point(1f, 10f),
                     Point(2f, 30f),
                     Point(3f, 15f),
                     Point(4f, 35f),
+                    Point(5f, 0f),
+                    Point(6f, 10f),
+                    Point(7f, 30f),
+                    Point(8f, 15f),
+                    Point(9f, 35f),
                 )
 
                 val xAxisData = AxisData.Builder()
