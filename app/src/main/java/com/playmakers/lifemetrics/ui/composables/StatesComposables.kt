@@ -1,6 +1,7 @@
 package com.playmakers.lifemetrics.ui.composables
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -182,7 +184,49 @@ fun GraphCard(){
     }
 }
 
-@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun AchievementCard(){
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ){
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Achievements",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary,
+            )
+
+            Text(
+                text = "Upcoming: Corporal",
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+
+            LinearProgressIndicator(
+                progress = 0.6f,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(10.dp),
+                trackColor = MaterialTheme.colorScheme.inversePrimary
+            )
+
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "Scout")
+                Text(text = "Corporal")
+            }
+        }
+    }
+}
+
+@Preview(name = "Overview Card", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun OverviewCardPreview(){
     LifeMetricsTheme {
@@ -190,10 +234,18 @@ fun OverviewCardPreview(){
     }
 }
 
-@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Struggle Graph Card", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun GraphCardPreview(){
     LifeMetricsTheme {
         GraphCard()
+    }
+}
+
+@Preview(name = "Struggle Graph Card", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun AchievementCardPreview(){
+    LifeMetricsTheme {
+        AchievementCard()
     }
 }

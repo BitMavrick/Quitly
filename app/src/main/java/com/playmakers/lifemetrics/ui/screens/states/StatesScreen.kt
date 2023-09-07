@@ -4,12 +4,14 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.playmakers.lifemetrics.ui.composables.AchievementCard
 import com.playmakers.lifemetrics.ui.composables.GraphCard
 import com.playmakers.lifemetrics.ui.composables.OverviewCard
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
@@ -29,6 +31,10 @@ fun StatesScreen(paddingValues: PaddingValues){
 
         item{
             GraphCard()
+        }
+
+        item{
+            AchievementCard()
         }
     }
 }
