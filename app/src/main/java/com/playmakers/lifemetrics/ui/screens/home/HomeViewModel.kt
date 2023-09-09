@@ -38,18 +38,16 @@ class HomeViewModel : ViewModel() {
 
     private fun updateTimeStates() {
         val totalSeconds = time.seconds
+        val secondsInADay = 24 * 60 * 60 // 24 hours * 60 minutes * 60 seconds
 
-        val daysValue = totalSeconds / 86400 // 86400 seconds in a day
-        val hoursValue = (totalSeconds % 86400) / 3600
-        val minutesValue = (totalSeconds % 3600) / 60
-        val secondsValue = totalSeconds % 60
-        val progressValue =
+        // Calculate progress value as a fraction of the day's seconds
+        val progressValue = (totalSeconds % secondsInADay).toFloat() / secondsInADay
 
         // Update the mutableStateOf variables
-        days = daysValue.toString()
-        seconds = secondsValue.toString().padStart(2, '0')
-        minutes = minutesValue.toString().padStart(2, '0')
-        hours = hoursValue.toString().padStart(2, '0')
-        progress = progressValue.toFloat()
+        days = (totalSeconds / secondsInADay).toString()
+        seconds = (totalSeconds % 60).toString().padStart(2, '0')
+        minutes = ((totalSeconds % 3600) / 60).toString().padStart(2, '0')
+        hours = ((totalSeconds % 86400) / 3600).toString().padStart(2, '0')
+        progress = progressValue
     }
 }
