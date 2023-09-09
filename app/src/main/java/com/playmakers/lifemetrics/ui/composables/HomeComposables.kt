@@ -28,10 +28,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
-fun ProgressBar(){
+fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
+
     Box(
         Modifier
             .fillMaxWidth()
@@ -61,7 +65,7 @@ fun ProgressBar(){
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
                 Text(
-                    text = "06:57:07"
+                    text = "${homeViewModel.hours}:${homeViewModel.minutes}:${homeViewModel.seconds}"
                 )
             }
         }
@@ -69,7 +73,7 @@ fun ProgressBar(){
 }
 
 @Composable
-fun ActionButtons(){
+fun ActionButtons(homeViewModel: HomeViewModel = viewModel()){
     Row(
         Modifier
             .fillMaxWidth(),
@@ -89,7 +93,9 @@ fun ActionButtons(){
         }
 
         Button(
-            onClick = { /* Do something! */ },
+            onClick = { /* Do something! */
+                      homeViewModel.startTime()
+                      },
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding
         ) {
             Icon(
@@ -118,15 +124,15 @@ fun Quote(){
 
 @Preview(name = "Progress Bar Dark",uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun ProgressBarPreview(){
+fun ProgressBarPreview(homeViewModel: HomeViewModel = viewModel()){
     LifeMetricsTheme {
-        ProgressBar()
+        ProgressBar(homeViewModel)
     }
 }
 
 @Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun ActionButtonsPreview(){
+fun ActionButtonsPreview(homeViewModel: HomeViewModel = viewModel()){
     LifeMetricsTheme {
         ActionButtons()
     }

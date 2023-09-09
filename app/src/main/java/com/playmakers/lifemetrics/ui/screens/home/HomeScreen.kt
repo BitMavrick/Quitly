@@ -37,9 +37,9 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Box(Modifier.padding(18.dp)){
-                        ProgressBar()
+                        ProgressBar(homeViewModel)
                     }
-                    ActionButtons()
+                    ActionButtons(homeViewModel)
                     Quote()
                 }
             }else{
