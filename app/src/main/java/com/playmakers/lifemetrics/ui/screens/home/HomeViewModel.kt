@@ -43,7 +43,7 @@ class HomeViewModel : ViewModel() {
         val hoursValue = (totalSeconds % 86400) / 3600
         val minutesValue = (totalSeconds % 3600) / 60
         val secondsValue = totalSeconds % 60
-        val progressValue = secondsValue / 60.0
+        val progressValue =
 
         // Update the mutableStateOf variables
         days = daysValue.toString()
