@@ -50,7 +50,7 @@ fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
                 color = MaterialTheme.colorScheme.inversePrimary
             )
             CircularProgressIndicator(
-                progress = 0.4f,
+                progress = homeViewModel.progress,
                 strokeWidth = 10.dp,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -60,7 +60,7 @@ fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "3 Days",
+                    text = "${homeViewModel.days} Days",
                     style = MaterialTheme.typography.displaySmall,
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
