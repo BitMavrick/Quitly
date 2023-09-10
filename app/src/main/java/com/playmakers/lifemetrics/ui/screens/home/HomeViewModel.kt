@@ -21,6 +21,8 @@ class HomeViewModel : ViewModel() {
     var days by mutableStateOf("0")
     var progress by mutableFloatStateOf(0.0f)
 
+    // Shared preference
+
     fun showStateScreen(){
         isShowStateScreen.value = true
     }
