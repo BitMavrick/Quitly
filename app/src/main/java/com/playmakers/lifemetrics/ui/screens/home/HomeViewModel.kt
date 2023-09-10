@@ -1,19 +1,19 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
-import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import java.time.Duration
-import java.util.Timer
-import kotlin.concurrent.fixedRateTimer
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel : ViewModel() {
+    // State for showing different screens
     val isShowStateScreen = mutableStateOf(false)
-    private var time: Duration = Duration.ZERO
-    private lateinit var timer: Timer
 
     // Timing
     var seconds by mutableStateOf("00")
@@ -22,23 +22,31 @@ class HomeViewModel() : ViewModel() {
     var days by mutableStateOf("0")
     var progress by mutableFloatStateOf(0.0f)
 
-    fun showStateScreen(){
+    private var timerJob: Job? = null
+    private var startTimeMillis: Long = 0
+
+    fun showStateScreen() {
         isShowStateScreen.value = true
     }
 
-    fun showHomeScreen(){
+    fun showHomeScreen() {
         isShowStateScreen.value = false
     }
 
-    fun startTime(){
-        timer = fixedRateTimer(initialDelay = 1000L, period = 1000L){
-            time = time.plus(Duration.ofSeconds(1))
-            updateTimeStates()
+    @OptIn(DelicateCoroutinesApi::class)
+    fun startTimer() {
+        timerJob?.cancel() // Cancel the previous timer job if it exists
+        timerJob = GlobalScope.launch {
+            while (true) {
+                val currentTimeMillis = System.currentTimeMillis()
+                val elapsedMillis = currentTimeMillis - startTimeMillis
+                updateTimeStates(elapsedMillis / 1000)
+                delay(1000)
+            }
         }
     }
 
-    private fun updateTimeStates() {
-        val totalSeconds = time.seconds
+    private fun updateTimeStates(totalSeconds: Long) {
         val secondsInADay = 24 * 60 * 60 // 24 hours * 60 minutes * 60 seconds
 
         // Calculate progress value as a fraction of the day's seconds
@@ -50,5 +58,10 @@ class HomeViewModel() : ViewModel() {
         minutes = ((totalSeconds % 3600) / 60).toString().padStart(2, '0')
         hours = ((totalSeconds % 86400) / 3600).toString().padStart(2, '0')
         progress = progressValue
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
     }
 }

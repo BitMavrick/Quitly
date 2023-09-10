@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -15,17 +16,17 @@ class UserPreferencesRepository(
     private val dataStore: DataStore<Preferences>
 ) {
     private companion object {
-        val TIME_START = stringPreferencesKey("time_start")
+        val TIME_START = longPreferencesKey("time_start")
         const val TAG = "UserPreferencesRepo"
     }
 
     suspend fun saveTimePreference(theTime : String){
         dataStore.edit { preferences ->
-            preferences[TIME_START] = theTime
+            preferences[TIME_START] = 0
         }
     }
 
-    val dateTime: Flow<String> = dataStore.data
+    val dateTime: Flow<Long> = dataStore.data
         .catch {
             if (it is IOException) {
                 Log.e(TAG, "Error reading preferences.", it)
@@ -35,6 +36,6 @@ class UserPreferencesRepository(
             }
         }
         .map { preferences ->
-            preferences[TIME_START] ?: "-1"
+            preferences[TIME_START] ?: 0
         }
 }
