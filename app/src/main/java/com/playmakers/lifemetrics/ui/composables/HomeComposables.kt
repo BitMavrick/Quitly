@@ -93,7 +93,9 @@ fun ActionButtons(homeViewModel: HomeViewModel = viewModel()){
         }
 
         Button(
-            onClick = { /* Do something! */ },
+            onClick = { /* Do something! */
+                      homeViewModel.startTime()
+                      },
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding
         ) {
             Icon(
