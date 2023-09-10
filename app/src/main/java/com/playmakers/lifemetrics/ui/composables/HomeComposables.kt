@@ -23,17 +23,27 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playmakers.lifemetrics.data.DateTimePreferences
 import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val dateTimeObj = DateTimePreferences(context)
+    val dateTime = dateTimeObj.dateTimeFlow.collectAsState(initial = null)
 
     Box(
         Modifier
@@ -66,6 +76,10 @@ fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
                 Text(
                     text = "${homeViewModel.hours}:${homeViewModel.minutes}:${homeViewModel.seconds}"
                 )
+
+                if(!dateTime.value.isNullOrBlank()){
+                    Text(text = dateTime.value!!)
+                }
             }
         }
     }
@@ -73,13 +87,22 @@ fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
 
 @Composable
 fun ActionButtons(homeViewModel: HomeViewModel = viewModel()){
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val dateTimeObj = DateTimePreferences(context)
+
     Row(
         Modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
         OutlinedButton(
-            onClick = { /* Do something! */ },
+            onClick = { /* Do something! */
+                      scope.launch {
+                          dateTimeObj.saveDateTime("Success")
+                      }
+                      },
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding
         ) {
             Icon(
@@ -111,7 +134,9 @@ fun ActionButtons(homeViewModel: HomeViewModel = viewModel()){
 @Composable
 fun Quote(){
     Row(
-        Modifier.fillMaxWidth().padding(horizontal = 20.dp),
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.Center
     ){
         Text(

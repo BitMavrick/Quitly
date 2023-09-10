@@ -1,5 +1,6 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -9,7 +10,7 @@ import java.time.Duration
 import java.util.Timer
 import kotlin.concurrent.fixedRateTimer
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel() : ViewModel() {
     val isShowStateScreen = mutableStateOf(false)
     private var time: Duration = Duration.ZERO
     private lateinit var timer: Timer
@@ -20,8 +21,6 @@ class HomeViewModel : ViewModel() {
     var hours by mutableStateOf("00")
     var days by mutableStateOf("0")
     var progress by mutableFloatStateOf(0.0f)
-
-    // Shared preference
 
     fun showStateScreen(){
         isShowStateScreen.value = true
