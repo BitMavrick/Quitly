@@ -13,7 +13,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = DATE_TIME_NAME
 )
 class LifeMetricsApplication : Application() {
-    private lateinit var userPreferencesRepository: UserPreferencesRepository
+    lateinit var userPreferencesRepository: UserPreferencesRepository
 
     override fun onCreate() {
         super.onCreate()

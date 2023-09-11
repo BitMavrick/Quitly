@@ -5,13 +5,21 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.playmakers.lifemetrics.LifeMetricsApplication
+import com.playmakers.lifemetrics.data.local.UserPreferencesRepository
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val userPreferencesRepository: UserPreferencesRepository
+) : ViewModel() {
     // State for showing different screens
     val isShowStateScreen = mutableStateOf(false)
 
@@ -23,7 +31,6 @@ class HomeViewModel : ViewModel() {
     var progress by mutableFloatStateOf(0.0f)
 
     private var timerJob: Job? = null
-    private var startTimeMillis: Long = 0
 
     fun showStateScreen() {
         isShowStateScreen.value = true
@@ -37,9 +44,10 @@ class HomeViewModel : ViewModel() {
     fun startTimer() {
         timerJob?.cancel() // Cancel the previous timer job if it exists
         timerJob = GlobalScope.launch {
+            val startTime = System.currentTimeMillis()
             while (true) {
                 val currentTimeMillis = System.currentTimeMillis()
-                val elapsedMillis = currentTimeMillis - startTimeMillis
+                val elapsedMillis = currentTimeMillis - startTime
                 updateTimeStates(elapsedMillis / 1000)
                 delay(1000)
             }
@@ -63,5 +71,14 @@ class HomeViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
+    }
+
+    companion object{
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[APPLICATION_KEY] as LifeMetricsApplication)
+                HomeViewModel(application.userPreferencesRepository)
+            }
+        }
     }
 }

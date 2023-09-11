@@ -45,7 +45,9 @@ fun TopBar(){
 
 @Composable
 fun NavigationBar(
-    homeViewModel: HomeViewModel = viewModel()
+    homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.Factory
+    )
 ){
     androidx.compose.material3.NavigationBar(
         modifier = Modifier.height(50.dp)

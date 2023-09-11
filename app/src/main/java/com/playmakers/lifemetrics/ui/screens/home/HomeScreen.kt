@@ -21,13 +21,16 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = viewModel()
+    homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.Factory
+    )
 ){
     Scaffold(
         topBar = {
             TopBar()
         },
         content = { innerPadding ->
+
             if(!homeViewModel.isShowStateScreen.value){
                 Column(
                     modifier = Modifier
@@ -37,9 +40,9 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Box(Modifier.padding(18.dp)){
-                        ProgressBar(homeViewModel)
+                        ProgressBar()
                     }
-                    ActionButtons(homeViewModel)
+                    ActionButtons()
                     Quote()
                 }
             }else{

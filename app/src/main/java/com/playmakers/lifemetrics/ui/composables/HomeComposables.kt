@@ -33,7 +33,11 @@ import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
-fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
+fun ProgressBar(
+    homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.Factory
+    )
+){
 
     Box(
         Modifier
@@ -72,7 +76,11 @@ fun ProgressBar(homeViewModel: HomeViewModel = viewModel()){
 }
 
 @Composable
-fun ActionButtons(homeViewModel: HomeViewModel = viewModel()){
+fun ActionButtons(
+    homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.Factory
+    )
+){
 
     Row(
         Modifier
@@ -126,15 +134,15 @@ fun Quote(){
 
 @Preview(name = "Progress Bar Dark",uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun ProgressBarPreview(homeViewModel: HomeViewModel = viewModel()){
+fun ProgressBarPreview(){
     LifeMetricsTheme {
-        ProgressBar(homeViewModel)
+        ProgressBar()
     }
 }
 
 @Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun ActionButtonsPreview(homeViewModel: HomeViewModel = viewModel()){
+fun ActionButtonsPreview(){
     LifeMetricsTheme {
         ActionButtons()
     }

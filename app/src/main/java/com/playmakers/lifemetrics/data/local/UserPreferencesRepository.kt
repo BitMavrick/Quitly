@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -20,9 +19,9 @@ class UserPreferencesRepository(
         const val TAG = "UserPreferencesRepo"
     }
 
-    suspend fun saveTimePreference(theTime : String){
+    suspend fun saveTimePreference(theTime : Long){
         dataStore.edit { preferences ->
-            preferences[TIME_START] = 0
+            preferences[TIME_START] = 0L
         }
     }
 
@@ -36,6 +35,6 @@ class UserPreferencesRepository(
             }
         }
         .map { preferences ->
-            preferences[TIME_START] ?: 0
+            preferences[TIME_START] ?: 0L
         }
 }
