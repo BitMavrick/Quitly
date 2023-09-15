@@ -1,6 +1,5 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
-import android.text.Spannable.Factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -38,9 +37,9 @@ class HomeViewModel(
         )
 
 
-    fun selectTime(time: String){
+    fun saveTime(){
         viewModelScope.launch {
-            userPreferencesRepository.saveTimePreference(time)
+            userPreferencesRepository.saveTimePreference(System.currentTimeMillis().toString()) // Actually its a long value
         }
     }
 
@@ -69,6 +68,8 @@ class HomeViewModel(
             }
         }
     }
+
+    // Create a init block here
 }
 
 data class PreferenceState(
