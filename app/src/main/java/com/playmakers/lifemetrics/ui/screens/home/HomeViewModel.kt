@@ -16,7 +16,7 @@ class HomeViewModel : ViewModel() {
     fun navigateHomeScreen(){
         _uiState.update { newState ->
             newState.copy(
-                showStateScreen = false,
+                showHomeScreen = true,
             )
         }
     }
@@ -24,7 +24,7 @@ class HomeViewModel : ViewModel() {
     fun navigateStateScreen(){
         _uiState.update { newState ->
             newState.copy(
-                showStateScreen = true,
+                showHomeScreen = false,
             )
         }
     }

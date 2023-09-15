@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,17 +23,16 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = viewModel(
-        factory = HomeViewModel.Factory
-    )
+    homeViewModel: HomeViewModel = viewModel()
 ){
+    val homeUiState by homeViewModel.uiState.collectAsState()
+
     Scaffold(
         topBar = {
             TopBar()
         },
         content = { innerPadding ->
-
-            if(!homeViewModel.isShowStateScreen.value){
+            if(homeUiState.showHomeScreen){
                 Column(
                     modifier = Modifier
                         .padding(innerPadding)
@@ -50,7 +51,11 @@ fun HomeScreen(
             }
         },
         bottomBar = {
-            NavigationBar()
+            NavigationBar(
+                onHomeButtonClicked = { homeViewModel.navigateHomeScreen() },
+                onStateButtonClicked = { homeViewModel.navigateStateScreen() },
+                selectedValue = homeUiState.showHomeScreen
+            )
         }
     )
 }

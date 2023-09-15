@@ -28,16 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
-fun ProgressBar(
-    homeViewModel: HomeViewModel = viewModel(
-        factory = HomeViewModel.Factory
-    )
-){
+fun ProgressBar(){
 
     Box(
         Modifier
@@ -53,7 +47,7 @@ fun ProgressBar(
                 color = MaterialTheme.colorScheme.inversePrimary
             )
             CircularProgressIndicator(
-                progress = homeViewModel.progress,
+                progress = 0.4f,
                 strokeWidth = 10.dp,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -63,12 +57,12 @@ fun ProgressBar(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "${homeViewModel.days} Days",
+                    text = "2 Days",
                     style = MaterialTheme.typography.displaySmall,
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
                 Text(
-                    text = "${homeViewModel.hours}:${homeViewModel.minutes}:${homeViewModel.seconds}"
+                    text = "00:02:45"
                 )
             }
         }
@@ -76,11 +70,7 @@ fun ProgressBar(
 }
 
 @Composable
-fun ActionButtons(
-    homeViewModel: HomeViewModel = viewModel(
-        factory = HomeViewModel.Factory
-    )
-){
+fun ActionButtons(){
 
     Row(
         Modifier
@@ -101,9 +91,7 @@ fun ActionButtons(
         }
 
         Button(
-            onClick = { /* Do something! */
-                      homeViewModel.startTimer()
-                      },
+            onClick = { /* Do something! */ },
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding
         ) {
             Icon(

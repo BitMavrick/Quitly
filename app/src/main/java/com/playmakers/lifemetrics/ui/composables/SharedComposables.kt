@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,22 +43,23 @@ fun TopBar(){
 
 @Composable
 fun NavigationBar(
-    homeViewModel: HomeViewModel = viewModel(
-        factory = HomeViewModel.Factory
-    )
+    onHomeButtonClicked: () ->Unit,
+    onStateButtonClicked: () ->Unit,
+    selectedValue: Boolean
 ){
     androidx.compose.material3.NavigationBar(
+
         modifier = Modifier.height(50.dp)
     ) {
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Home, contentDescription = null) },
-            selected = !homeViewModel.isShowStateScreen.value,
-            onClick = { homeViewModel.showHomeScreen() }
+            selected = selectedValue,
+            onClick = { onHomeButtonClicked() }
         )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.BarChart, contentDescription = null) },
-            selected = homeViewModel.isShowStateScreen.value,
-            onClick = { homeViewModel.showStateScreen() }
+            selected = !selectedValue,
+            onClick = { onStateButtonClicked() }
         )
     }
 }
@@ -77,6 +76,10 @@ fun TopBarPreview(){
 @Composable
 fun NavigationBarPreview(){
     LifeMetricsTheme {
-        NavigationBar()
+        NavigationBar(
+            onHomeButtonClicked = {},
+            onStateButtonClicked = {},
+            selectedValue  = true
+        )
     }
 }
