@@ -34,7 +34,7 @@ fun TopBar(){
             IconButton(onClick = { /* doSomething() */ }) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Localized description"
+                    contentDescription = "More option"
                 )
             }
         },

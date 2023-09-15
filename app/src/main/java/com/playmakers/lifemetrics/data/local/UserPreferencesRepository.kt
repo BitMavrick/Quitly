@@ -35,6 +35,6 @@ class UserPreferencesRepository(
             }
         }
         .map { preferences ->
-            preferences[TIME_START] ?: ""
+            preferences[TIME_START] ?: "Hello World"
         }
 }

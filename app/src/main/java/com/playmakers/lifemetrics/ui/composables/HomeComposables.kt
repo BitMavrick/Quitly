@@ -28,10 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.playmakers.lifemetrics.ui.screens.home.PreferenceState
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
-fun ProgressBar(){
+fun ProgressBar(
+    timeState: PreferenceState
+){
 
     Box(
         Modifier
@@ -62,7 +65,8 @@ fun ProgressBar(){
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
                 Text(
-                    text = "00:02:45"
+                    //text = "00:02:45"
+                    text = timeState.startTime
                 )
             }
         }
@@ -70,7 +74,10 @@ fun ProgressBar(){
 }
 
 @Composable
-fun ActionButtons(){
+fun ActionButtons(
+    onGaveUpClick: () -> Unit,
+    onClearDataClick: () -> Unit
+){
 
     Row(
         Modifier
@@ -78,7 +85,7 @@ fun ActionButtons(){
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
         OutlinedButton(
-            onClick = { /* Do something! */ },
+            onClick = { onClearDataClick() },
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding
         ) {
             Icon(
@@ -91,7 +98,7 @@ fun ActionButtons(){
         }
 
         Button(
-            onClick = { /* Do something! */ },
+            onClick = { onGaveUpClick() },
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding
         ) {
             Icon(
@@ -124,7 +131,7 @@ fun Quote(){
 @Composable
 fun ProgressBarPreview(){
     LifeMetricsTheme {
-        ProgressBar()
+        // ProgressBar()
     }
 }
 
@@ -132,7 +139,10 @@ fun ProgressBarPreview(){
 @Composable
 fun ActionButtonsPreview(){
     LifeMetricsTheme {
-        ActionButtons()
+        ActionButtons(
+            onGaveUpClick = {},
+            onClearDataClick = {}
+        )
     }
 }
 

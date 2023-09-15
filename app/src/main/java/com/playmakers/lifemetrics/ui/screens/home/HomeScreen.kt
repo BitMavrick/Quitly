@@ -23,9 +23,13 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = viewModel()
+    homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.Factory
+    )
 ){
     val homeUiState by homeViewModel.uiState.collectAsState()
+    val timeState = homeViewModel.timeState.collectAsState().value
+    val time = homeViewModel::selectTime
 
     Scaffold(
         topBar = {
@@ -41,9 +45,14 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Box(Modifier.padding(18.dp)){
-                        ProgressBar()
+                        ProgressBar(timeState)
                     }
-                    ActionButtons()
+                    ActionButtons(
+                        onGaveUpClick = {
+                            time("ok")
+                        },
+                        onClearDataClick = {}
+                    )
                     Quote()
                 }
             }else{
