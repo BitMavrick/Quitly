@@ -19,5 +19,4 @@ class LifeMetricsApplication : Application() {
         super.onCreate()
         userPreferencesRepository = UserPreferencesRepository(dataStore)
     }
-
 }
