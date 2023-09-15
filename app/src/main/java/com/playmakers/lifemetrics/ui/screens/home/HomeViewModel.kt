@@ -73,5 +73,5 @@ class HomeViewModel(
 }
 
 data class PreferenceState(
-    val startTime: String = "",
+    val startTime: String = "0",
 )
