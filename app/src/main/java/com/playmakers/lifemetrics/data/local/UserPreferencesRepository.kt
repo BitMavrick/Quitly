@@ -35,6 +35,6 @@ class UserPreferencesRepository(
             }
         }
         .map { preferences ->
-            preferences[TIME_START] ?: "0"
+            preferences[TIME_START] ?: "-1" // This -1 will be real value after convert it to Long
         }
 }

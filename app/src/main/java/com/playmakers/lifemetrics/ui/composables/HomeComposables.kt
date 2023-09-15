@@ -66,7 +66,7 @@ fun ProgressBar(
                 )
                 Text(
                     //text = "00:02:45"
-                    text =  timeState.startTime
+                    text = timeState.startTime
                 )
             }
         }
