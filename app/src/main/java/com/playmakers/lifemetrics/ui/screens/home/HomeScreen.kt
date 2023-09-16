@@ -21,11 +21,20 @@ import com.playmakers.lifemetrics.ui.composables.TopBar
 import com.playmakers.lifemetrics.ui.screens.states.StatesScreen
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
+
 @Composable
-fun HomeScreen(
+fun LifeMetricsApp(
     homeViewModel: HomeViewModel = viewModel(
         factory = HomeViewModel.Factory
     )
+){
+    HomeScreen(homeViewModel)
+}
+
+
+@Composable
+fun HomeScreen(
+    homeViewModel: HomeViewModel
 ){
     val homeUiState by homeViewModel.uiState.collectAsState()
     val timeState = homeViewModel.timeState.collectAsState().value
@@ -71,8 +80,12 @@ fun HomeScreen(
 
 @Preview
 @Composable
-fun HomeScreenPreview(){
+fun HomeScreenPreview(
+    homeViewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.Factory
+    )
+){
     LifeMetricsTheme {
-        HomeScreen()
+        HomeScreen(homeViewModel)
     }
 }
