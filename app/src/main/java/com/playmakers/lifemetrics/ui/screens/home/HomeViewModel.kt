@@ -1,9 +1,5 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -58,6 +54,7 @@ class HomeViewModel(
     fun resetTime(){
         viewModelScope.launch {
             userPreferencesRepository.saveTimePreference("-1")
+            timerJob?.cancel()
         }
     }
 
@@ -123,10 +120,8 @@ class HomeViewModel(
 
     init {
         GlobalScope.launch {
-            delay(1000)
-            if (timeState.value.startTime != "-1") {
-                startTimer(timeState.value.startTime.toLong())
-            }
+            while (timeState.value.startTime == "-1") {}
+            startTimer(timeState.value.startTime.toLong())
         }
     }
 }

@@ -54,20 +54,20 @@ fun HomeScreen(
                 ) {
                     Box(Modifier.padding(18.dp)){
                         ProgressBar(
-                            seconds = homeUiState.seconds.toString(),
-                            minutes = homeUiState.minutes.toString(),
-                            hours = homeUiState.hours.toString(),
-                            days = homeUiState.days.toString(),
+                            seconds = homeUiState.seconds,
+                            minutes = homeUiState.minutes,
+                            hours = homeUiState.hours,
+                            days = homeUiState.days,
                             progressValue = homeUiState.progressValue
                         )
                     }
                     ActionButtons(
                         onGaveUpClick = {
+                            homeViewModel.saveTime()
                             homeViewModel.startTimer(timeState.startTime.toLong())
                         },
                         onClearDataClick = {
-                            homeViewModel.saveTime()
-                            homeViewModel.startTimer(timeState.startTime.toLong())
+                            homeViewModel.resetTime()
                         }
                     )
                     Quote()
