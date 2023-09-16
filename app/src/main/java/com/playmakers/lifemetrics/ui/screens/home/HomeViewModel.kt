@@ -36,12 +36,6 @@ class HomeViewModel(
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     // Timing
-    private var seconds by mutableStateOf("00")
-    private var minutes by mutableStateOf("00")
-    private var hours by mutableStateOf("00")
-    private var days by mutableStateOf("0")
-    private var progress by mutableFloatStateOf(0.0f)
-
     private var timerJob: Job? = null
 
 
@@ -102,12 +96,15 @@ class HomeViewModel(
         // Calculate progress value as a fraction of the day's seconds
         val progressValue = (totalSeconds % secondsInADay).toFloat() / secondsInADay
 
-        // Update the mutableStateOf variables
-        days = (totalSeconds / secondsInADay).toString()
-        seconds = (totalSeconds % 60).toString().padStart(2, '0')
-        minutes = ((totalSeconds % 3600) / 60).toString().padStart(2, '0')
-        hours = ((totalSeconds % 86400) / 3600).toString().padStart(2, '0')
-        progress = progressValue
+        _uiState.update { newState ->
+            newState.copy(
+                days = (totalSeconds / secondsInADay).toString(),
+                seconds = (totalSeconds % 60).toString().padStart(2, '0'),
+                minutes = ((totalSeconds % 3600) / 60).toString().padStart(2, '0'),
+                hours = ((totalSeconds % 86400) / 3600).toString().padStart(2, '0'),
+                progressValue = progressValue
+            )
+        }
     }
 
     companion object {
@@ -124,11 +121,9 @@ class HomeViewModel(
         timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
     }
 
-    // Create a init block here
-
     init {
-        GlobalScope.launch{
-            startTimer(12362536)
+        if(timeState.value.startTime != "-1"){
+            startTimer(timeState.value.startTime.toLong())
         }
     }
 }

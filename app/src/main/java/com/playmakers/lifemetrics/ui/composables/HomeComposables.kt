@@ -34,8 +34,7 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun ProgressBar(
-    timeState: PreferenceState,
-    homeViewModel: HomeViewModel
+    seconds: String
 ){
 
     Box(
@@ -68,7 +67,7 @@ fun ProgressBar(
                 )
                 Text(
                     //text = "${homeViewModel.hours} : ${homeViewModel.minutes} : ${homeViewModel.seconds}"
-                    text = timeState.startTime
+                    text = seconds
                 )
             }
         }

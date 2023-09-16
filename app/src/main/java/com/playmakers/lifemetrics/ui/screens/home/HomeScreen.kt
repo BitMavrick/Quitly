@@ -54,8 +54,7 @@ fun HomeScreen(
                 ) {
                     Box(Modifier.padding(18.dp)){
                         ProgressBar(
-                            timeState,
-                            homeViewModel
+                            homeUiState.seconds.toString()
                         )
                     }
                     ActionButtons(
