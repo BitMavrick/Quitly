@@ -31,7 +31,6 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-    // Timing
     private var timerJob: Job? = null
 
 
@@ -43,20 +42,6 @@ class HomeViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = PreferenceState()
         )
-
-
-    fun saveTime(){
-        viewModelScope.launch {
-            userPreferencesRepository.saveTimePreference(System.currentTimeMillis().toString()) // Actually its a long value
-        }
-    }
-
-    fun resetTime(){
-        viewModelScope.launch {
-            userPreferencesRepository.saveTimePreference("-1")
-            timerJob?.cancel()
-        }
-    }
 
     fun navigateHomeScreen(){
         _uiState.update { newState ->
@@ -71,6 +56,47 @@ class HomeViewModel(
             newState.copy(
                 showHomeScreen = false,
             )
+        }
+    }
+
+    fun start(){
+        timerJob?.cancel()
+        saveTime()
+        startTimer(timeState.value.startTime.toLong())
+    }
+
+    fun gaveUp(){
+        timerJob?.cancel()
+        resetTime()
+        saveTime()
+        startTimer(timeState.value.startTime.toLong())
+    }
+
+    fun cleanUp(){
+        timerJob?.cancel()
+        resetTime()
+        _uiState.update { newState ->
+            newState.copy(
+                days = "0",
+                seconds = "00",
+                minutes = "00",
+                hours = "00",
+                progressValue = 0.0f
+            )
+        }
+    }
+
+
+    fun saveTime(){
+        viewModelScope.launch {
+            userPreferencesRepository.saveTimePreference(System.currentTimeMillis().toString()) // Actually its a long value
+        }
+    }
+
+    fun resetTime(){
+        viewModelScope.launch {
+            userPreferencesRepository.saveTimePreference("-1")
+            timerJob?.cancel()
         }
     }
 

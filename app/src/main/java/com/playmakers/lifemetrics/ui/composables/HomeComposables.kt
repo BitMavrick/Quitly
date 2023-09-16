@@ -80,7 +80,8 @@ fun ProgressBar(
 @Composable
 fun ActionButtons(
     onGaveUpClick: () -> Unit,
-    onClearDataClick: () -> Unit
+    onClearDataClick: () -> Unit,
+    onStartClick: () -> Unit,
 ){
 
     Row(
@@ -112,6 +113,19 @@ fun ActionButtons(
             )
             Spacer(Modifier.size(ButtonDefaults.IconSpacing))
             Text("Gave Up")
+        }
+
+        Button(
+            onClick = { onStartClick() },
+            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+        ) {
+            Icon(
+                Icons.Filled.Refresh,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(ButtonDefaults.IconSize)
+            )
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Text("Start")
         }
     }
 }
@@ -145,7 +159,8 @@ fun ActionButtonsPreview(){
     LifeMetricsTheme {
         ActionButtons(
             onGaveUpClick = {},
-            onClearDataClick = {}
+            onClearDataClick = {},
+            onStartClick = {}
         )
     }
 }

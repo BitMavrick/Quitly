@@ -63,11 +63,13 @@ fun HomeScreen(
                     }
                     ActionButtons(
                         onGaveUpClick = {
-                            homeViewModel.saveTime()
-                            homeViewModel.startTimer(timeState.startTime.toLong())
+                            homeViewModel.gaveUp()
                         },
                         onClearDataClick = {
-                            homeViewModel.resetTime()
+                            homeViewModel.cleanUp()
+                        },
+                        onStartClick = {
+                            homeViewModel.start()
                         }
                     )
                     Quote()
