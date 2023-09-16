@@ -34,7 +34,11 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun ProgressBar(
-    seconds: String
+    seconds: String,
+    minutes: String,
+    hours: String,
+    days: String,
+    progressValue: Float
 ){
 
     Box(
@@ -51,7 +55,7 @@ fun ProgressBar(
                 color = MaterialTheme.colorScheme.inversePrimary
             )
             CircularProgressIndicator(
-                progress = 0.4f,
+                progress = progressValue,
                 strokeWidth = 10.dp,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -61,13 +65,12 @@ fun ProgressBar(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "2 Days",
+                    text = "$days Days",
                     style = MaterialTheme.typography.displaySmall,
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
                 Text(
-                    //text = "${homeViewModel.hours} : ${homeViewModel.minutes} : ${homeViewModel.seconds}"
-                    text = seconds
+                    text = "$hours : $minutes : $seconds"
                 )
             }
         }

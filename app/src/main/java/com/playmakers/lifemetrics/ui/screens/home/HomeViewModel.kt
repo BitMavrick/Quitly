@@ -122,8 +122,11 @@ class HomeViewModel(
     }
 
     init {
-        if(timeState.value.startTime != "-1"){
-            startTimer(timeState.value.startTime.toLong())
+        GlobalScope.launch {
+            delay(1000)
+            if (timeState.value.startTime != "-1") {
+                startTimer(timeState.value.startTime.toLong())
+            }
         }
     }
 }
