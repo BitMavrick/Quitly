@@ -43,6 +43,11 @@ class HomeViewModel(
         }
     }
 
+    fun resetTime(){
+        viewModelScope.launch {
+            userPreferencesRepository.saveTimePreference("-1")
+        }
+    }
 
     fun navigateHomeScreen(){
         _uiState.update { newState ->

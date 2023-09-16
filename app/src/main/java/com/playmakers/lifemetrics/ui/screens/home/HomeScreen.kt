@@ -38,7 +38,6 @@ fun HomeScreen(
 ){
     val homeUiState by homeViewModel.uiState.collectAsState()
     val timeState = homeViewModel.timeState.collectAsState().value
-    val saveTime = homeViewModel::saveTime
 
     Scaffold(
         topBar = {
@@ -58,9 +57,11 @@ fun HomeScreen(
                     }
                     ActionButtons(
                         onGaveUpClick = {
-                            saveTime()
+                            homeViewModel.saveTime()
                         },
-                        onClearDataClick = {}
+                        onClearDataClick = {
+                            homeViewModel.resetTime()
+                        }
                     )
                     Quote()
                 }
