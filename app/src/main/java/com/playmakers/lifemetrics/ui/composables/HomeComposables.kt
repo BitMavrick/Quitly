@@ -28,8 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
-import com.playmakers.lifemetrics.ui.screens.home.PreferenceState
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
@@ -82,6 +80,7 @@ fun ActionButtons(
     onGaveUpClick: () -> Unit,
     onClearDataClick: () -> Unit,
     onStartClick: () -> Unit,
+    timeState: String
 ){
 
     Row(
@@ -89,43 +88,40 @@ fun ActionButtons(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
-        OutlinedButton(
-            onClick = { onClearDataClick() },
-            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-        ) {
-            Icon(
-                Icons.Filled.Delete,
-                contentDescription = "Localized description",
-                modifier = Modifier.size(ButtonDefaults.IconSize)
-            )
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Text("Clear Data")
-        }
+        if(timeState == "-1"){
+            Button(
+                onClick = { onStartClick() },
+                contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+            ) {
+                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                Text("Start Now")
+            }
+        }else{
+            OutlinedButton(
+                onClick = { onClearDataClick() },
+                contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+            ) {
+                Icon(
+                    Icons.Filled.Delete,
+                    contentDescription = "Localized description",
+                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                )
+                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                Text("Clear Data")
+            }
 
-        Button(
-            onClick = { onGaveUpClick() },
-            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-        ) {
-            Icon(
-                Icons.Filled.Refresh,
-                contentDescription = "Localized description",
-                modifier = Modifier.size(ButtonDefaults.IconSize)
-            )
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Text("Gave Up")
-        }
-
-        Button(
-            onClick = { onStartClick() },
-            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-        ) {
-            Icon(
-                Icons.Filled.Refresh,
-                contentDescription = "Localized description",
-                modifier = Modifier.size(ButtonDefaults.IconSize)
-            )
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Text("Start")
+            Button(
+                onClick = { onGaveUpClick() },
+                contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+            ) {
+                Icon(
+                    Icons.Filled.Refresh,
+                    contentDescription = "Localized description",
+                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                )
+                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                Text("Gave Up")
+            }
         }
     }
 }
@@ -160,7 +156,8 @@ fun ActionButtonsPreview(){
         ActionButtons(
             onGaveUpClick = {},
             onClearDataClick = {},
-            onStartClick = {}
+            onStartClick = {},
+            timeState = "-1"
         )
     }
 }

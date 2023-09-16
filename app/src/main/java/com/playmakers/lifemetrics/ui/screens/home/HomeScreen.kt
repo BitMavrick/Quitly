@@ -36,7 +36,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel
 ){
     val homeUiState by homeViewModel.uiState.collectAsState()
-    homeViewModel.timeState.collectAsState().value
+    val savedTime = homeViewModel.timeState.collectAsState().value
 
     Scaffold(
         topBar = {
@@ -69,7 +69,8 @@ fun HomeScreen(
                         },
                         onStartClick = {
                             homeViewModel.gaveUp()
-                        }
+                        },
+                        timeState = savedTime.startTime
                     )
                     Quote()
                 }
