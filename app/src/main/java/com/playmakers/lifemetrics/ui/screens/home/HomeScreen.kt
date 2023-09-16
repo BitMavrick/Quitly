@@ -31,13 +31,12 @@ fun LifeMetricsApp(
     HomeScreen(homeViewModel)
 }
 
-
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel
 ){
     val homeUiState by homeViewModel.uiState.collectAsState()
-    val timeState = homeViewModel.timeState.collectAsState().value
+    homeViewModel.timeState.collectAsState().value
 
     Scaffold(
         topBar = {
@@ -69,7 +68,7 @@ fun HomeScreen(
                             homeViewModel.cleanUp()
                         },
                         onStartClick = {
-                            homeViewModel.start()
+                            homeViewModel.gaveUp()
                         }
                     )
                     Quote()

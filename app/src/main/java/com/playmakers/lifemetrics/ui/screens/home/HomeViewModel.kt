@@ -1,5 +1,6 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -60,20 +61,18 @@ class HomeViewModel(
         }
     }
 
-    fun start(){
-        timerJob?.cancel()
+    private fun start(){
         saveTime()
         startTimer(timeState.value.startTime.toLong())
     }
 
     fun gaveUp(){
-        timerJob?.cancel()
         resetTime()
-        saveTime()
-        startTimer(timeState.value.startTime.toLong())
+        start()
     }
 
-    fun cleanUp(){
+    fun cleanUp() {
+        timerJob?.cancel()
         resetTime()
         _uiState.update { newState ->
             newState.copy(
@@ -84,31 +83,34 @@ class HomeViewModel(
                 progressValue = 0.0f
             )
         }
-
-        timerJob?.cancel()
     }
-
 
     private fun saveTime(){
         viewModelScope.launch {
             userPreferencesRepository.saveTimePreference(System.currentTimeMillis().toString()) // Actually its a long value
         }
+
     }
 
     private fun resetTime(){
         viewModelScope.launch {
             userPreferencesRepository.saveTimePreference("-1")
         }
-        timerJob?.cancel()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
     fun startTimer(startTime: Long) {
         timerJob?.cancel() // Cancel the previous timer job if it exists
+        val time: Long = if(startTime == -1L){
+            System.currentTimeMillis()
+        }else{
+            startTime
+        }
+
         timerJob = GlobalScope.launch {
             while (true) {
                 val currentTimeMillis = System.currentTimeMillis()
-                val elapsedMillis = currentTimeMillis - startTime
+                val elapsedMillis = currentTimeMillis - time
                 updateTimeStates(elapsedMillis / 1000)
                 delay(1000)
             }
