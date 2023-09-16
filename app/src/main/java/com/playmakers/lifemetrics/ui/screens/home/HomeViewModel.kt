@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -73,7 +74,6 @@ class HomeViewModel(
     }
 
     fun cleanUp(){
-        timerJob?.cancel()
         resetTime()
         _uiState.update { newState ->
             newState.copy(
@@ -84,20 +84,22 @@ class HomeViewModel(
                 progressValue = 0.0f
             )
         }
+
+        timerJob?.cancel()
     }
 
 
-    fun saveTime(){
+    private fun saveTime(){
         viewModelScope.launch {
             userPreferencesRepository.saveTimePreference(System.currentTimeMillis().toString()) // Actually its a long value
         }
     }
 
-    fun resetTime(){
+    private fun resetTime(){
         viewModelScope.launch {
             userPreferencesRepository.saveTimePreference("-1")
-            timerJob?.cancel()
         }
+        timerJob?.cancel()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -145,9 +147,12 @@ class HomeViewModel(
     }
 
     init {
-        GlobalScope.launch {
-            while (timeState.value.startTime == "-1") {}
-            startTimer(timeState.value.startTime.toLong())
+        viewModelScope.launch {
+            userPreferencesRepository.time.distinctUntilChanged().collect { startTime ->
+                if (startTime != "-1") {
+                    startTimer(timeState.value.startTime.toLong())
+                }
+            }
         }
     }
 }
