@@ -53,14 +53,17 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Box(Modifier.padding(18.dp)){
-                        ProgressBar(timeState)
+                        ProgressBar(
+                            timeState,
+                            homeViewModel
+                        )
                     }
                     ActionButtons(
                         onGaveUpClick = {
-                            homeViewModel.saveTime()
+                            homeViewModel.startTimer(timeState.startTime.toLong())
                         },
                         onClearDataClick = {
-                            homeViewModel.resetTime()
+                            homeViewModel.saveTime()
                         }
                     )
                     Quote()

@@ -28,12 +28,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.screens.home.PreferenceState
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun ProgressBar(
     timeState: PreferenceState,
+    homeViewModel: HomeViewModel
 ){
 
     Box(
@@ -65,7 +67,7 @@ fun ProgressBar(
                     modifier = Modifier.padding(bottom = 15.dp)
                 )
                 Text(
-                    //text = "00:02:45"
+                    //text = "${homeViewModel.hours} : ${homeViewModel.minutes} : ${homeViewModel.seconds}"
                     text = timeState.startTime
                 )
             }
