@@ -1,12 +1,7 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.playmakers.lifemetrics.LifeMetricsApplication
 import com.playmakers.lifemetrics.data.local.UserPreferencesRepository
 import com.playmakers.lifemetrics.ui.screens.UiState
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -132,15 +127,6 @@ class HomeViewModel(
             )
         }
     }
-
-//    companion object {
-//        val Factory: ViewModelProvider.Factory = viewModelFactory {
-//            initializer {
-//                val application = (this[APPLICATION_KEY] as LifeMetricsApplication)
-//                HomeViewModel(application.userPreferencesRepository)
-//            }
-//        }
-//    }
 
     override fun onCleared() {
         super.onCleared()
