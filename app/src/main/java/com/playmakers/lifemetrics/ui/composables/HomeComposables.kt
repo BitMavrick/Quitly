@@ -38,7 +38,6 @@ fun ProgressBar(
     days: String,
     progressValue: Float
 ){
-
     Box(
         Modifier
             .fillMaxWidth()
@@ -82,7 +81,6 @@ fun ActionButtons(
     onStartClick: () -> Unit,
     timeState: String
 ){
-
     Row(
         Modifier
             .fillMaxWidth(),

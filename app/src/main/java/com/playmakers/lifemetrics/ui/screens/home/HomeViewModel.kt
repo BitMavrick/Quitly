@@ -133,14 +133,14 @@ class HomeViewModel(
         }
     }
 
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as LifeMetricsApplication)
-                HomeViewModel(application.userPreferencesRepository)
-            }
-        }
-    }
+//    companion object {
+//        val Factory: ViewModelProvider.Factory = viewModelFactory {
+//            initializer {
+//                val application = (this[APPLICATION_KEY] as LifeMetricsApplication)
+//                HomeViewModel(application.userPreferencesRepository)
+//            }
+//        }
+//    }
 
     override fun onCleared() {
         super.onCleared()
