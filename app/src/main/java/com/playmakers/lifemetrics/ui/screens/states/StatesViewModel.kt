@@ -21,7 +21,6 @@ class StatesViewModel(
                 initialValue = StatesUiState()
             )
 
-
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L
     }

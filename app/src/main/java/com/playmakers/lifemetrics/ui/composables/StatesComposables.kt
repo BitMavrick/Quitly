@@ -31,6 +31,7 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
+import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
@@ -93,7 +94,7 @@ fun OverviewCard(){
 }
 
 @Composable
-fun GraphCard(){
+fun GraphCard(statesUiState: StatesUiState){
     Card(
         Modifier
             .fillMaxWidth()
@@ -114,19 +115,13 @@ fun GraphCard(){
 
             Card {
                 // Dummy Data for the chart
-                val steps = 10
-                val pointsData = listOf(
-                    Point(0f, 0f),
-                    Point(1f, 10f),
-                    Point(2f, 30f),
-                    Point(3f, 2000f),
-                    Point(4f, 35f),
-                    Point(5f, 0f),
-                    Point(6f, 10f),
-                    Point(7f, 30f),
-                    Point(8f, 15f),
-                    Point(9f, 1000f),
-                )
+                val steps = (statesUiState.valueList.size + 1)
+
+                val pointsData = listOf(Point(0f, 0f)) + statesUiState.valueList.mapIndexed { index, element ->
+                    val serial = index.toFloat() + 1f
+                    val point = element.period.toFloat()
+                    Point(serial, point)
+                }
 
                 val xAxisData = AxisData.Builder()
                     .axisStepSize(70.dp)
@@ -250,7 +245,7 @@ fun OverviewCardPreview(){
 @Composable
 fun GraphCardPreview(){
     LifeMetricsTheme {
-        GraphCard()
+        // GraphCard()
     }
 }
 
