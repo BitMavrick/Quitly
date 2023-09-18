@@ -20,7 +20,6 @@ object AppViewModelProvider {
 
         initializer {
             StatesViewModel(
-                this.createSavedStateHandle(),
                 lifeMetricsApplication().container.valuesRepository
             )
         }
