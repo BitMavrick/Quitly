@@ -15,7 +15,7 @@ class OfflineValuesRepository(private val valueDao: ValueDao) : ValuesRepository
         return valueDao.insert(value)
     }
 
-    override suspend fun deleteValue(value: Value) {
-        return valueDao.delete(value)
+    override suspend fun clearValue() {
+        return valueDao.delete()
     }
 }

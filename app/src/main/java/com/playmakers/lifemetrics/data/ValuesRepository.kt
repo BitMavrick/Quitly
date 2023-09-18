@@ -9,5 +9,5 @@ interface ValuesRepository {
 
     suspend fun insertValue(value: Value)
 
-    suspend fun deleteValue(value: Value)
+    suspend fun clearValue()
 }

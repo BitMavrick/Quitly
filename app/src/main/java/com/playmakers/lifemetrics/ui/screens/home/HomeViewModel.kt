@@ -83,13 +83,16 @@ class HomeViewModel(
                 progressValue = 0.0f
             )
         }
+
+        viewModelScope.launch {
+            deleteTimeFromDatabase()
+        }
     }
 
     private fun saveTime(){
         viewModelScope.launch {
             userPreferencesRepository.saveTimePreference(System.currentTimeMillis().toString()) // Actually its a long value
         }
-
     }
 
     private fun resetTime(){
@@ -137,6 +140,10 @@ class HomeViewModel(
 
     private suspend fun saveTimeInDatabase(){
         valuesRepository.insertValue(uiState.value.toValue())
+    }
+
+    private suspend fun deleteTimeFromDatabase(){
+        valuesRepository.clearValue()
     }
 
     override fun onCleared() {

@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.Flow
 interface ValueDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(value: Value)
-
-    @Delete
-    suspend fun delete(value: Value)
+    @Query("DELETE from `values`")
+    suspend fun delete()
 
     @Query("SELECT * from `values` WHERE id = :id")
     fun getValue(id: Int): Flow<Value>
