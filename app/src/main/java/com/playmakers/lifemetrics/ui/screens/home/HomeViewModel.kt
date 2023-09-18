@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.playmakers.lifemetrics.data.ValuesRepository
 import com.playmakers.lifemetrics.data.local.UserPreferencesRepository
 import com.playmakers.lifemetrics.ui.screens.UiState
-import com.playmakers.lifemetrics.ui.screens.states.StatesViewModel
+import com.playmakers.lifemetrics.ui.screens.toValue
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -66,6 +66,9 @@ class HomeViewModel(
     fun gaveUp(){
         resetTime()
         start()
+        viewModelScope.launch {
+            saveTimeInDatabase()
+        }
     }
 
     fun cleanUp() {
@@ -127,9 +130,13 @@ class HomeViewModel(
                 minutes = ((totalSeconds % 3600) / 60).toString().padStart(2, '0'),
                 hours = ((totalSeconds % 86400) / 3600).toString().padStart(2, '0'),
                 progressValue = progressValue,
-                runningTimeMillis = totalSeconds
+                runningTimeSeconds = totalSeconds
             )
         }
+    }
+
+    private suspend fun saveTimeInDatabase(){
+        valuesRepository.insertValue(uiState.value.toValue())
     }
 
     override fun onCleared() {
@@ -137,11 +144,6 @@ class HomeViewModel(
         timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
     }
 
-
-//    fun checking(){
-//        StatesViewModel.theTest()
-//        StatesViewModel.theTest2()
-//    }
 
     init {
         viewModelScope.launch {
@@ -157,3 +159,4 @@ class HomeViewModel(
 data class PreferenceState(
     val startTime: String = "-1",
 )
+
