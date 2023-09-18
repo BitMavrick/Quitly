@@ -69,7 +69,7 @@ fun HomeScreen(
                             homeViewModel.cleanUp()
                         },
                         onStartClick = {
-                            homeViewModel.gaveUp()
+                            homeViewModel.start()
                         },
                         timeState = savedTime.startTime
                     )

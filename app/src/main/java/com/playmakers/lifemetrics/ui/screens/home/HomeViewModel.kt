@@ -58,13 +58,13 @@ class HomeViewModel(
         }
     }
 
-    private fun start(){
+    fun start(){
+        resetTime()
         saveTime()
         startTimer(timeState.value.startTime.toLong())
     }
 
     fun gaveUp(){
-        resetTime()
         start()
         viewModelScope.launch {
             saveTimeInDatabase()
