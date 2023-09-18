@@ -6,5 +6,6 @@ data class UiState (
     val minutes: String = "00",
     val hours: String = "00",
     val days: String = "0",
+    val runningTimeMillis: Long = 0L,
     val progressValue : Float = 0.0f
 )

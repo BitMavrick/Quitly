@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playmakers.lifemetrics.ui.AppViewModelProvider
 import com.playmakers.lifemetrics.ui.composables.AchievementCard
 import com.playmakers.lifemetrics.ui.composables.GraphCard
 import com.playmakers.lifemetrics.ui.composables.OverviewCard
@@ -17,7 +19,12 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun StatesScreen(paddingValues: PaddingValues){
+fun StatesScreen(
+    paddingValues: PaddingValues,
+    statesViewModel: StatesViewModel = viewModel(
+        factory = AppViewModelProvider.Factory
+    )
+){
     LazyColumn(
         modifier = Modifier
             .consumeWindowInsets(paddingValues)

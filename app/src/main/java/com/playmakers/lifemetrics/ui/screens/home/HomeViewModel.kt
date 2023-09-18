@@ -2,8 +2,10 @@ package com.playmakers.lifemetrics.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playmakers.lifemetrics.data.ValuesRepository
 import com.playmakers.lifemetrics.data.local.UserPreferencesRepository
 import com.playmakers.lifemetrics.ui.screens.UiState
+import com.playmakers.lifemetrics.ui.screens.states.StatesViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -20,7 +22,8 @@ import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
 class HomeViewModel(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val valuesRepository: ValuesRepository
 ) : ViewModel() {
 
     // The UI states
@@ -123,7 +126,8 @@ class HomeViewModel(
                 seconds = (totalSeconds % 60).toString().padStart(2, '0'),
                 minutes = ((totalSeconds % 3600) / 60).toString().padStart(2, '0'),
                 hours = ((totalSeconds % 86400) / 3600).toString().padStart(2, '0'),
-                progressValue = progressValue
+                progressValue = progressValue,
+                runningTimeMillis = totalSeconds
             )
         }
     }
@@ -132,6 +136,12 @@ class HomeViewModel(
         super.onCleared()
         timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
     }
+
+
+//    fun checking(){
+//        StatesViewModel.theTest()
+//        StatesViewModel.theTest2()
+//    }
 
     init {
         viewModelScope.launch {

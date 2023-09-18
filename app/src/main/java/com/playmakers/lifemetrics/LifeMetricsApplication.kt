@@ -5,6 +5,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.playmakers.lifemetrics.data.AppContainer
+import com.playmakers.lifemetrics.data.AppDataContainer
 import com.playmakers.lifemetrics.data.local.UserPreferencesRepository
 
 
@@ -15,8 +17,10 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 
 class LifeMetricsApplication : Application() {
     lateinit var userPreferencesRepository: UserPreferencesRepository
+    lateinit var container: AppContainer
     override fun onCreate() {
         super.onCreate()
         userPreferencesRepository = UserPreferencesRepository(dataStore)
+        container = AppDataContainer(this)
     }
 }
