@@ -1,4 +1,4 @@
-package com.playmakers.lifemetrics.ui.screens
+package com.playmakers.lifemetrics.ui.screens.home
 
 class HomeEvents {
 }

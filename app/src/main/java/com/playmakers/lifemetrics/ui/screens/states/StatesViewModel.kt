@@ -8,14 +8,4 @@ class StatesViewModel(
     savedStateHandle: SavedStateHandle,
     private val valuesRepository: ValuesRepository
 ) : ViewModel() {
-
-    companion object {
-        fun saveTime(period: Long) {
-            TODO("Not yet implemented")
-        }
-
-        fun deleteAllRecords(){
-            TODO("Not yet implemented")
-        }
-    }
 }
