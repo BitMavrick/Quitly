@@ -35,7 +35,9 @@ import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
-fun OverviewCard(){
+fun OverviewCard(
+    runningTime: Long
+){
     Card(
         Modifier
             .fillMaxWidth()
@@ -84,7 +86,7 @@ fun OverviewCard(){
                 )
 
                 Text(
-                    text = "3 Times",
+                    text = "$runningTime Times",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
@@ -94,7 +96,10 @@ fun OverviewCard(){
 }
 
 @Composable
-fun GraphCard(statesUiState: StatesUiState){
+fun GraphCard(
+    statesUiState: StatesUiState,
+    runningTime: Long
+){
     Card(
         Modifier
             .fillMaxWidth()
@@ -121,7 +126,7 @@ fun GraphCard(statesUiState: StatesUiState){
                     val serial = index.toFloat() + 1f
                     val point = element.period.toFloat()
                     Point(serial, point)
-                }
+                } + Point(steps.toFloat(), runningTime.toFloat())
 
                 val xAxisData = AxisData.Builder()
                     .axisStepSize(70.dp)
@@ -237,7 +242,7 @@ fun AchievementCard(){
 @Composable
 fun OverviewCardPreview(){
     LifeMetricsTheme {
-        OverviewCard()
+        // OverviewCard()
     }
 }
 

@@ -17,18 +17,21 @@ import com.playmakers.lifemetrics.ui.AppViewModelProvider
 import com.playmakers.lifemetrics.ui.composables.AchievementCard
 import com.playmakers.lifemetrics.ui.composables.GraphCard
 import com.playmakers.lifemetrics.ui.composables.OverviewCard
+import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun StatesScreen(
     paddingValues: PaddingValues,
+    homeViewModel: HomeViewModel,
     statesViewModel: StatesViewModel = viewModel(
         factory = AppViewModelProvider.Factory
     )
 ){
 
     val statesUiState by statesViewModel.statesUiState.collectAsState()
+    val mainUiState by homeViewModel.uiState.collectAsState()
 
     LazyColumn(
         modifier = Modifier
@@ -37,25 +40,20 @@ fun StatesScreen(
         contentPadding = paddingValues
     ){
         item{
-            OverviewCard()
+            OverviewCard(mainUiState.runningTimeSeconds)
         }
 
         if(statesUiState.valueList.isNotEmpty()){
             item{
-                GraphCard(statesUiState)
+                GraphCard(
+                    statesUiState,
+                    mainUiState.runningTimeSeconds
+                )
             }
         }
 
         item{
             AchievementCard()
         }
-    }
-}
-
-@Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun StatesScreenPreview(){
-    LifeMetricsTheme {
-        StatesScreen(paddingValues = PaddingValues())
     }
 }

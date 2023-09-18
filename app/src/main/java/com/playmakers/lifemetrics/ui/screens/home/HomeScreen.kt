@@ -76,7 +76,10 @@ fun HomeScreen(
                     Quote()
                 }
             }else{
-                StatesScreen(innerPadding)
+                StatesScreen(
+                    innerPadding,
+                    homeViewModel
+                )
             }
         },
         bottomBar = {
