@@ -195,6 +195,15 @@ fun AchievementCard(
     runningTime: Long,
     progress: Progress
 ){
+    val remainingTime = progress.endTime - runningTime
+
+    val secondsInADay = 24 * 60 * 60
+    val days = (remainingTime / secondsInADay).toString()
+    val seconds = (remainingTime % 60).toString().padStart(2, '0')
+    val minutes = ((remainingTime % 3600) / 60).toString().padStart(2, '0')
+    val hours = ((remainingTime % 86400) / 3600).toString().padStart(2, '0')
+
+
     Card(
         Modifier
             .fillMaxWidth()
@@ -222,7 +231,12 @@ fun AchievementCard(
                 )
 
                 Text(
-                    text = "2d 12 : 05 : 15",
+                    text = buildString {
+                        if (days != "0") {
+                            append("${days}d ")
+                        }
+                        append("$hours : $minutes : $seconds")
+                    },
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
@@ -252,13 +266,5 @@ fun AchievementCard(
                 )
             }
         }
-    }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun AchievementCardPreview(){
-    LifeMetricsTheme {
-        // AchievementCard()
     }
 }

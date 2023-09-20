@@ -35,24 +35,26 @@ fun StatesScreen(
             .padding(16.dp),
         contentPadding = paddingValues
     ){
-        item{
-            OverviewCard(statesUiState.valueList.size)
-        }
-
-        if(statesUiState.valueList.isNotEmpty()){
+        if(mainUiState.runningTimeSeconds != 0L){
             item{
-                GraphCard(
-                    statesUiState,
-                    mainUiState.runningTimeSeconds
+                OverviewCard(statesUiState.valueList.size)
+            }
+
+            if(statesUiState.valueList.isNotEmpty()){
+                item{
+                    GraphCard(
+                        statesUiState,
+                        mainUiState.runningTimeSeconds
+                    )
+                }
+            }
+
+            item{
+                AchievementCard(
+                    mainUiState.runningTimeSeconds,
+                    homeViewModel.statesProgressCard()
                 )
             }
-        }
-
-        item{
-            AchievementCard(
-                mainUiState.runningTimeSeconds,
-                homeViewModel.statesProgressCard()
-            )
         }
     }
 }

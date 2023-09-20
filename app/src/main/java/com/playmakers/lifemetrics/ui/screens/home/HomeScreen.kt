@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.playmakers.lifemetrics.ui.AppViewModelProvider
@@ -20,7 +19,6 @@ import com.playmakers.lifemetrics.ui.composables.ProgressBar
 import com.playmakers.lifemetrics.ui.composables.Quote
 import com.playmakers.lifemetrics.ui.composables.TopBar
 import com.playmakers.lifemetrics.ui.screens.states.StatesScreen
-import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 
 @Composable
@@ -90,16 +88,4 @@ fun HomeScreen(
             )
         }
     )
-}
-
-@Preview
-@Composable
-fun HomeScreenPreview(
-    homeViewModel: HomeViewModel = viewModel(
-        factory = AppViewModelProvider.Factory
-    )
-){
-    LifeMetricsTheme {
-        HomeScreen(homeViewModel)
-    }
 }

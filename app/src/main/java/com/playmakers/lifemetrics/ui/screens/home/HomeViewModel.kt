@@ -82,7 +82,8 @@ class HomeViewModel(
                 seconds = "00",
                 minutes = "00",
                 hours = "00",
-                progressValue = 0.0f
+                progressValue = 0.0f,
+                runningTimeSeconds = 0
             )
         }
 
