@@ -34,6 +34,8 @@ import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
 
 @Composable
 fun OverviewCard(
+    currentBest: String,
+    days: Int,
     giveUps: Int
 ){
     Card(
@@ -46,16 +48,29 @@ fun OverviewCard(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(
-                text = "Corporal",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary
-            )
-            Text(
-                text = "Reached 5 Days",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
+            if(giveUps == 0){
+                Text(
+                    text = currentBest,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "Reached $days Days",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }else{
+                Text(
+                    text = "Corporal",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "Reached 5 Days",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
 
             Divider(
                 thickness = 3.dp,
@@ -71,7 +86,7 @@ fun OverviewCard(
                 )
 
                 Text(
-                    text = "Scout",
+                    text = currentBest,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
@@ -79,7 +94,7 @@ fun OverviewCard(
 
             Row{
                 Text(
-                    text = "Total Give Ups: ",
+                    text = "Total Give ups: ",
                     style = MaterialTheme.typography.bodyMedium
                 )
 

@@ -37,7 +37,11 @@ fun StatesScreen(
     ){
         if(mainUiState.runningTimeSeconds != 0L){
             item{
-                OverviewCard(statesUiState.valueList.size)
+                OverviewCard(
+                    homeViewModel.statesProgressCard().title,
+                    homeViewModel.statesProgressCard().days,
+                    statesUiState.valueList.size
+                )
             }
 
             if(statesUiState.valueList.isNotEmpty()){
