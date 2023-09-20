@@ -36,7 +36,7 @@ fun StatesScreen(
         contentPadding = paddingValues
     ){
         item{
-            OverviewCard(mainUiState.runningTimeSeconds)
+            OverviewCard(statesUiState.valueList.size)
         }
 
         if(statesUiState.valueList.isNotEmpty()){

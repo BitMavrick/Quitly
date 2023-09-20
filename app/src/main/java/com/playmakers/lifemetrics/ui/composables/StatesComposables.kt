@@ -36,7 +36,7 @@ import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun OverviewCard(
-    runningTime: Long
+    giveUps: Int
 ){
     Card(
         Modifier
@@ -86,7 +86,7 @@ fun OverviewCard(
                 )
 
                 Text(
-                    text = "$runningTime Times",
+                    text = "$giveUps Times",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
