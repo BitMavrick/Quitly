@@ -1,6 +1,5 @@
 package com.playmakers.lifemetrics.ui.composables
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.yml.charts.axis.AxisData
 import co.yml.charts.common.model.Point
@@ -33,7 +31,6 @@ import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
 import com.playmakers.lifemetrics.data.progressValue.Progress
 import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
-import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
 @Composable
 fun OverviewCard(
