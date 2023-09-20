@@ -20,7 +20,6 @@ import com.playmakers.lifemetrics.ui.composables.Quote
 import com.playmakers.lifemetrics.ui.composables.TopBar
 import com.playmakers.lifemetrics.ui.screens.states.StatesScreen
 
-
 @Composable
 fun LifeMetricsApp(
     homeViewModel: HomeViewModel = viewModel(

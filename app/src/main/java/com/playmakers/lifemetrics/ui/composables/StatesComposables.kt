@@ -232,7 +232,6 @@ fun AchievementCard(
     val minutes = ((remainingTime % 3600) / 60).toString().padStart(2, '0')
     val hours = ((remainingTime % 86400) / 3600).toString().padStart(2, '0')
 
-
     Card(
         Modifier
             .fillMaxWidth()
