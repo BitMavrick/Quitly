@@ -31,6 +31,7 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
+import com.playmakers.lifemetrics.data.progressValue.Progress
 import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
 import com.playmakers.lifemetrics.ui.theme.LifeMetricsTheme
 
@@ -190,7 +191,10 @@ fun GraphCard(
 }
 
 @Composable
-fun AchievementCard(){
+fun AchievementCard(
+    runningTime: Long,
+    progress: Progress
+){
     Card(
         Modifier
             .fillMaxWidth()
@@ -212,7 +216,7 @@ fun AchievementCard(){
                 horizontalArrangement = Arrangement.SpaceBetween
             ){
                 Text(
-                    text = "Upcoming: Corporal",
+                    text = "Upcoming: ${progress.upcoming}",
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
@@ -226,7 +230,7 @@ fun AchievementCard(){
             }
 
             LinearProgressIndicator(
-                progress = 0.6f,
+                progress = ((runningTime.toFloat() - progress.startTime.toFloat())/(progress.endTime.toFloat() - progress.startTime.toFloat())),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(10.dp),
@@ -238,11 +242,11 @@ fun AchievementCard(){
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Scout",
+                    text = progress.title,
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(
-                    text = "Corporal",
+                    text = progress.upcoming,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -255,6 +259,6 @@ fun AchievementCard(){
 @Composable
 fun AchievementCardPreview(){
     LifeMetricsTheme {
-        AchievementCard()
+        // AchievementCard()
     }
 }

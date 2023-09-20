@@ -16,9 +16,6 @@ class StatesViewModel(
     valuesRepository: ValuesRepository
 ) : ViewModel() {
 
-    // The UI states
-
-
     val statesUiState : StateFlow<StatesUiState> =
         valuesRepository.getAllValuesStream().map { StatesUiState(it) }
             .stateIn(

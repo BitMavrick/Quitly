@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playmakers.lifemetrics.data.ValuesRepository
 import com.playmakers.lifemetrics.data.local.UserPreferencesRepository
+import com.playmakers.lifemetrics.data.progressValue.Progress
+import com.playmakers.lifemetrics.data.progressValue.ProgressDataSource.progressList
 import com.playmakers.lifemetrics.ui.screens.UiState
 import com.playmakers.lifemetrics.ui.screens.toValue
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -151,6 +153,20 @@ class HomeViewModel(
         timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
     }
 
+    fun statesProgressCard() : Progress {
+        val runningTime = uiState.value.runningTimeSeconds
+        var answer = progressList.first()
+
+        for(progress in progressList){
+            if(runningTime >= progress.startTime){
+                answer = progress
+            }else{
+                break
+            }
+        }
+
+        return answer
+    }
 
     init {
         viewModelScope.launch {

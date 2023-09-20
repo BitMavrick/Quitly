@@ -49,7 +49,10 @@ fun StatesScreen(
         }
 
         item{
-            AchievementCard()
+            AchievementCard(
+                mainUiState.runningTimeSeconds,
+                homeViewModel.statesProgressCard()
+            )
         }
     }
 }
