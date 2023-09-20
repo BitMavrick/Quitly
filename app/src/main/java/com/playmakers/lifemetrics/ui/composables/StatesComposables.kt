@@ -36,7 +36,9 @@ import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
 fun OverviewCard(
     currentBest: String,
     days: Int,
-    giveUps: Int
+    giveUps: Int,
+    statesUiState: StatesUiState,
+    runningTime: Long
 ){
     Card(
         Modifier

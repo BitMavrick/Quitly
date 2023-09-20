@@ -40,7 +40,9 @@ fun StatesScreen(
                 OverviewCard(
                     homeViewModel.statesProgressCard().title,
                     homeViewModel.statesProgressCard().days,
-                    statesUiState.valueList.size
+                    statesUiState.valueList.size,
+                    statesUiState,
+                    mainUiState.runningTimeSeconds
                 )
             }
 
