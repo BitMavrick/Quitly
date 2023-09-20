@@ -139,14 +139,6 @@ fun Quote(){
     }
 }
 
-@Preview(name = "Progress Bar Dark",uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun ProgressBarPreview(){
-    LifeMetricsTheme {
-        // ProgressBar()
-    }
-}
-
 @Preview(name = "Action Buttons Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ActionButtonsPreview(){

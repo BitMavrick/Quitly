@@ -202,23 +202,35 @@ fun AchievementCard(){
                 .padding(16.dp)
         ) {
             Text(
-                text = "Achievements",
+                text = "Progress",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.primary,
             )
 
-            Text(
-                text = "Upcoming: Corporal",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 12.dp)
-            )
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ){
+                Text(
+                    text = "Upcoming: Corporal",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                Text(
+                    text = "2d 12 : 05 : 15",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+            }
 
             LinearProgressIndicator(
                 progress = 0.6f,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(10.dp),
-                trackColor = MaterialTheme.colorScheme.inversePrimary
+                trackColor = MaterialTheme.colorScheme.inversePrimary,
             )
 
             Row(
@@ -231,30 +243,15 @@ fun AchievementCard(){
                 )
                 Text(
                     text = "Corporal",
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
     }
 }
 
-@Preview(name = "Overview Card", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun OverviewCardPreview(){
-    LifeMetricsTheme {
-        // OverviewCard()
-    }
-}
-
-@Preview(name = "Struggle Graph Card", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun GraphCardPreview(){
-    LifeMetricsTheme {
-        // GraphCard()
-    }
-}
-
-@Preview(name = "Struggle Graph Card", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun AchievementCardPreview(){
     LifeMetricsTheme {
