@@ -53,7 +53,7 @@ fun HomeScreen(
             AnimatedVisibility(
                 homeUiState.showHomeScreen,
                 enter = slideInHorizontally(animationSpec = tween(250)),
-                exit = fadeOut()
+                exit = ExitTransition.None
             ){
                 Column(
                     modifier = Modifier
@@ -89,7 +89,7 @@ fun HomeScreen(
             AnimatedVisibility(
                 !homeUiState.showHomeScreen,
                 enter = slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(250)),
-                exit = slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(250)),
+                exit = ExitTransition.None
             ){
                 StatesScreen(
                     innerPadding,
