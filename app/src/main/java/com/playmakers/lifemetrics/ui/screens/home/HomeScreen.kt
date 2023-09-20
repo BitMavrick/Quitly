@@ -1,5 +1,14 @@
 package com.playmakers.lifemetrics.ui.screens.home
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +50,11 @@ fun HomeScreen(
             TopBar()
         },
         content = { innerPadding ->
-            if(homeUiState.showHomeScreen){
+            AnimatedVisibility(
+                homeUiState.showHomeScreen,
+                enter = slideInHorizontally(animationSpec = tween(250)),
+                exit = fadeOut()
+            ){
                 Column(
                     modifier = Modifier
                         .padding(innerPadding)
@@ -72,7 +85,12 @@ fun HomeScreen(
                     )
                     Quote()
                 }
-            }else{
+            }
+            AnimatedVisibility(
+                !homeUiState.showHomeScreen,
+                enter = slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(250)),
+                exit = slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(250)),
+            ){
                 StatesScreen(
                     innerPadding,
                     homeViewModel
