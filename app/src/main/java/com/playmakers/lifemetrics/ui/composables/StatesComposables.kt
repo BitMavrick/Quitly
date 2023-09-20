@@ -30,6 +30,7 @@ import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
 import com.playmakers.lifemetrics.data.progressValue.Progress
+import com.playmakers.lifemetrics.ui.screens.home.HomeViewModel
 import com.playmakers.lifemetrics.ui.screens.states.StatesUiState
 
 @Composable
@@ -38,7 +39,8 @@ fun OverviewCard(
     days: Int,
     giveUps: Int,
     statesUiState: StatesUiState,
-    runningTime: Long
+    runningTime: Long,
+    homeViewModel: HomeViewModel
 ){
     Card(
         Modifier
@@ -62,13 +64,26 @@ fun OverviewCard(
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }else{
+                var maxTime = 0L
+                statesUiState.valueList.forEach{ states ->
+                    if(states.period > maxTime){
+                        maxTime = states.period
+                    }
+                }
+
+                if(maxTime > runningTime){
+                    maxTime = runningTime
+                }
+
+                val allTimeBest = homeViewModel.maxStatesProgress(maxTime)
+
                 Text(
-                    text = "Corporal",
+                    text = allTimeBest.title,
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    text = "Reached 5 Days",
+                    text = "Reached ${allTimeBest.days} Days",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )

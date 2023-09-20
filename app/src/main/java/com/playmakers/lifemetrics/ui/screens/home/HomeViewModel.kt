@@ -169,6 +169,20 @@ class HomeViewModel(
         return answer
     }
 
+    fun maxStatesProgress(time: Long) : Progress {
+        var answer = progressList.first()
+
+        for(progress in progressList){
+            if(time >= progress.startTime){
+                answer = progress
+            }else{
+                break
+            }
+        }
+
+        return answer
+    }
+
     init {
         viewModelScope.launch {
             userPreferencesRepository.time.distinctUntilChanged().collect { startTime ->
