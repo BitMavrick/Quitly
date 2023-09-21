@@ -71,7 +71,7 @@ fun OverviewCard(
                     }
                 }
 
-                if(maxTime > runningTime){
+                if(runningTime > maxTime){
                     maxTime = runningTime
                 }
 
