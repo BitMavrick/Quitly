@@ -1,18 +1,15 @@
-@file:Suppress("UnstableApiUsage")
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
 }
 
 android {
-    namespace = "com.playmakers.lifemetrics"
+    namespace = "com.playmaker.quitly"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.playmakers.lifemetrics"
-        minSdk = 26
+        applicationId = "com.playmaker.quitly"
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -43,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
     packaging {
         resources {
@@ -53,6 +50,7 @@ android {
 }
 
 dependencies {
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
@@ -68,21 +66,4 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    // Icon Extended
-    implementation ("androidx.compose.material:material-icons-extended:1.5.1")
-
-    // View Model
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-
-    // Y charts
-    implementation("co.yml:ycharts:2.1.0")
-
-    // Shared Preferences
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-
-    // Room database
-    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
-    ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
-    implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
 }

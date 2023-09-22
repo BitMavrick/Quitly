@@ -1,4 +1,4 @@
-package com.playmakers.lifemetrics.ui.theme
+package com.playmaker.quitly.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

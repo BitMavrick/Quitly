@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "LifeMetrics"
+rootProject.name = "Quitly"
 include(":app")
