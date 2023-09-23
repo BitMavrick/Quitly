@@ -247,13 +247,15 @@ private fun NavigationDrawerHeader(
         verticalAlignment = Alignment.CenterVertically
     ){
         Text(
-            text = "Quitly"
+            text = "Quitly",
+            color = MaterialTheme.colorScheme.primary
         )
 
         IconButton(onClick = { /* doSomething() */ }) {
             Icon(
                 imageVector = Icons.Filled.MoreVert,
-                contentDescription = "More option"
+                contentDescription = "More option",
+                tint = MaterialTheme.colorScheme.primary
             )
         }
     }
