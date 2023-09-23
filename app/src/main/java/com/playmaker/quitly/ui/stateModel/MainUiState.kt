@@ -1,4 +1,7 @@
 package com.playmaker.quitly.ui.stateModel
 
-class MainUiState {
-}
+import com.playmaker.quitly.data.model.ScreenType
+
+data class MainUiState (
+    val currentScreenType: ScreenType = ScreenType.Home
+)
