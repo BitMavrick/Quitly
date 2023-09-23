@@ -42,7 +42,6 @@ import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.NavigationType
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
