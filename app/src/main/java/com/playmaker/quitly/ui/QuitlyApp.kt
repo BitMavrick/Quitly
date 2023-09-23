@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playmaker.quitly.ui.screens.HomeScreen
 import com.playmaker.quitly.ui.stateModel.MainViewModel
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.NavigationType
@@ -37,5 +38,13 @@ fun QuitlyApp(
             contentType = ContentType.HOME_ONLY
         }
     }
+
+    HomeScreen(
+        navigationType = navigationType,
+        contentType = contentType,
+        uiState = uiState,
+        onTabPressed = {},
+        onDetailsScreenBackPressed = { /*TODO*/ }
+    )
 
 }
