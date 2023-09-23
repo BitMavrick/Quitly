@@ -1,4 +1,5 @@
 package com.playmaker.quitly.data.model
 
-class ScreenType {
+enum class ScreenType {
+    Home, Rank
 }
