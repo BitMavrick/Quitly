@@ -44,7 +44,7 @@ fun QuitlyApp(
         contentType = contentType,
         uiState = uiState,
         onTabPressed = {},
-        onDetailsScreenBackPressed = { /*TODO*/ }
+        onDetailsScreenBackPressed = { /*TODO*/ },
+        modifier = modifier
     )
-
 }

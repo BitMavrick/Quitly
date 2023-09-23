@@ -1,10 +1,13 @@
 package com.playmaker.quitly.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -35,7 +38,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R
 import com.playmaker.quitly.data.model.ScreenType
-import com.playmaker.quitly.ui.components.HomeComponents
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.NavigationType
@@ -68,7 +70,7 @@ fun HomeScreen(
         PermanentNavigationDrawer(
             drawerContent = {
                 PermanentDrawerSheet(Modifier.width(dimensionResource(R.dimen.drawer_width))) {
-                    NavigationDrawer(
+                    AppNavigationDrawer(
                         selectedDestination = uiState.currentScreenType,
                         onTabPressed = onTabPressed,
                         navigationItemContentList = navigationItemContentList,
@@ -81,21 +83,79 @@ fun HomeScreen(
                 }
             }
         ) {
-            HomeComponents()
+            AppContent(
+                navigationType = navigationType,
+                contentType = contentType,
+                uiState = uiState,
+                onTabPressed = onTabPressed,
+                navigationItemContentList = navigationItemContentList
+            )
         }
     }else{
         if(uiState.isShowingHomepage){
-            HomeComponents()
+            AppContent(
+                navigationType = navigationType,
+                contentType = contentType,
+                uiState = uiState,
+                onTabPressed = onTabPressed,
+                navigationItemContentList = navigationItemContentList
+            )
         }else{
-
+            AppContent(
+                navigationType = navigationType,
+                contentType = contentType,
+                uiState = uiState,
+                onTabPressed = onTabPressed,
+                navigationItemContentList = navigationItemContentList
+            )
         }
     }
-
-
 }
 
 @Composable
-private fun BottomNavigationBar(
+private fun AppContent(
+    navigationType: NavigationType,
+    contentType: ContentType,
+    uiState: MainUiState,
+    onTabPressed: (ScreenType) -> Unit,
+    navigationItemContentList: List<NavigationItemContent>,
+    modifier: Modifier = Modifier
+){
+    Box(modifier = modifier){
+        Row(modifier = Modifier.fillMaxSize()) {
+            AnimatedVisibility(visible = navigationType == NavigationType.NAVIGATION_RAIL) {
+                AppNavigationRail(
+                    currentTab = uiState.currentScreenType,
+                    onTabPressed = onTabPressed,
+                    navigationItemContentList = navigationItemContentList
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.inverseOnSurface)
+            ) {
+                if(contentType == ContentType.HOME_AND_DETAIL){
+                    // TODO: Home and detail system will be here
+                }else{
+                    // TODO: Only home system will be here
+                }
+
+                AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
+                    AppBottomNavigationBar(
+                        currentTab = uiState.currentScreenType,
+                        onTabPressed = onTabPressed,
+                        navigationItemContentList = navigationItemContentList,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AppBottomNavigationBar(
     currentTab: ScreenType,
     onTabPressed: ((ScreenType) -> Unit),
     navigationItemContentList: List<NavigationItemContent>,
@@ -118,7 +178,7 @@ private fun BottomNavigationBar(
 }
 
 @Composable
-private fun NavigationRail(
+private fun AppNavigationRail(
     currentTab: ScreenType,
     onTabPressed: ((ScreenType) -> Unit),
     navigationItemContentList: List<NavigationItemContent>,
@@ -142,7 +202,7 @@ private fun NavigationRail(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun NavigationDrawer(
+private fun AppNavigationDrawer(
     selectedDestination: ScreenType,
     onTabPressed: ((ScreenType) -> Unit),
     navigationItemContentList: List<NavigationItemContent>,
