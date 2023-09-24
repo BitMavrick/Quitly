@@ -48,7 +48,11 @@ fun HomeOnlyContent(
             }
         }else{
             item {
-                Text(text = "This is the Rank screen")
+                Column(
+                    modifier.padding(horizontal = 16.dp)
+                ) {
+                    Text(text = "This is the Rank screen")
+                }
             }
         }
     }
@@ -77,7 +81,6 @@ fun HomeAndDetailContent(
             item {
                 Text(text = "This is the Home and detail screen")
             }
-
         }else{
             item {
                 Text(text = "This is the Rank and detail screen")
@@ -100,7 +103,9 @@ private fun AppHomeTopBar(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(start = 16.dp)
         )
 
-        IconButton(onClick = { /* doSomething() */ }) {
+        IconButton(
+            onClick = { }
+        ) {
             Icon(
                 imageVector = Icons.Filled.MoreVert,
                 contentDescription = "More option",
