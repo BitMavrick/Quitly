@@ -1,6 +1,7 @@
 package com.playmaker.quitly.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -39,9 +40,12 @@ fun HomeOnlyContent(
 
         if(uiState.currentScreenType == ScreenType.Home){
             item {
-                Text(text = "This is the Home screen")
+                Column(
+                    modifier.padding(horizontal = 16.dp)
+                ) {
+                    TimeCounter()
+                }
             }
-
         }else{
             item {
                 Text(text = "This is the Rank screen")
