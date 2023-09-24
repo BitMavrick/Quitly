@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.screens.HomeScreen
 import com.playmaker.quitly.ui.stateModel.MainViewModel
 import com.playmaker.quitly.ui.utils.ContentType
@@ -17,8 +18,8 @@ fun QuitlyApp(
 ) {
     val navigationType: NavigationType
     val contentType: ContentType
-    val viewModel: MainViewModel = viewModel()
-    val uiState = viewModel.uiState.collectAsState().value
+    val mainViewModel: MainViewModel = viewModel()
+    val uiState = mainViewModel.uiState.collectAsState().value
 
     when(windowSize){
         WindowWidthSizeClass.Compact ->{
@@ -43,7 +44,9 @@ fun QuitlyApp(
         navigationType = navigationType,
         contentType = contentType,
         uiState = uiState,
-        onTabPressed = {},
+        onTabPressed = {screenType : ScreenType ->
+            mainViewModel.updateCurrentScreenType(screenType = screenType)
+        },
         onDetailsScreenBackPressed = { /*TODO*/ },
         modifier = modifier
     )
