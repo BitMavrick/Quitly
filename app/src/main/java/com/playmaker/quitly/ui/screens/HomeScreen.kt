@@ -38,6 +38,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R
 import com.playmaker.quitly.data.model.ScreenType
+import com.playmaker.quitly.ui.components.HomeOnlyContent
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.NavigationType
@@ -138,11 +139,7 @@ private fun AppContent(
                 if(contentType == ContentType.HOME_AND_DETAIL){
                     Text(text = "This is the home and details page")
                 }else{
-                    Column(
-                        modifier = Modifier.weight(1f) // The solution to fixing the bottom bar
-                    ) {
-                        Text(text = "This is the home page")
-                    }
+                    HomeOnlyContent(modifier = Modifier.weight(1f))
                 }
 
                 AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
