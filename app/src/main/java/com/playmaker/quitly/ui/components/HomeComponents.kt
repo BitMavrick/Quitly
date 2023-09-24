@@ -31,14 +31,15 @@ import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 
 @Composable
-fun TimeCounter(modifier: Modifier = Modifier){
+fun TimeCounter(){
     Card{
         Column(
             Modifier.background(MaterialTheme.colorScheme.secondaryContainer)
         ) {
             Box(
                 Modifier
-                    .fillMaxWidth().padding(16.dp)
+                    .fillMaxWidth()
+                    .padding(16.dp)
                     .aspectRatio(1f)
             ){
                 Surface(
@@ -47,7 +48,9 @@ fun TimeCounter(modifier: Modifier = Modifier){
                         .background(MaterialTheme.colorScheme.secondaryContainer)
                 ){
                     Column(
-                        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.secondaryContainer),
+                        Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.secondaryContainer),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
@@ -57,7 +60,10 @@ fun TimeCounter(modifier: Modifier = Modifier){
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(bottom = 15.dp)
                         )
-                        Text(text = "00 : 00 : 00")
+                        Text(
+                            text = "00 : 00 : 00",
+                            color = MaterialTheme.colorScheme.tertiary
+                        )
                     }
 
                     CircularProgressIndicator(
@@ -74,12 +80,14 @@ fun TimeCounter(modifier: Modifier = Modifier){
             }
 
             Row(
-                Modifier.fillMaxWidth().padding(top = 50.dp, bottom = 16.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(top = 50.dp, bottom = 16.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 OutlinedButton(
                     onClick = { },
-                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                 ) {
                     Icon(
                         Icons.Filled.Delete,
