@@ -136,9 +136,13 @@ private fun AppContent(
                     .background(MaterialTheme.colorScheme.inverseOnSurface)
             ) {
                 if(contentType == ContentType.HOME_AND_DETAIL){
-                    // TODO: Home and detail system will be here
+                    Text(text = "This is the home and details page")
                 }else{
-                    // TODO: Only home system will be here
+                    Column(
+                        modifier = Modifier.weight(1f) // The solution to fixing the bottom bar
+                    ) {
+                        Text(text = "This is the home page")
+                    }
                 }
 
                 AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
