@@ -38,6 +38,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R
 import com.playmaker.quitly.data.model.ScreenType
+import com.playmaker.quitly.ui.components.HomeAndDetailContent
 import com.playmaker.quitly.ui.components.HomeOnlyContent
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.utils.ContentType
@@ -137,9 +138,16 @@ private fun AppContent(
                     .background(MaterialTheme.colorScheme.inverseOnSurface)
             ) {
                 if(contentType == ContentType.HOME_AND_DETAIL){
-                    Text(text = "This is the home and details page")
+                    HomeAndDetailContent(
+                        uiState = uiState,
+                        navigationType = navigationType,
+                        modifier = Modifier.weight(1f)
+                    )
                 }else{
-                    HomeOnlyContent(modifier = Modifier.weight(1f))
+                    HomeOnlyContent(
+                        uiState = uiState,
+                        modifier = Modifier.weight(1f)
+                    )
                 }
 
                 AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {

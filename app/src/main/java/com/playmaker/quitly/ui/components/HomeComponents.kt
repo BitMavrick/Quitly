@@ -18,9 +18,13 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R
 import com.playmaker.quitly.R.dimen.topbar_padding_vertical
+import com.playmaker.quitly.data.model.ScreenType
+import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.utils.NavigationType
 
 @Composable
 fun HomeOnlyContent(
+    uiState: MainUiState,
     modifier: Modifier = Modifier
 ){
     LazyColumn(
@@ -33,9 +37,52 @@ fun HomeOnlyContent(
                     .padding(vertical = dimensionResource(topbar_padding_vertical))
             )
         }
+
+        if(uiState.currentScreenType == ScreenType.Home){
+            item {
+                Text(text = "This is the Home screen")
+            }
+
+        }else{
+            item {
+                Text(text = "This is the Rank screen")
+            }
+        }
     }
 }
 
+@Composable
+fun HomeAndDetailContent(
+    uiState: MainUiState,
+    navigationType: NavigationType,
+    modifier: Modifier = Modifier
+){
+    LazyColumn(
+        modifier = modifier,
+    ){
+        if(navigationType == NavigationType.NAVIGATION_RAIL){
+            item {
+                AppHomeTopBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = dimensionResource(topbar_padding_vertical))
+                )
+            }
+        }
+
+        if(uiState.currentScreenType == ScreenType.Home){
+            item {
+                Text(text = "This is the Home and detail screen")
+            }
+
+        }else{
+            item {
+                Text(text = "This is the Rank and detail screen")
+            }
+        }
+    }
+
+}
 
 @Composable
 private fun AppHomeTopBar(modifier: Modifier = Modifier) {
