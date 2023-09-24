@@ -248,8 +248,9 @@ private fun NavigationDrawerHeader(
         verticalAlignment = Alignment.CenterVertically
     ){
         Text(
-            text = "Quitly",
-            color = MaterialTheme.colorScheme.primary
+            text = "QUITLY",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary,
         )
 
         IconButton(onClick = { /* doSomething() */ }) {

@@ -45,7 +45,8 @@ private fun AppHomeTopBar(modifier: Modifier = Modifier) {
         modifier = modifier
     ){
         Text(
-            text = "Quitly",
+            text = "QUITLY",
+            style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(start = 16.dp)
         )
