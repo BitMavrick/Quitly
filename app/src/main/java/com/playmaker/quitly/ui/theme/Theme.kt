@@ -101,7 +101,7 @@ fun QuitlyTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.surfaceColorAtElevation(1.dp).toArgb()
+            window.statusBarColor = colorScheme.inverseOnSurface.toArgb()
             window.navigationBarColor = colorScheme.surfaceColorAtElevation(3.dp).toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
             WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
