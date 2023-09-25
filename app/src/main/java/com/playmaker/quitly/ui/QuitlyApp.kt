@@ -47,6 +47,7 @@ fun QuitlyApp(
         onTabPressed = {screenType : ScreenType ->
             mainViewModel.updateCurrentScreenType(screenType = screenType)
         },
+        onDetailPress = {},
         onDetailsScreenBackPressed = { },
         modifier = modifier
     )

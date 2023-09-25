@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.QuitlyTheme
+import com.playmaker.quitly.ui.utils.DetailType
 
 @Composable
 fun RandomQuote(){
@@ -180,12 +181,14 @@ fun TimeCounter(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProgressHistory(){
+fun ProgressHistory(
+    onDetailPress: ((DetailType) -> Unit)
+){
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
         ),
-        onClick = { }
+        onClick = { onDetailPress(DetailType.HOME_DETAIL) }
     ) {
         Column(
             modifier = Modifier
@@ -239,6 +242,6 @@ fun TimeCounterPreview(){
 @Composable
 fun ProgressHistoryPreview(){
     QuitlyTheme {
-        ProgressHistory()
+        ProgressHistory(onDetailPress = { })
     }
 }

@@ -20,11 +20,13 @@ import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R.dimen.topbar_padding_vertical
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
 @Composable
 fun HomeOnlyContent(
     uiState: MainUiState,
+    onDetailPress: ((DetailType) -> Unit),
     modifier: Modifier = Modifier
 ){
     LazyColumn(
@@ -55,7 +57,7 @@ fun HomeOnlyContent(
                 Column(
                     modifier.padding(top = 16.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
                 ) {
-                    ProgressHistory()
+                    ProgressHistory(onDetailPress = onDetailPress)
                 }
             } else{
                 item {

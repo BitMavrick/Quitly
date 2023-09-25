@@ -42,6 +42,7 @@ import com.playmaker.quitly.ui.components.HomeAndDetailContent
 import com.playmaker.quitly.ui.components.HomeOnlyContent
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.utils.ContentType
+import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,6 +52,7 @@ fun HomeScreen(
     contentType: ContentType,
     uiState: MainUiState,
     onTabPressed: (ScreenType) -> Unit,
+    onDetailPress: (DetailType) -> Unit,
     onDetailsScreenBackPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -89,6 +91,7 @@ fun HomeScreen(
                 contentType = contentType,
                 uiState = uiState,
                 onTabPressed = onTabPressed,
+                onDetailPress = onDetailPress,
                 navigationItemContentList = navigationItemContentList
             )
         }
@@ -99,6 +102,7 @@ fun HomeScreen(
                 contentType = contentType,
                 uiState = uiState,
                 onTabPressed = onTabPressed,
+                onDetailPress = onDetailPress,
                 navigationItemContentList = navigationItemContentList
             )
         }else{
@@ -107,6 +111,7 @@ fun HomeScreen(
                 contentType = contentType,
                 uiState = uiState,
                 onTabPressed = onTabPressed,
+                onDetailPress = onDetailPress,
                 navigationItemContentList = navigationItemContentList
             )
         }
@@ -119,6 +124,7 @@ private fun AppContent(
     contentType: ContentType,
     uiState: MainUiState,
     onTabPressed: (ScreenType) -> Unit,
+    onDetailPress: (DetailType) -> Unit,
     navigationItemContentList: List<NavigationItemContent>,
     modifier: Modifier = Modifier
 ){
@@ -146,6 +152,7 @@ private fun AppContent(
                 }else{
                     HomeOnlyContent(
                         uiState = uiState,
+                        onDetailPress = onDetailPress,
                         modifier = Modifier.weight(1f)
                     )
                 }
