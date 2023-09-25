@@ -38,8 +38,8 @@ fun HomeOnlyContent(
             )
         }
 
-        if(uiState.currentScreenType == ScreenType.Home){
-            item {
+        if(uiState.isShowingHomepage){
+            if(uiState.currentScreenType == ScreenType.HOME) item {
                 Column(
                     modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
                 ) {
@@ -57,13 +57,13 @@ fun HomeOnlyContent(
                 ) {
                     ProgressHistory()
                 }
-            }
-        }else{
-            item {
-                Column(
-                    modifier.padding(horizontal = 16.dp)
-                ) {
-                    Text(text = "This is the Rank screen")
+            } else{
+                item {
+                    Column(
+                        modifier.padding(horizontal = 16.dp)
+                    ) {
+                        Text(text = "This is the Rank screen")
+                    }
                 }
             }
         }
@@ -89,7 +89,7 @@ fun HomeAndDetailContent(
             }
         }
 
-        if(uiState.currentScreenType == ScreenType.Home){
+        if(uiState.currentScreenType == ScreenType.HOME){
             item {
                 Text(text = "This is the Home and detail screen")
             }

@@ -56,12 +56,12 @@ fun HomeScreen(
 ) {
     val navigationItemContentList = listOf(
         NavigationItemContent(
-            screenType = ScreenType.Home,
+            screenType = ScreenType.HOME,
             icon = Icons.Filled.Home,
             text = "Home"
         ),
         NavigationItemContent(
-            screenType = ScreenType.Rank,
+            screenType = ScreenType.RANK,
             icon = Icons.Filled.BarChart,
             text = "Ranks"
         ),
