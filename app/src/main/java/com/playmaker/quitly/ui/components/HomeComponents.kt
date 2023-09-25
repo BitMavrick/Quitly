@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -36,6 +37,23 @@ fun TimeCounter(){
         Column(
             Modifier.background(MaterialTheme.colorScheme.secondaryContainer)
         ) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Icon(
+                    Icons.Filled.Timer,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = null,
+                )
+                Text(
+                    text = "TIMER",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
             Box(
                 Modifier
                     .fillMaxWidth()
