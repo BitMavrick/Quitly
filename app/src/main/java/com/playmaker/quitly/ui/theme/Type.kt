@@ -55,7 +55,7 @@ val Typography = Typography(
     titleMedium = TextStyle(
         fontFamily = martian_mono,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
+        fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.15.sp
     ),

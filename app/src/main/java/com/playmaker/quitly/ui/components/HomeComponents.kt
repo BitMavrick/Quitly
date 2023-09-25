@@ -15,12 +15,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Lightbulb
+import androidx.compose.material.icons.outlined.ShowChart
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -40,7 +42,6 @@ fun RandomQuote(){
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
         ),
-
     ) {
         Column(
             modifier = Modifier
@@ -64,7 +65,6 @@ fun RandomQuote(){
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
-
             Row(
                 Modifier.fillMaxWidth().padding(horizontal = 16.dp)
             ) {
@@ -178,6 +178,47 @@ fun TimeCounter(){
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProgressHistory(){
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        ),
+        onClick = { }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row(
+                Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(
+                    Icons.Outlined.ShowChart,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = null,
+                )
+                Text(
+                    text = "Progress History",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+            Row{
+                Text(
+                    text = "Tap to see the progress >",
+                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                )
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun RandomQuotePreview(){
@@ -191,5 +232,13 @@ fun RandomQuotePreview(){
 fun TimeCounterPreview(){
     QuitlyTheme {
         TimeCounter()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProgressHistoryPreview(){
+    QuitlyTheme {
+        ProgressHistory()
     }
 }

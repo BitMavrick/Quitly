@@ -51,6 +51,12 @@ fun HomeOnlyContent(
                 ) {
                     TimeCounter()
                 }
+
+                Column(
+                    modifier.padding(top = 16.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
+                ) {
+                    ProgressHistory()
+                }
             }
         }else{
             item {
