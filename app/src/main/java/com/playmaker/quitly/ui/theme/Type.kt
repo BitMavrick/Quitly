@@ -15,6 +15,10 @@ val graduate = FontFamily(
     Font(graduate_regular)
 )
 
+val martian_mono = FontFamily(
+    Font(R.font.martian_mono_regular)
+)
+
 val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -49,9 +53,9 @@ val Typography = Typography(
     ),
 
     titleMedium = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
+        fontFamily = martian_mono,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.15.sp
     ),

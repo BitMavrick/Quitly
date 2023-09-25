@@ -40,7 +40,8 @@ fun TimeCounter(){
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     Icons.Filled.Timer,
@@ -48,8 +49,8 @@ fun TimeCounter(){
                     contentDescription = null,
                 )
                 Text(
-                    text = "TIMER",
-                    style = MaterialTheme.typography.titleLarge,
+                    text = "Timer",
+                    style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(start = 8.dp)
                 )
