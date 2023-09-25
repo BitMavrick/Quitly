@@ -1,5 +1,6 @@
 package com.playmaker.quitly.ui.components
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R.dimen.topbar_padding_vertical
@@ -29,18 +31,19 @@ fun HomeOnlyContent(
     onDetailPress: ((DetailType) -> Unit),
     modifier: Modifier = Modifier
 ){
-    LazyColumn(
-        modifier = modifier,
-    ){
-        item {
-            AppHomeTopBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = dimensionResource(topbar_padding_vertical))
-            )
-        }
+    val activity = LocalContext.current as Activity
 
-        if(uiState.isShowingHomepage){
+    if(uiState.isShowingHomepage){
+        LazyColumn(
+            modifier = modifier,
+        ){
+            item {
+                AppHomeTopBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = dimensionResource(topbar_padding_vertical))
+                )
+            }
             if(uiState.currentScreenType == ScreenType.HOME) item {
                 Column(
                     modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
@@ -68,25 +71,12 @@ fun HomeOnlyContent(
                     }
                 }
             }
-        }else{
-            if(uiState.currentDetailType == DetailType.HOME_DETAIL){
-                item {
-                    Column(
-                        modifier.padding(horizontal = 16.dp)
-                    ) {
-                        Text(text = "This is the home detail screen")
-                    }
-                }
-            }else if(uiState.currentDetailType == DetailType.RANK_DETAIL){
-                item {
-                    Column(
-                        modifier.padding(horizontal = 16.dp)
-                    ) {
-                        Text(text = "This is the Rank detail screen")
-                    }
-                }
-            }
         }
+    }else{
+        RootDetailComponents(
+            uiState = uiState,
+            onBackPressed = { activity.finish() } // Have some error
+        )
     }
 }
 

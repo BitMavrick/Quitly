@@ -157,7 +157,7 @@ private fun AppContent(
                     )
                 }
 
-                AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
+                AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION && uiState.currentDetailType == DetailType.NONE) {
                     AppBottomNavigationBar(
                         currentTab = uiState.currentScreenType,
                         onTabPressed = onTabPressed,
