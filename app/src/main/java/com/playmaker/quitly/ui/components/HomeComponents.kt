@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,11 +34,37 @@ import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 
 @Composable
+fun RandomQuote(){
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+        ),
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Icon(
+                Icons.Filled.Lightbulb,
+                tint = MaterialTheme.colorScheme.primary,
+                contentDescription = null,
+            )
+            Text(
+                text = "Random Quote",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(start = 8.dp)
+            )
+        }
+    }
+}
+
+@Composable
 fun TimeCounter(){
     Card{
-        Column(
-            Modifier.background(MaterialTheme.colorScheme.secondaryContainer)
-        ) {
+        Column {
             Row(
                 Modifier
                     .fillMaxWidth()
@@ -64,12 +92,11 @@ fun TimeCounter(){
                 Surface(
                     Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
                 ){
                     Column(
                         Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.secondaryContainer),
+                            .background(MaterialTheme.colorScheme.surfaceVariant),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
@@ -131,6 +158,14 @@ fun TimeCounter(){
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RandomQuotePreview(){
+    QuitlyTheme {
+        RandomQuote()
     }
 }
 
