@@ -68,6 +68,24 @@ fun HomeOnlyContent(
                     }
                 }
             }
+        }else{
+            if(uiState.currentDetailType == DetailType.HOME_DETAIL){
+                item {
+                    Column(
+                        modifier.padding(horizontal = 16.dp)
+                    ) {
+                        Text(text = "This is the home detail screen")
+                    }
+                }
+            }else if(uiState.currentDetailType == DetailType.RANK_DETAIL){
+                item {
+                    Column(
+                        modifier.padding(horizontal = 16.dp)
+                    ) {
+                        Text(text = "This is the Rank detail screen")
+                    }
+                }
+            }
         }
     }
 }

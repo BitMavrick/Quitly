@@ -9,6 +9,7 @@ import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.screens.HomeScreen
 import com.playmaker.quitly.ui.stateModel.MainViewModel
 import com.playmaker.quitly.ui.utils.ContentType
+import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
 @Composable
@@ -47,7 +48,9 @@ fun QuitlyApp(
         onTabPressed = {screenType : ScreenType ->
             mainViewModel.updateCurrentScreenType(screenType = screenType)
         },
-        onDetailPress = {},
+        onDetailPress = {detailType: DetailType ->
+            mainViewModel.setDetailScreenType(detailType = detailType)
+        },
         onDetailsScreenBackPressed = { },
         modifier = modifier
     )
