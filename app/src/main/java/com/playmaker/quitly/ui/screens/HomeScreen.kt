@@ -54,8 +54,7 @@ fun HomeScreen(
     uiState: MainUiState,
     onTabPressed: (ScreenType) -> Unit,
     onDetailPress: (DetailType) -> Unit,
-    onDetailsScreenBackPressed: () -> Unit,
-    modifier: Modifier = Modifier
+    onDetailsScreenBackPressed: () -> Unit
 ) {
     val navigationItemContentList = listOf(
         NavigationItemContent(
@@ -145,7 +144,7 @@ private fun AppContent(
                     HomeAndDetailContent(
                         uiState = uiState,
                         navigationType = navigationType,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
                     )
                 }else{
                     HomeOnlyContent(

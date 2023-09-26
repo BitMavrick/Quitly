@@ -1,6 +1,5 @@
 package com.playmaker.quitly.ui.components
 
-import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R.dimen.topbar_padding_vertical
@@ -89,16 +87,12 @@ fun HomeAndDetailContent(
                 )
             }
         }
+    }
 
-        if(uiState.currentScreenType == ScreenType.HOME){
-            item {
-                Text(text = "This is the Home and detail screen")
-            }
-        }else{
-            item {
-                Text(text = "This is the Rank and detail screen")
-            }
-        }
+    if(uiState.currentScreenType == ScreenType.HOME){
+        Text(text = "This is the Home and detail screen")
+    }else{
+        Text(text = "This is the Rank and detail screen")
     }
 }
 
