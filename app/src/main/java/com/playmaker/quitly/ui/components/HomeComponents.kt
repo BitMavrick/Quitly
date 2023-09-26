@@ -222,12 +222,16 @@ fun ProgressHistory(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RankCard(){
+fun RankCard(
+    onDetailPress: ((DetailType) -> Unit)
+){
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
         ),
+        onClick = { onDetailPress(DetailType.RANK_DETAIL) }
     ) {
         Column(
             modifier = Modifier
