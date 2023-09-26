@@ -109,6 +109,7 @@ fun HomeScreen(
         }else{
             RootDetailComponents(
                 uiState = uiState,
+                navigationType = navigationType,
                 onBackPressed = onDetailsScreenBackPressed
             )
         }
