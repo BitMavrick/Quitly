@@ -62,9 +62,9 @@ fun HomeOnlyContent(
         } else{
             item {
                 Column(
-                    modifier.padding(horizontal = 16.dp)
+                    modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
                 ) {
-                    Text(text = "This is the Rank screen")
+                    RankCard()
                 }
             }
         }

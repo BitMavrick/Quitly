@@ -222,6 +222,48 @@ fun ProgressHistory(
     }
 }
 
+@Composable
+fun RankCard(){
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+        ),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row(
+                Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(
+                    Icons.Outlined.Lightbulb,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = null,
+                )
+                Text(
+                    text = "Rank Card",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+            Row(
+                Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+            ) {
+                Text(
+                    text = "- This is the rank card",
+                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun RandomQuotePreview(){
