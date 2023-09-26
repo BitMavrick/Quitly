@@ -51,7 +51,9 @@ fun QuitlyApp(
         onDetailPress = {detailType: DetailType ->
             mainViewModel.setDetailScreenType(detailType = detailType)
         },
-        onDetailsScreenBackPressed = { },
+        onDetailsScreenBackPressed = {
+            mainViewModel.resetDetailScreenType()
+        },
         modifier = modifier
     )
 }

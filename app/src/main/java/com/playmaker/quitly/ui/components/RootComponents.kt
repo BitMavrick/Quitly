@@ -31,52 +31,43 @@ fun HomeOnlyContent(
     onDetailPress: ((DetailType) -> Unit),
     modifier: Modifier = Modifier
 ){
-    val activity = LocalContext.current as Activity
-
-    if(uiState.isShowingHomepage){
-        LazyColumn(
-            modifier = modifier,
-        ){
-            item {
-                AppHomeTopBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = dimensionResource(topbar_padding_vertical))
-                )
+    LazyColumn(
+        modifier = modifier,
+    ){
+        item {
+            AppHomeTopBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = dimensionResource(topbar_padding_vertical))
+            )
+        }
+        if(uiState.currentScreenType == ScreenType.HOME) item {
+            Column(
+                modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
+            ) {
+                RandomQuote()
             }
-            if(uiState.currentScreenType == ScreenType.HOME) item {
-                Column(
-                    modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
-                ) {
-                    RandomQuote()
-                }
 
+            Column(
+                modifier.padding(horizontal = 16.dp)
+            ) {
+                TimeCounter()
+            }
+
+            Column(
+                modifier.padding(top = 16.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
+            ) {
+                ProgressHistory(onDetailPress = onDetailPress)
+            }
+        } else{
+            item {
                 Column(
                     modifier.padding(horizontal = 16.dp)
                 ) {
-                    TimeCounter()
-                }
-
-                Column(
-                    modifier.padding(top = 16.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
-                ) {
-                    ProgressHistory(onDetailPress = onDetailPress)
-                }
-            } else{
-                item {
-                    Column(
-                        modifier.padding(horizontal = 16.dp)
-                    ) {
-                        Text(text = "This is the Rank screen")
-                    }
+                    Text(text = "This is the Rank screen")
                 }
             }
         }
-    }else{
-        RootDetailComponents(
-            uiState = uiState,
-            onBackPressed = { activity.finish() } // Have some error
-        )
     }
 }
 

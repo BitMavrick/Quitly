@@ -40,6 +40,7 @@ import com.playmaker.quitly.R
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.components.HomeAndDetailContent
 import com.playmaker.quitly.ui.components.HomeOnlyContent
+import com.playmaker.quitly.ui.components.RootDetailComponents
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
@@ -106,13 +107,9 @@ fun HomeScreen(
                 navigationItemContentList = navigationItemContentList
             )
         }else{
-            AppContent(
-                navigationType = navigationType,
-                contentType = contentType,
+            RootDetailComponents(
                 uiState = uiState,
-                onTabPressed = onTabPressed,
-                onDetailPress = onDetailPress,
-                navigationItemContentList = navigationItemContentList
+                onBackPressed = onDetailsScreenBackPressed
             )
         }
     }

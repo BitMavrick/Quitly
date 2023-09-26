@@ -14,6 +14,7 @@ fun RootDetailComponents(
     BackHandler {
         onBackPressed()
     }
+
     Column {
         Text(text = "This is the details page")
     }
