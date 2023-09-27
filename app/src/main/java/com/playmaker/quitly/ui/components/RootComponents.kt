@@ -34,7 +34,7 @@ fun HomeOnlyContent(
         modifier = modifier,
     ){
 
-        if(navigationType == NavigationType.BOTTOM_NAVIGATION || navigationType == NavigationType.NAVIGATION_RAIL){
+        if(navigationType == NavigationType.BOTTOM_NAVIGATION){
             item {
                 AppHomeTopBar(
                     modifier = Modifier
