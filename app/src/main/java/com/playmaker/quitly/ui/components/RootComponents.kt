@@ -26,19 +26,24 @@ import com.playmaker.quitly.ui.utils.NavigationType
 @Composable
 fun HomeOnlyContent(
     uiState: MainUiState,
+    navigationType: NavigationType,
     onDetailPress: ((DetailType) -> Unit),
     modifier: Modifier = Modifier
 ){
     LazyColumn(
         modifier = modifier,
     ){
-        item {
-            AppHomeTopBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = dimensionResource(topbar_padding_vertical))
-            )
+
+        if(navigationType == NavigationType.BOTTOM_NAVIGATION || navigationType == NavigationType.NAVIGATION_RAIL){
+            item {
+                AppHomeTopBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = dimensionResource(topbar_padding_vertical))
+                )
+            }
         }
+
         if(uiState.currentScreenType == ScreenType.HOME) item {
             Column(
                 modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
@@ -73,24 +78,34 @@ fun HomeOnlyContent(
 fun HomeAndDetailContent(
     uiState: MainUiState,
     navigationType: NavigationType,
-    modifier: Modifier = Modifier
+    onDetailPress: (DetailType) -> Unit
 ){
-    LazyColumn(
-        modifier = modifier,
-    ){
-        if(navigationType == NavigationType.NAVIGATION_RAIL){
-            item {
-                AppHomeTopBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = dimensionResource(topbar_padding_vertical))
-                )
-            }
-        }
+    if(navigationType == NavigationType.NAVIGATION_RAIL){
+        AppHomeTopBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = dimensionResource(topbar_padding_vertical))
+        )
     }
 
     if(uiState.currentScreenType == ScreenType.HOME){
-        Text(text = "This is the Home and detail screen")
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            HomeOnlyContent(
+                uiState = uiState,
+                onDetailPress = onDetailPress,
+                navigationType = navigationType,
+                modifier = Modifier.weight(1f)
+            )
+
+            HomeOnlyContent(
+                uiState = uiState,
+                onDetailPress = onDetailPress,
+                navigationType = navigationType,
+                modifier = Modifier.weight(1f)
+            )
+        }
     }else{
         Text(text = "This is the Rank and detail screen")
     }

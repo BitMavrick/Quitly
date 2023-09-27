@@ -144,11 +144,12 @@ private fun AppContent(
                     HomeAndDetailContent(
                         uiState = uiState,
                         navigationType = navigationType,
-                        modifier = Modifier
+                        onDetailPress = onDetailPress,
                     )
                 }else{
                     HomeOnlyContent(
                         uiState = uiState,
+                        navigationType = navigationType,
                         onDetailPress = onDetailPress,
                         modifier = Modifier.weight(1f)
                     )

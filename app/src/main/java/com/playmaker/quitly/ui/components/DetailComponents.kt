@@ -78,6 +78,7 @@ private fun AppDetailTopBar(
         modifier = modifier.fillMaxWidth()
     ){
         Row(
+            Modifier.padding(top = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ){
             IconButton(
