@@ -26,6 +26,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,48 +37,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
-
-@Composable
-fun RandomQuote(){
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-        ),
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Row(
-                Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(
-                    Icons.Outlined.Lightbulb,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = null,
-                )
-                Text(
-                    text = "Random Quote",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-            Row(
-                Modifier.fillMaxWidth().padding(horizontal = 16.dp)
-            ) {
-                Text(
-                    text = "- Believe you can, and you are halfway there",
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
 
 @Composable
 fun TimeCounter(){
@@ -184,9 +143,9 @@ fun TimeCounter(){
 fun ProgressHistory(
     onDetailPress: ((DetailType) -> Unit)
 ){
-    Card(
+    OutlinedCard(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
         ),
         onClick = { onDetailPress(DetailType.HOME_DETAIL) }
     ) {
@@ -265,14 +224,6 @@ fun RankCard(
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RandomQuotePreview(){
-    QuitlyTheme {
-        RandomQuote()
     }
 }
 

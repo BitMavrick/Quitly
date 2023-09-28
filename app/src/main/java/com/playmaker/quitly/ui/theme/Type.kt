@@ -53,7 +53,7 @@ val Typography = Typography(
     ),
 
     titleMedium = TextStyle(
-        fontFamily = martian_mono,
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
         lineHeight = 24.sp,
