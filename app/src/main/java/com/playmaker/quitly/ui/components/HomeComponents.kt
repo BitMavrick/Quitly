@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,7 +18,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material.icons.outlined.Lightbulb
-import androidx.compose.material.icons.outlined.ShowChart
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -42,7 +40,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun TimeCounter(){
@@ -120,7 +117,7 @@ fun TimeCounter(){
                 ) {
                     Icon(
                         Icons.Filled.Delete,
-                        contentDescription = "Localized description",
+                        contentDescription = "Clear data icon",
                         modifier = Modifier.size(ButtonDefaults.IconSize)
                     )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
@@ -133,12 +130,19 @@ fun TimeCounter(){
                 ) {
                     Icon(
                         Icons.Filled.Refresh,
-                        contentDescription = "Localized description",
+                        contentDescription = "Gave up icon",
                         modifier = Modifier.size(ButtonDefaults.IconSize)
                     )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
                     Text("Gave Up")
                 }
+            }
+
+            Row(Modifier.padding(38.dp)) {
+                Text(
+                    text = "- Believe in yourself, and you are halfway there!",
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }
@@ -181,7 +185,9 @@ fun ProgressHistory(
             }
 
             Column(
-                Modifier.height(60.dp).padding(start = 16.dp),
+                Modifier
+                    .height(60.dp)
+                    .padding(start = 16.dp),
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 Text(
@@ -247,7 +253,7 @@ fun RankCard(
     }
 }
 
-// @Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun TimeCounterPreview(){
     QuitlyTheme {
