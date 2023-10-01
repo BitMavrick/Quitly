@@ -7,13 +7,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.ShowChart
 import androidx.compose.material.icons.outlined.Timer
@@ -32,11 +36,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun TimeCounter(){
@@ -149,32 +155,42 @@ fun ProgressHistory(
         ),
         onClick = { onDetailPress(DetailType.HOME_DETAIL) }
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Row(
-                Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(
-                    Icons.Outlined.ShowChart,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = null,
-                )
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(60.dp)
+                    .aspectRatio(1f)
+                    .background(MaterialTheme.colorScheme.inversePrimary)
+
+            ) {
+                Column(
+                    Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        Icons.Filled.ShowChart,
+                        contentDescription = null,
+                    )
+                }
+            }
+
+            Column(
+                Modifier.height(60.dp).padding(start = 16.dp),
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
                 Text(
                     text = "Progress History",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp)
+                    style = MaterialTheme.typography.bodyLarge
                 )
-            }
-            Row{
                 Text(
-                    text = "Tap to see the progress >",
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                    text = "Tap to see your progress details",
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }
@@ -215,11 +231,15 @@ fun RankCard(
                 )
             }
             Row(
-                Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
             ) {
                 Text(
                     text = "- This is the rank card",
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
                     textAlign = TextAlign.Center
                 )
             }
@@ -227,7 +247,7 @@ fun RankCard(
     }
 }
 
-@Preview(showBackground = true)
+// @Preview(showBackground = true)
 @Composable
 fun TimeCounterPreview(){
     QuitlyTheme {
