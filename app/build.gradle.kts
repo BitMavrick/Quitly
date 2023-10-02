@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.playmaker.quitly"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -74,4 +74,7 @@ dependencies {
 
     // Icon Extended
     implementation ("androidx.compose.material:material-icons-extended:1.5.1")
+
+    // Ycharts
+    implementation("co.yml:ycharts:2.1.0")
 }
