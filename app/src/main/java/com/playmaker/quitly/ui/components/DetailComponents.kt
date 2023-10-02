@@ -21,8 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
@@ -51,7 +53,7 @@ fun RootDetailComponents(
                 Column(
                     Modifier.padding(16.dp)
                 ) {
-                    ProgressCard()
+                    ProgressGraph()
                 }
             }
         }else{
@@ -75,7 +77,9 @@ private fun AppDetailTopBar(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().padding(top = 8.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
     ){
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -119,7 +123,7 @@ private fun AppDetailTopBar(
 
 
 @Composable
-fun ProgressCard(){
+fun ProgressGraph(){
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
@@ -130,37 +134,16 @@ fun ProgressCard(){
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Row(
-                Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(
-                    Icons.Outlined.Lightbulb,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = null,
-                )
-                Text(
-                    text = "Progress Card",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            ) {
-                Text(
-                    text = "- This is the progress card",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(text = "This is the text")
         }
+    }
+}
+
+@Preview
+@Composable
+fun ProgressGraphPreview(){
+    QuitlyTheme {
+        ProgressGraph()
     }
 }
 

@@ -88,7 +88,7 @@ fun TimeCounter(){
                         )
                         Text(
                             text = "00 : 00 : 00",
-                            color = MaterialTheme.colorScheme.tertiary
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
 
