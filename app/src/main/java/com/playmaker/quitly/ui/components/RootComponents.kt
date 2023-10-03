@@ -61,7 +61,7 @@ fun HomeOnlyContent(
                 Column(
                     modifier.padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
                 ) {
-                    RankCard(onDetailPress = onDetailPress)
+                    OverviewCard()
                 }
             }
         }

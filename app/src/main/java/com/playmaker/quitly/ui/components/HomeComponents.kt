@@ -24,8 +24,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
@@ -38,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.playmaker.quitly.ui.theme.CustomTypography
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 
@@ -247,6 +250,138 @@ fun RankCard(
                         .fillMaxWidth()
                         .padding(top = 16.dp),
                     textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun OverviewCard(){
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+    ){
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Corporal",
+                style = CustomTypography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = "Reached 5 Days",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+
+            Divider(
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.inversePrimary,
+                modifier = Modifier.padding(vertical = 6.dp)
+            )
+
+            Row{
+                Text(
+                    text = "Current Best: ",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 3.dp)
+                )
+
+                Text(
+                    text = "New",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                )
+            }
+
+            Row{
+                Text(
+                    text = "Total Give ups: ",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                Text(
+                    text = "3 Times",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ProgressCard(){
+
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ){
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Progress",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary,
+            )
+
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ){
+                Text(
+                    text = "Upcoming: Nothing",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+/*
+                Text(
+                    text = buildString {
+                        if (days != "0") {
+                            append("${days}d ")
+                        }
+                        append("$hours : $minutes : $seconds")
+                    },
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+ */
+
+            }
+
+            LinearProgressIndicator(
+                progress = 0.4f,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(10.dp),
+                trackColor = MaterialTheme.colorScheme.inversePrimary,
+            )
+
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Current Progress",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    text = "Upcoming progress",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }

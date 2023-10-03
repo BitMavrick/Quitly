@@ -111,6 +111,7 @@ fun QuitlyTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+
         content = content
     )
 }
