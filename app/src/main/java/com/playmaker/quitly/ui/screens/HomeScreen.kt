@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +45,6 @@ import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navigationType: NavigationType,
@@ -109,6 +107,7 @@ fun HomeScreen(
             RootDetailComponents(
                 uiState = uiState,
                 navigationType = navigationType,
+                contentType = contentType,
                 onBackPressed = onDetailsScreenBackPressed
             )
         }
@@ -143,6 +142,7 @@ private fun AppContent(
                 if(contentType == ContentType.HOME_AND_DETAIL){
                     HomeAndDetailContent(
                         uiState = uiState,
+                        contentType = contentType,
                         navigationType = navigationType,
                         onDetailPress = onDetailPress,
                     )
@@ -213,7 +213,6 @@ private fun AppNavigationRail(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppNavigationDrawer(
     selectedDestination: ScreenType,

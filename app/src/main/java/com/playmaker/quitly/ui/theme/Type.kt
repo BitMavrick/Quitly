@@ -6,17 +6,12 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.playmaker.quitly.R
 import com.playmaker.quitly.R.font.graduate_regular
 
 // Set of Material typography styles to start with
 
 val graduate = FontFamily(
     Font(graduate_regular)
-)
-
-val martian_mono = FontFamily(
-    Font(R.font.martian_mono_regular)
 )
 
 val CustomTypography = Typography(

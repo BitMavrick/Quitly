@@ -15,9 +15,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ShowChart
-import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -37,7 +37,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.theme.CustomTypography
@@ -206,56 +205,6 @@ fun ProgressHistory(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun RankCard(
-    onDetailPress: ((DetailType) -> Unit)
-){
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-        ),
-        onClick = { onDetailPress(DetailType.RANK_DETAIL) }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Row(
-                Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(
-                    Icons.Outlined.Lightbulb,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = null,
-                )
-                Text(
-                    text = "Rank Card",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            ) {
-                Text(
-                    text = "- This is the rank card",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
-
 @Preview
 @Composable
 fun OverviewCard(){
@@ -382,6 +331,62 @@ fun ProgressCard(){
                     text = "Upcoming progress",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ScoreBoard(
+    onDetailPress: ((DetailType) -> Unit)
+){
+    OutlinedCard(
+        modifier = Modifier.padding(top = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+        ),
+        onClick = { onDetailPress(DetailType.RANK_DETAIL) }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(60.dp)
+                    .aspectRatio(1f)
+                    .background(MaterialTheme.colorScheme.inversePrimary)
+
+            ) {
+                Column(
+                    Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        Icons.Filled.List,
+                        contentDescription = null,
+                    )
+                }
+            }
+
+            Column(
+                Modifier
+                    .height(60.dp)
+                    .padding(start = 16.dp),
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(
+                    text = "Score Board",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Text(
+                    text = "Tap to see the score board",
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }

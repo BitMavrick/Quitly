@@ -50,12 +50,14 @@ import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.theme.QuitlyTheme
+import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
 @Composable
 fun RootDetailComponents(
     uiState: MainUiState,
+    contentType: ContentType,
     navigationType: NavigationType,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
@@ -76,7 +78,7 @@ fun RootDetailComponents(
             }
         }
 
-        if(uiState.currentDetailType == DetailType.HOME_DETAIL || navigationType != NavigationType.BOTTOM_NAVIGATION){
+        if(uiState.currentDetailType == DetailType.HOME_DETAIL){
             item {
                 Column(
                     Modifier.padding(horizontal = 16.dp)
