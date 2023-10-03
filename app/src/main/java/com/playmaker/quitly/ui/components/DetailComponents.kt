@@ -58,12 +58,15 @@ fun RootDetailComponents(
     uiState: MainUiState,
     navigationType: NavigationType,
     onBackPressed: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     BackHandler {
         onBackPressed()
     }
 
-    LazyColumn {
+    LazyColumn(
+        modifier = modifier
+    ) {
         if(navigationType == NavigationType.BOTTOM_NAVIGATION){
             item {
                 AppDetailTopBar(
@@ -73,15 +76,15 @@ fun RootDetailComponents(
             }
         }
 
-        if(uiState.currentDetailType == DetailType.HOME_DETAIL){
+        if(uiState.currentDetailType == DetailType.HOME_DETAIL || navigationType != NavigationType.BOTTOM_NAVIGATION){
             item {
                 Column(
-                    Modifier.padding(16.dp)
+                    Modifier.padding(horizontal = 16.dp)
                 ) {
                     ProgressGraph()
                 }
             }
-        }else{
+        }else if(uiState.currentDetailType == DetailType.RANK_DETAIL){
             item{
                 Column(
                     Modifier.padding(16.dp)

@@ -93,10 +93,10 @@ fun HomeAndDetailContent(
                 modifier = Modifier.weight(1f)
             )
 
-            HomeOnlyContent(
+            RootDetailComponents(
                 uiState = uiState,
-                onDetailPress = onDetailPress,
                 navigationType = navigationType,
+                onBackPressed = {},
                 modifier = Modifier.weight(1f)
             )
         }
