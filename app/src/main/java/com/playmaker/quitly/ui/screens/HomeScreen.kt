@@ -93,6 +93,7 @@ fun HomeScreen(
                 navigationItemContentList = navigationItemContentList
             )
         }
+
     }else{
         if(uiState.isShowingHomepage){
             AppContent(
