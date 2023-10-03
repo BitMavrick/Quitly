@@ -48,6 +48,7 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
+import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.ContentType
@@ -78,7 +79,7 @@ fun RootDetailComponents(
             }
         }
 
-        if(uiState.currentDetailType == DetailType.HOME_DETAIL){
+        if(uiState.currentScreenType == ScreenType.HOME){ // The problem is here
             item {
                 Column(
                     Modifier.padding(horizontal = 16.dp)
@@ -86,7 +87,7 @@ fun RootDetailComponents(
                     ProgressGraph()
                 }
             }
-        }else if(uiState.currentDetailType == DetailType.RANK_DETAIL){
+        }else{
             item{
                 Column(
                     Modifier.padding(16.dp)
@@ -132,7 +133,7 @@ private fun AppDetailTopBar(
                 )
             }else{
                 Text(
-                    text = "ACHIEVEMENTS",
+                    text = "SCORE BOARD",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                 )
