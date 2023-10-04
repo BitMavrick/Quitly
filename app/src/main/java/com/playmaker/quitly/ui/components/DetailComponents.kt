@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -66,7 +67,7 @@ fun RootDetailComponents(
     }
 
     LazyColumn(
-        modifier = modifier
+        modifier = modifier.background(MaterialTheme.colorScheme.inverseOnSurface)
     ) {
         if(navigationType == NavigationType.BOTTOM_NAVIGATION){
             item {

@@ -51,10 +51,12 @@ fun HomeOnlyContent(
                 TimeCounter()
             }
 
-            Column(
-                modifier.padding(top = 16.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
-            ) {
-                ProgressHistory(onDetailPress = onDetailPress)
+            if(navigationType == NavigationType.BOTTOM_NAVIGATION){
+                Column(
+                    modifier.padding(top = 16.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
+                ) {
+                    ProgressHistory(onDetailPress = onDetailPress)
+                }
             }
         } else{
             item {
@@ -63,7 +65,9 @@ fun HomeOnlyContent(
                 ) {
                     OverviewCard()
                     ProgressCard()
-                    ScoreBoard(onDetailPress = onDetailPress)
+                    if(navigationType == NavigationType.BOTTOM_NAVIGATION){
+                        ScoreBoard(onDetailPress = onDetailPress)
+                    }
                 }
             }
         }
