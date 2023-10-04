@@ -5,10 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -66,10 +66,15 @@ fun RootDetailComponents(
         onBackPressed()
     }
 
+    var paddingValue = PaddingValues(0.dp)
+
     LazyColumn(
         modifier = modifier.background(MaterialTheme.colorScheme.inverseOnSurface)
     ) {
         if(navigationType == NavigationType.BOTTOM_NAVIGATION){
+
+            paddingValue = PaddingValues(horizontal = 16.dp)
+
             item {
                 AppDetailTopBar(
                     uiState,
@@ -78,10 +83,10 @@ fun RootDetailComponents(
             }
         }
 
-        if(uiState.currentScreenType == ScreenType.HOME){ // The problem is here
+        if(uiState.currentScreenType == ScreenType.HOME){
             item {
                 Column(
-                    Modifier.padding(horizontal = 16.dp)
+                    Modifier.padding(paddingValue)
                 ) {
                     ProgressGraph()
                 }
@@ -89,7 +94,8 @@ fun RootDetailComponents(
         }else{
             item{
                 Column(
-                    Modifier.padding(16.dp)
+                    //
+                    Modifier.padding(paddingValue)
                 ) {
                     AchievementCard()
                 }

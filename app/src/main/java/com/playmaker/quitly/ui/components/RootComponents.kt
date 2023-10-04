@@ -103,7 +103,7 @@ fun HomeAndDetailContent(
                 uiState = uiState,
                 navigationType = navigationType,
                 onBackPressed = {},
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f).padding(end = 16.dp)
             )
         }
     }else{
@@ -121,7 +121,7 @@ fun HomeAndDetailContent(
                 uiState = uiState,
                 navigationType = navigationType,
                 onBackPressed = {},
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f).padding(end = 16.dp)
             )
         }
     }
