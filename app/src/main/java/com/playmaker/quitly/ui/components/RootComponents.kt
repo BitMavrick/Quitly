@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R.dimen.topbar_padding_vertical
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
-import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
@@ -74,7 +73,6 @@ fun HomeOnlyContent(
 @Composable
 fun HomeAndDetailContent(
     uiState: MainUiState,
-    contentType: ContentType,
     navigationType: NavigationType,
     onDetailPress: (DetailType) -> Unit
 ){
@@ -99,7 +97,6 @@ fun HomeAndDetailContent(
 
             RootDetailComponents(
                 uiState = uiState,
-                contentType = contentType,
                 navigationType = navigationType,
                 onBackPressed = {},
                 modifier = Modifier.weight(1f)
@@ -118,7 +115,6 @@ fun HomeAndDetailContent(
 
             RootDetailComponents(
                 uiState = uiState,
-                contentType = contentType,
                 navigationType = navigationType,
                 onBackPressed = {},
                 modifier = Modifier.weight(1f)

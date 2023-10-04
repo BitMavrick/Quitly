@@ -107,7 +107,6 @@ fun HomeScreen(
             RootDetailComponents(
                 uiState = uiState,
                 navigationType = navigationType,
-                contentType = contentType,
                 onBackPressed = onDetailsScreenBackPressed
             )
         }
@@ -142,7 +141,6 @@ private fun AppContent(
                 if(contentType == ContentType.HOME_AND_DETAIL){
                     HomeAndDetailContent(
                         uiState = uiState,
-                        contentType = contentType,
                         navigationType = navigationType,
                         onDetailPress = onDetailPress,
                     )

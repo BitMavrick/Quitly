@@ -3,7 +3,6 @@ package com.playmaker.quitly.ui
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.screens.HomeScreen
@@ -15,7 +14,6 @@ import com.playmaker.quitly.ui.utils.NavigationType
 @Composable
 fun QuitlyApp(
     windowSize: WindowWidthSizeClass,
-    modifier: Modifier = Modifier
 ) {
     val navigationType: NavigationType
     val contentType: ContentType

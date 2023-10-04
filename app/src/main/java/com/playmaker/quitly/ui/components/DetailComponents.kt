@@ -51,14 +51,12 @@ import co.yml.charts.ui.linechart.model.ShadowUnderLine
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.theme.QuitlyTheme
-import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
 @Composable
 fun RootDetailComponents(
     uiState: MainUiState,
-    contentType: ContentType,
     navigationType: NavigationType,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
