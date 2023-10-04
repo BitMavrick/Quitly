@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -51,6 +52,7 @@ import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.theme.CustomTypography
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
@@ -94,7 +96,6 @@ fun RootDetailComponents(
         }else{
             item{
                 Column(
-                    //
                     Modifier.padding(paddingValue)
                 ) {
                     AchievementCard()
@@ -115,7 +116,7 @@ private fun AppDetailTopBar(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 8.dp),
+            .padding(top = 8.dp, bottom = 8.dp),
     ){
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -341,7 +342,7 @@ fun  ProgressGraphPreview(){
 fun AchievementCard(){
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            //containerColor = MaterialTheme.colorScheme.tertiaryContainer,
         ),
     ) {
         Column(
@@ -354,28 +355,28 @@ fun AchievementCard(){
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Icon(
-                    Icons.Outlined.Lightbulb,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = null,
-                )
                 Text(
-                    text = "Achievement Card",
-                    style = MaterialTheme.typography.titleMedium,
+                    text = "Scout",
+                    style = CustomTypography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 8.dp)
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
                 )
             }
+            Divider(
+                thickness = 3.dp
+            )
             Row(
                 Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = "- This is the achievement card",
+                    text = "Reach 1 day",
+                    style = CustomTypography.bodyMedium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .padding(top = 8.dp),
                     textAlign = TextAlign.Center
                 )
             }
