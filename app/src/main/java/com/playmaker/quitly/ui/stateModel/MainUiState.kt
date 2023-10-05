@@ -7,4 +7,13 @@ data class MainUiState (
     val currentScreenType: ScreenType = ScreenType.HOME,
     val currentDetailType: DetailType = DetailType.NONE,
     val isShowingHomepage: Boolean = true,
+
+    // Backend related
+    val seconds: String = "00",
+    val minutes: String = "00",
+    val hours: String = "00",
+    val days: String = "0",
+    val runningTimeSeconds: Long = 0L,
+    val progressValue : Float = 0.0f
 )
+
