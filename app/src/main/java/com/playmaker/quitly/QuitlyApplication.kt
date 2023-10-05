@@ -1,4 +1,5 @@
 package com.playmaker.quitly
 
-class QuitlyApplication {
+import android.app.Application
+class QuitlyApplication: Application() {
 }

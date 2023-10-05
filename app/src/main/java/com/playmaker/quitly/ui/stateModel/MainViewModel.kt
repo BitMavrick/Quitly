@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val userPreferencesRepository: UserPreferencesRepository
+    //private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel(){
 
     private val _uiState = MutableStateFlow(MainUiState())
@@ -52,8 +52,8 @@ class MainViewModel(
     }
 
     // Backend related functions and systems
-    private var timerJob: Job? = null
-
+    //private var timerJob: Job? = null
+/*
     val timeState: StateFlow<PreferenceState> =
         userPreferencesRepository.time.map { newTime ->
             PreferenceState(startTime = newTime)
@@ -111,6 +111,8 @@ class MainViewModel(
             )
         }
     }
+
+ */
 
 
 }
