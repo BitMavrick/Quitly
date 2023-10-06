@@ -5,19 +5,19 @@ import com.playmaker.quitly.data.model.Time
 import kotlinx.coroutines.flow.Flow
 
 class LocalTimesRepository(private val timeDao: TimeDao) : TimesRepository {
-    override fun getAllValuesStream(): Flow<List<Time>> {
+    override fun getAllTimesStream(): Flow<List<Time>> {
         return timeDao.getAllValues()
     }
 
-    override fun getValueStream(id: Int): Flow<Time?> {
+    override fun getTimeStream(id: Int): Flow<Time?> {
         return timeDao.getValue(id)
     }
 
-    override suspend fun insertValue(time: Time) {
+    override suspend fun insertTime(time: Time) {
         return timeDao.insert(time)
     }
 
-    override suspend fun clearValue() {
+    override suspend fun clearTime() {
         return timeDao.delete()
     }
 }

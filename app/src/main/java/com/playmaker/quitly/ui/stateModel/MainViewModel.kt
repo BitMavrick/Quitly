@@ -3,9 +3,10 @@ package com.playmaker.quitly.ui.stateModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.playmaker.quitly.data.TimesRepository
+import com.playmaker.quitly.data.local.ProgressDataSource.progressList
+import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.data.preference.UserPreferencesRepository
-import com.playmaker.quitly.data.room.LocalTimesRepository
 import com.playmaker.quitly.ui.utils.DetailType
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -14,6 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -57,7 +59,7 @@ class MainViewModel(
     // Backend related functions and systems
     private var timerJob: Job? = null
 
-    val timeState: StateFlow<PreferenceState> =
+    private val timeState: StateFlow<PreferenceState> =
         userPreferencesRepository.time.map { newTime ->
             PreferenceState(startTime = newTime)
         }.stateIn(
@@ -65,6 +67,40 @@ class MainViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = PreferenceState()
         )
+
+    fun start(){
+        resetTime()
+        saveTime()
+        startTimer(timeState.value.startTime.toLong())
+    }
+
+    fun gaveUp(){
+        start()
+        viewModelScope.launch {
+            saveTimeInDatabase()
+        }
+    }
+
+    fun cleanUp() {
+        timerJob?.cancel()
+        resetTime()
+        _uiState.update { newState ->
+            newState.copy(
+                days = "0",
+                seconds = "00",
+                minutes = "00",
+                hours = "00",
+                progressValue = 0.0f,
+                runningTimeSeconds = 0
+            )
+        }
+
+        viewModelScope.launch {
+            deleteTimeFromDatabase()
+        }
+    }
+
+
 
     private fun saveTime(){
         viewModelScope.launch {
@@ -112,6 +148,58 @@ class MainViewModel(
                 progressValue = progressValue,
                 runningTimeSeconds = totalSeconds
             )
+        }
+    }
+
+    private suspend fun saveTimeInDatabase(){
+        timesRepository.insertTime(uiState.value.toData())
+    }
+
+    private suspend fun deleteTimeFromDatabase(){
+        timesRepository.clearTime()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        timerJob?.cancel() // Cancel the timer job when the ViewModel is cleared
+    }
+
+    fun statesProgressCard() : Progress {
+        val runningTime = uiState.value.runningTimeSeconds
+        var answer = progressList.first()
+
+        for(progress in progressList){
+            if(runningTime >= progress.startTime){
+                answer = progress
+            }else{
+                break
+            }
+        }
+
+        return answer
+    }
+
+    fun maxStatesProgress(time: Long) : Progress {
+        var answer = progressList.first()
+
+        for(progress in progressList){
+            if(time >= progress.startTime){
+                answer = progress
+            }else{
+                break
+            }
+        }
+
+        return answer
+    }
+
+    init {
+        viewModelScope.launch {
+            userPreferencesRepository.time.distinctUntilChanged().collect { startTime ->
+                if (startTime != "-1") {
+                    startTimer(timeState.value.startTime.toLong())
+                }
+            }
         }
     }
 }

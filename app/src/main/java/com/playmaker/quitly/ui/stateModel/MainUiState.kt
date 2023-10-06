@@ -1,6 +1,7 @@
 package com.playmaker.quitly.ui.stateModel
 
 import com.playmaker.quitly.data.model.ScreenType
+import com.playmaker.quitly.data.model.Time
 import com.playmaker.quitly.ui.utils.DetailType
 
 data class MainUiState (
@@ -17,3 +18,7 @@ data class MainUiState (
     val progressValue : Float = 0.0f
 )
 
+fun MainUiState.toData(): Time = Time(
+    id = 0,
+    period = runningTimeSeconds
+)
