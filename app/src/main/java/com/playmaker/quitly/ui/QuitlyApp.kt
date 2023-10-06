@@ -17,7 +17,9 @@ fun QuitlyApp(
 ) {
     val navigationType: NavigationType
     val contentType: ContentType
-    val mainViewModel: MainViewModel = viewModel()
+    val mainViewModel: MainViewModel = viewModel(
+        factory = AppViewModelProvider.Factory
+    )
     val uiState = mainViewModel.uiState.collectAsState().value
 
     when(windowSize){
