@@ -2,8 +2,10 @@ package com.playmaker.quitly.ui.stateModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.playmaker.quitly.data.TimesRepository
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.data.preference.UserPreferencesRepository
+import com.playmaker.quitly.data.room.LocalTimesRepository
 import com.playmaker.quitly.ui.utils.DetailType
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -18,7 +20,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val timesRepository: TimesRepository
 ) : ViewModel(){
 
     private val _uiState = MutableStateFlow(MainUiState())

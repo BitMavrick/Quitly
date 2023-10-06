@@ -11,7 +11,8 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             MainViewModel(
-                QuitlyApplication().userPreferencesRepository
+                QuitlyApplication().userPreferencesRepository,
+                QuitlyApplication().container.timesRepository
             )
         }
     }

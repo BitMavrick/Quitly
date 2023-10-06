@@ -1,6 +1,5 @@
 package com.playmaker.quitly.data.room
 
-import androidx.datastore.preferences.PreferencesProto
 import androidx.room.Dao
 import com.playmaker.quitly.data.model.Time
 import androidx.room.OnConflictStrategy
