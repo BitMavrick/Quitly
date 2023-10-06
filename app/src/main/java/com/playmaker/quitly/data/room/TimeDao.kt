@@ -19,5 +19,5 @@ interface TimeDao {
     fun getValue(id: Int): Flow<Time>
 
     @Query("SELECT * from `times` ORDER BY id ASC")
-    fun getAllValues(): Flow<List<PreferencesProto.Value>>
+    fun getAllValues(): Flow<List<Time>>
 }
