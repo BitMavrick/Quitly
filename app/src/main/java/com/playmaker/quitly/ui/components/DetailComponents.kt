@@ -19,7 +19,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -168,6 +167,9 @@ fun  ProgressGraph(
     statesUiData: StatesUiData,
     runningTime: Long,
 ){
+    var maxPoint = 0f
+    var progressIndex = 0
+
     Card(
         Modifier
             .fillMaxWidth()
@@ -189,9 +191,16 @@ fun  ProgressGraph(
                 // Dummy Data for the chart
                 val steps = (statesUiData.timesList.size + 1)
 
+
+
                 val pointsData = listOf(Point(0f, 0f)) + statesUiData.timesList.mapIndexed { index, element ->
                     val serial = index.toFloat() + 1f
                     val point = element.period.toFloat()
+
+                    if(point > maxPoint){
+                        maxPoint = point
+                    }
+
                     Point(serial, point)
                 } + Point(steps.toFloat(), runningTime.toFloat())
 
@@ -266,22 +275,27 @@ fun  ProgressGraph(
                 text = "Avg. duration: 1d 10H",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            ProgressBar()
-            Spacer(modifier = Modifier.height(8.dp))
-            ProgressBar()
-            Spacer(modifier = Modifier.height(8.dp))
-            ProgressBar()
-            Spacer(modifier = Modifier.height(8.dp))
-            ProgressBar()
+            statesUiData.timesList.mapIndexed { index, element ->
+                progressIndex = index + 1
+                val point = element.period.toFloat()
+
+                Spacer(modifier = Modifier.height(12.dp))
+                ProgressBar(progressIndex, point)
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+            ProgressBar(progressIndex + 1, runningTime.toFloat())
         }
     }
 }
 
 @Composable
-fun ProgressBar(){
+fun ProgressBar(
+    serial: Int,
+    duration: Float
+){
     Row(
         Modifier
             .fillMaxWidth()
@@ -301,7 +315,7 @@ fun ProgressBar(){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "1",
+                    text = serial.toString(),
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -314,7 +328,7 @@ fun ProgressBar(){
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(
-                text = "Duration: 1d 10H 35M",
+                text = "Duration: $duration",
                 style = MaterialTheme.typography.bodySmall
             )
 
@@ -333,7 +347,7 @@ fun ProgressBar(){
 @Composable
 fun  ProgressBarPreview(){
     QuitlyTheme {
-        ProgressBar()
+        //ProgressBar()
     }
 }
 
