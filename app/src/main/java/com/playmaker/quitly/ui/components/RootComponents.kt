@@ -53,6 +53,7 @@ fun HomeOnlyContent(
                 modifier.padding(horizontal = 16.dp)
             ) {
                 TimeCounter(
+                    uiState = uiState,
                     onStartClick = onStartPress,
                     onGaveUpClick = onGaveUpPress,
                     onClearDataClick = onClearDataPress,

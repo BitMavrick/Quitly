@@ -39,12 +39,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.theme.CustomTypography
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 
 @Composable
 fun TimeCounter(
+    uiState: MainUiState,
     onGaveUpClick: () -> Unit,
     onClearDataClick: () -> Unit,
     onStartClick: () -> Unit,
@@ -88,13 +90,13 @@ fun TimeCounter(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ){
                         Text(
-                            text = "0 DAYS",
+                            text = "${uiState.days} DAYS",
                             style = MaterialTheme.typography.displaySmall,
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(bottom = 15.dp)
                         )
                         Text(
-                            text = "00 : 00 : 00",
+                            text = "${uiState.hours} : ${uiState.minutes} : ${uiState.seconds}",
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -105,7 +107,7 @@ fun TimeCounter(
                         color = MaterialTheme.colorScheme.inversePrimary
                     )
                     CircularProgressIndicator(
-                        progress = 0.4f,
+                        progress = uiState.progressValue,
                         strokeWidth = 10.dp,
                         color = MaterialTheme.colorScheme.primary
                     )
