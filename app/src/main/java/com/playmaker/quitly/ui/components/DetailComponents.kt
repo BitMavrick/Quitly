@@ -52,6 +52,7 @@ import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.theme.CustomTypography
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
@@ -60,6 +61,7 @@ import com.playmaker.quitly.ui.utils.NavigationType
 @Composable
 fun RootDetailComponents(
     uiState: MainUiState,
+    statesUiData: StatesUiData,
     navigationType: NavigationType,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
@@ -90,7 +92,10 @@ fun RootDetailComponents(
                 Column(
                     Modifier.padding(paddingValue)
                 ) {
-                    ProgressGraph()
+                    ProgressGraph(
+                        statesUiData = statesUiData,
+                        runningTime = uiState.runningTimeSeconds,
+                    )
                 }
             }
         }else{
@@ -159,7 +164,10 @@ private fun AppDetailTopBar(
 }
 
 @Composable
-fun  ProgressGraph(){
+fun  ProgressGraph(
+    statesUiData: StatesUiData,
+    runningTime: Long,
+){
     Card(
         Modifier
             .fillMaxWidth()
@@ -179,14 +187,13 @@ fun  ProgressGraph(){
 
             Card {
                 // Dummy Data for the chart
-                val steps = 5
-                val pointsData = listOf(
-                    Point(0f, 0f),
-                    Point(1f, 10f),
-                    Point(2f, 30f),
-                    Point(3f, 15f),
-                    Point(4f, 35f),
-                )
+                val steps = (statesUiData.timesList.size + 1)
+
+                val pointsData = listOf(Point(0f, 0f)) + statesUiData.timesList.mapIndexed { index, element ->
+                    val serial = index.toFloat() + 1f
+                    val point = element.period.toFloat()
+                    Point(serial, point)
+                } + Point(steps.toFloat(), runningTime.toFloat())
 
                 val xAxisData = AxisData.Builder()
                     .axisStepSize(70.dp)
@@ -334,7 +341,7 @@ fun  ProgressBarPreview(){
 @Composable
 fun  ProgressGraphPreview(){
     QuitlyTheme {
-        ProgressGraph()
+        //ProgressGraph()
     }
 }
 

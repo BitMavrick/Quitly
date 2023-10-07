@@ -41,6 +41,7 @@ import com.playmaker.quitly.ui.components.HomeAndDetailContent
 import com.playmaker.quitly.ui.components.HomeOnlyContent
 import com.playmaker.quitly.ui.components.RootDetailComponents
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
@@ -50,6 +51,7 @@ fun HomeScreen(
     navigationType: NavigationType,
     contentType: ContentType,
     uiState: MainUiState,
+    statesUiData: StatesUiData,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -92,6 +94,7 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                statesUiData = statesUiData,
                 timeState = timeState,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
@@ -107,6 +110,7 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                statesUiData = statesUiData,
                 timeState = timeState,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
@@ -118,6 +122,7 @@ fun HomeScreen(
         }else{
             RootDetailComponents(
                 uiState = uiState,
+                statesUiData = statesUiData,
                 navigationType = navigationType,
                 onBackPressed = onDetailsScreenBackPressed
             )
@@ -130,6 +135,7 @@ private fun AppContent(
     navigationType: NavigationType,
     contentType: ContentType,
     uiState: MainUiState,
+    statesUiData : StatesUiData,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -157,6 +163,7 @@ private fun AppContent(
                 if(contentType == ContentType.HOME_AND_DETAIL){
                     HomeAndDetailContent(
                         uiState = uiState,
+                        statesUiData = statesUiData,
                         timeState = timeState,
                         onStartPress = onStartPress,
                         onGaveUpPress = onGaveUpPress,

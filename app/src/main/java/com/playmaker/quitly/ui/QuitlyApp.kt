@@ -22,6 +22,8 @@ fun QuitlyApp(
     )
     val uiState = mainViewModel.uiState.collectAsState().value
     val savedTime = mainViewModel.timeState.collectAsState().value
+    val statesUiData = mainViewModel.statesUiData.collectAsState().value
+
 
     when(windowSize){
         WindowWidthSizeClass.Compact ->{
@@ -46,6 +48,7 @@ fun QuitlyApp(
         navigationType = navigationType,
         contentType = contentType,
         uiState = uiState,
+        statesUiData = statesUiData,
         timeState = savedTime.startTime,
         onStartPress = {
             mainViewModel.start()

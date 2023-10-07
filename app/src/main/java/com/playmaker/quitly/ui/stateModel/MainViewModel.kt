@@ -6,6 +6,7 @@ import com.playmaker.quitly.data.TimesRepository
 import com.playmaker.quitly.data.local.ProgressDataSource.progressList
 import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.data.model.ScreenType
+import com.playmaker.quitly.data.model.Time
 import com.playmaker.quitly.data.preference.UserPreferencesRepository
 import com.playmaker.quitly.ui.utils.DetailType
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -193,6 +194,17 @@ class MainViewModel(
         return answer
     }
 
+    val statesUiData : StateFlow<StatesUiData> =
+        timesRepository.getAllTimesStream().map { StatesUiData(it) }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+                initialValue = StatesUiData()
+            )
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
+    }
+
     init {
         viewModelScope.launch {
             userPreferencesRepository.time.distinctUntilChanged().collect { startTime ->
@@ -206,4 +218,8 @@ class MainViewModel(
 
 data class PreferenceState(
     val startTime: String = "-1",
+)
+
+data class StatesUiData(
+    val timesList: List<Time> = listOf()
 )
