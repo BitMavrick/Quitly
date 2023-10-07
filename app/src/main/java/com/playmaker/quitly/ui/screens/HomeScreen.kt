@@ -50,9 +50,13 @@ fun HomeScreen(
     navigationType: NavigationType,
     contentType: ContentType,
     uiState: MainUiState,
+    timeState: String,
+    onStartPress: () -> Unit,
+    onGaveUpPress: () -> Unit,
+    onClearDataPress: () -> Unit,
     onTabPressed: (ScreenType) -> Unit,
     onDetailPress: (DetailType) -> Unit,
-    onDetailsScreenBackPressed: () -> Unit
+    onDetailsScreenBackPressed: () -> Unit = {},
 ) {
     val navigationItemContentList = listOf(
         NavigationItemContent(
@@ -88,6 +92,10 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                timeState = timeState,
+                onStartPress = onStartPress,
+                onGaveUpPress = onGaveUpPress,
+                onClearDataPress = onClearDataPress,
                 onTabPressed = onTabPressed,
                 onDetailPress = onDetailPress,
                 navigationItemContentList = navigationItemContentList
@@ -99,6 +107,10 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                timeState = timeState,
+                onStartPress = onStartPress,
+                onGaveUpPress = onGaveUpPress,
+                onClearDataPress = onClearDataPress,
                 onTabPressed = onTabPressed,
                 onDetailPress = onDetailPress,
                 navigationItemContentList = navigationItemContentList
@@ -118,6 +130,10 @@ private fun AppContent(
     navigationType: NavigationType,
     contentType: ContentType,
     uiState: MainUiState,
+    timeState: String,
+    onStartPress: () -> Unit,
+    onGaveUpPress: () -> Unit,
+    onClearDataPress: () -> Unit,
     onTabPressed: (ScreenType) -> Unit,
     onDetailPress: (DetailType) -> Unit,
     navigationItemContentList: List<NavigationItemContent>,
@@ -141,12 +157,20 @@ private fun AppContent(
                 if(contentType == ContentType.HOME_AND_DETAIL){
                     HomeAndDetailContent(
                         uiState = uiState,
+                        timeState = timeState,
+                        onStartPress = onStartPress,
+                        onGaveUpPress = onGaveUpPress,
+                        onClearDataPress = onClearDataPress,
                         navigationType = navigationType,
                         onDetailPress = onDetailPress,
                     )
                 }else{
                     HomeOnlyContent(
                         uiState = uiState,
+                        timeState = timeState,
+                        onStartPress = onStartPress,
+                        onGaveUpPress = onGaveUpPress,
+                        onClearDataPress = onClearDataPress,
                         navigationType = navigationType,
                         onDetailPress = onDetailPress,
                         modifier = Modifier.weight(1f)

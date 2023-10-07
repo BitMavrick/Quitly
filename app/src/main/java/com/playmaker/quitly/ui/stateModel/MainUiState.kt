@@ -5,6 +5,7 @@ import com.playmaker.quitly.data.model.Time
 import com.playmaker.quitly.ui.utils.DetailType
 
 data class MainUiState (
+    // UI related
     val currentScreenType: ScreenType = ScreenType.HOME,
     val currentDetailType: DetailType = DetailType.NONE,
     val isShowingHomepage: Boolean = true,

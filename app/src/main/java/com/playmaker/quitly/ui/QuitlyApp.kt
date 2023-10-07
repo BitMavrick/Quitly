@@ -21,6 +21,7 @@ fun QuitlyApp(
         factory = AppViewModelProvider.Factory
     )
     val uiState = mainViewModel.uiState.collectAsState().value
+    val savedTime = mainViewModel.timeState.collectAsState().value
 
     when(windowSize){
         WindowWidthSizeClass.Compact ->{
@@ -45,12 +46,22 @@ fun QuitlyApp(
         navigationType = navigationType,
         contentType = contentType,
         uiState = uiState,
+        timeState = savedTime.startTime,
+        onStartPress = {
+            mainViewModel.start()
+        },
+        onGaveUpPress = {
+            mainViewModel.gaveUp()
+        },
+        onClearDataPress = {
+            mainViewModel.cleanUp()
+        },
         onTabPressed = {screenType : ScreenType ->
             mainViewModel.updateCurrentScreenType(screenType = screenType)
         },
         onDetailPress = {detailType: DetailType ->
             mainViewModel.setDetailScreenType(detailType = detailType)
-        }
+        },
     ) {
         mainViewModel.resetDetailScreenType()
     }

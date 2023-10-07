@@ -59,7 +59,7 @@ class MainViewModel(
     // Backend related functions and systems
     private var timerJob: Job? = null
 
-    private val timeState: StateFlow<PreferenceState> =
+    val timeState: StateFlow<PreferenceState> =
         userPreferencesRepository.time.map { newTime ->
             PreferenceState(startTime = newTime)
         }.stateIn(

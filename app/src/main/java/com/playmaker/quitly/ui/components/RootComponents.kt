@@ -26,6 +26,10 @@ import com.playmaker.quitly.ui.utils.NavigationType
 @Composable
 fun HomeOnlyContent(
     uiState: MainUiState,
+    timeState: String,
+    onStartPress: () -> Unit,
+    onGaveUpPress: () -> Unit,
+    onClearDataPress: () -> Unit,
     navigationType: NavigationType,
     onDetailPress: ((DetailType) -> Unit),
     modifier: Modifier = Modifier
@@ -48,7 +52,12 @@ fun HomeOnlyContent(
             Column(
                 modifier.padding(horizontal = 16.dp)
             ) {
-                TimeCounter()
+                TimeCounter(
+                    onStartClick = onStartPress,
+                    onGaveUpClick = onGaveUpPress,
+                    onClearDataClick = onClearDataPress,
+                    timeState = timeState,
+                )
             }
 
             if(navigationType == NavigationType.BOTTOM_NAVIGATION){
@@ -77,6 +86,10 @@ fun HomeOnlyContent(
 @Composable
 fun HomeAndDetailContent(
     uiState: MainUiState,
+    timeState: String,
+    onStartPress: () -> Unit,
+    onGaveUpPress: () -> Unit,
+    onClearDataPress: () -> Unit,
     navigationType: NavigationType,
     onDetailPress: (DetailType) -> Unit
 ){
@@ -94,6 +107,10 @@ fun HomeAndDetailContent(
         ) {
             HomeOnlyContent(
                 uiState = uiState,
+                timeState= timeState,
+                onStartPress = onStartPress,
+                onGaveUpPress = onGaveUpPress,
+                onClearDataPress = onClearDataPress,
                 onDetailPress = onDetailPress,
                 navigationType = navigationType,
                 modifier = Modifier.weight(1f)
@@ -112,6 +129,10 @@ fun HomeAndDetailContent(
         ) {
             HomeOnlyContent(
                 uiState = uiState,
+                timeState = timeState,
+                onStartPress = onStartPress,
+                onGaveUpPress = onGaveUpPress,
+                onClearDataPress = onClearDataPress,
                 onDetailPress = onDetailPress,
                 navigationType = navigationType,
                 modifier = Modifier.weight(1f)

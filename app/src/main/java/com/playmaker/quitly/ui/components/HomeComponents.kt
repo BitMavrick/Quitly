@@ -44,7 +44,12 @@ import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 
 @Composable
-fun TimeCounter(){
+fun TimeCounter(
+    onGaveUpClick: () -> Unit,
+    onClearDataClick: () -> Unit,
+    onStartClick: () -> Unit,
+    timeState: String
+){
     Card{
         Column {
             Row(
@@ -113,30 +118,40 @@ fun TimeCounter(){
                     .padding(top = 50.dp, bottom = 16.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                OutlinedButton(
-                    onClick = { },
-                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
-                ) {
-                    Icon(
-                        Icons.Filled.Delete,
-                        contentDescription = "Clear data icon",
-                        modifier = Modifier.size(ButtonDefaults.IconSize)
-                    )
-                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    Text("Clear Data")
-                }
+                if(timeState == "-1"){
+                    Button(
+                        onClick = { onStartClick() },
+                        contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+                    ) {
+                        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                        Text("Start Now")
+                    }
+                }else{
+                    OutlinedButton(
+                        onClick = { onClearDataClick() },
+                        contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
+                    ) {
+                        Icon(
+                            Icons.Filled.Delete,
+                            contentDescription = "Clear data icon",
+                            modifier = Modifier.size(ButtonDefaults.IconSize)
+                        )
+                        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                        Text("Clear Data")
+                    }
 
-                Button(
-                    onClick = { },
-                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-                ) {
-                    Icon(
-                        Icons.Filled.Refresh,
-                        contentDescription = "Gave up icon",
-                        modifier = Modifier.size(ButtonDefaults.IconSize)
-                    )
-                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    Text("Gave Up")
+                    Button(
+                        onClick = { onGaveUpClick() },
+                        contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+                    ) {
+                        Icon(
+                            Icons.Filled.Refresh,
+                            contentDescription = "Gave up icon",
+                            modifier = Modifier.size(ButtonDefaults.IconSize)
+                        )
+                        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                        Text("Gave Up")
+                    }
                 }
             }
 
@@ -393,13 +408,13 @@ fun ScoreBoard(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TimeCounterPreview(){
-    QuitlyTheme {
-        TimeCounter()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TimeCounterPreview(){
+//    QuitlyTheme {
+//        TimeCounter()
+//    }
+//}
 
 @Preview(showBackground = true)
 @Composable
