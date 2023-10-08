@@ -34,7 +34,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.yml.charts.axis.AxisData
 import co.yml.charts.common.model.Point
@@ -53,7 +52,6 @@ import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.theme.CustomTypography
-import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
 
@@ -167,126 +165,169 @@ fun  ProgressGraph(
     statesUiData: StatesUiData,
     runningTime: Long,
 ){
-    var maxPoint = 0f
-    var progressIndex = 0
+
+
 
     Card(
         Modifier
             .fillMaxWidth()
     ){
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
+        val totalTry = statesUiData.timesList.size
 
-            Text(
-                text = "Overview",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
+        if(totalTry != 0){
+            var maxPoint = 0f
+            var progressIndex = 0
+            var totalTime = 0f
 
-            Card {
-                // Dummy Data for the chart
-                val steps = (statesUiData.timesList.size + 1)
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
 
+                Text(
+                    text = "Overview",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
 
+                Card {
+                    // Dummy Data for the chart
+                    val steps = (statesUiData.timesList.size + 1)
 
-                val pointsData = listOf(Point(0f, 0f)) + statesUiData.timesList.mapIndexed { index, element ->
-                    val serial = index.toFloat() + 1f
-                    val point = element.period.toFloat()
+                    val pointsData = listOf(Point(0f, 0f)) + statesUiData.timesList.mapIndexed { index, element ->
+                        val serial = index.toFloat() + 1f
+                        val point = element.period.toFloat()
 
-                    if(point > maxPoint){
-                        maxPoint = point
+                        if(point > maxPoint){
+                            maxPoint = point
+                        }
+
+                        totalTime += point
+
+                        Point(serial, point)
+                    } + Point(steps.toFloat(), runningTime.toFloat())
+
+                    if(runningTime.toFloat() > maxPoint){
+                        maxPoint = runningTime.toFloat()
                     }
 
-                    Point(serial, point)
-                } + Point(steps.toFloat(), runningTime.toFloat())
+                    val xAxisData = AxisData.Builder()
+                        .axisStepSize(70.dp)
+                        .backgroundColor(Color.Transparent)
+                        .steps(pointsData.size - 1)
+                        .labelData { i -> i.toString() }
+                        .labelAndAxisLinePadding(15.dp)
+                        .axisLineColor(MaterialTheme.colorScheme.tertiary)
+                        .axisLabelColor(MaterialTheme.colorScheme.tertiary)
+                        .build()
 
-                val xAxisData = AxisData.Builder()
-                    .axisStepSize(70.dp)
-                    .backgroundColor(Color.Transparent)
-                    .steps(pointsData.size - 1)
-                    .labelData { i -> i.toString() }
-                    .labelAndAxisLinePadding(15.dp)
-                    .axisLineColor(MaterialTheme.colorScheme.tertiary)
-                    .axisLabelColor(MaterialTheme.colorScheme.tertiary)
-                    .build()
+                    val yAxisData = AxisData.Builder()
+                        .steps(steps)
+                        .backgroundColor(Color.Transparent)
+                        .labelAndAxisLinePadding(20.dp)
+                        .axisLineColor(MaterialTheme.colorScheme.tertiary)
+                        .axisLabelColor(MaterialTheme.colorScheme.tertiary)
+                        .build()
 
-                val yAxisData = AxisData.Builder()
-                    .steps(steps)
-                    .backgroundColor(Color.Transparent)
-                    .labelAndAxisLinePadding(20.dp)
-                    .axisLineColor(MaterialTheme.colorScheme.tertiary)
-                    .axisLabelColor(MaterialTheme.colorScheme.tertiary)
-                    .build()
-
-                val lineCharData = LineChartData(
-                    linePlotData = LinePlotData(
-                        lines = listOf(
-                            Line(
-                                dataPoints = pointsData,
-                                LineStyle(
-                                    color = MaterialTheme.colorScheme.tertiary,
-                                    lineType = LineType.SmoothCurve(isDotted = false)
-                                ),
-                                IntersectionPoint(
-                                    color = MaterialTheme.colorScheme.tertiary
-                                ),
-                                SelectionHighlightPoint(color = MaterialTheme.colorScheme.primary),
-                                ShadowUnderLine(
-                                    alpha = 0.5f,
-                                    brush = Brush.verticalGradient(
-                                        colors = listOf(
-                                            MaterialTheme.colorScheme.inversePrimary,
-                                            Color.Transparent
+                    val lineCharData = LineChartData(
+                        linePlotData = LinePlotData(
+                            lines = listOf(
+                                Line(
+                                    dataPoints = pointsData,
+                                    LineStyle(
+                                        color = MaterialTheme.colorScheme.tertiary,
+                                        lineType = LineType.SmoothCurve(isDotted = false)
+                                    ),
+                                    IntersectionPoint(
+                                        color = MaterialTheme.colorScheme.tertiary
+                                    ),
+                                    SelectionHighlightPoint(color = MaterialTheme.colorScheme.primary),
+                                    ShadowUnderLine(
+                                        alpha = 0.5f,
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(
+                                                MaterialTheme.colorScheme.inversePrimary,
+                                                Color.Transparent
+                                            )
                                         )
-                                    )
-                                ),
-                                SelectionHighlightPopUp()
-                            )
+                                    ),
+                                    SelectionHighlightPopUp()
+                                )
+                            ),
                         ),
-                    ),
-                    backgroundColor = MaterialTheme.colorScheme.surface,
-                    xAxisData = xAxisData,
-                    yAxisData = yAxisData,
-                    gridLines = GridLines(color = MaterialTheme.colorScheme.outlineVariant)
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                        xAxisData = xAxisData,
+                        yAxisData = yAxisData,
+                        gridLines = GridLines(color = MaterialTheme.colorScheme.outlineVariant)
+                    )
+
+                    LineChart(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp),
+                        lineChartData = lineCharData
+                    )
+                }
+
+                Text(
+                    text = "Progress Report",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.padding(top = 16.dp)
                 )
 
-                LineChart(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp),
-                    lineChartData = lineCharData
+                Spacer(modifier = Modifier.height(4.dp))
+
+                totalTime += runningTime
+
+                val avgTimeInSeconds = (totalTime / (totalTry + 1))
+
+                val days = getDays(avgTimeInSeconds)
+                val hours = getHours(avgTimeInSeconds)
+                val minutes = getMinutes(avgTimeInSeconds)
+                val seconds = getSeconds(avgTimeInSeconds)
+
+                val text = buildString {
+                    if (days > 0) append("${days}d ")
+                    if (hours > 0) append("${hours}h ")
+                    if (minutes > 0) append("${minutes}m ")
+                    if (seconds > 0 || (days == 0 && hours == 0 && minutes == 0)) append("${seconds}s")
+                }
+
+                Text(
+                    text = "Avg. duration: $text",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
-            }
-            
-            Text(
-                text = "Progress Report",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.padding(top = 16.dp)
-            )
 
-            Spacer(modifier = Modifier.height(4.dp))
+                statesUiData.timesList.mapIndexed { index, element ->
+                    progressIndex = index + 1
+                    val point = element.period.toFloat()
 
-            Text(
-                text = "Avg. duration: 1d 10H",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-            )
-
-            statesUiData.timesList.mapIndexed { index, element ->
-                progressIndex = index + 1
-                val point = element.period.toFloat()
+                    Spacer(modifier = Modifier.height(12.dp))
+                    ProgressBar(
+                        serial = progressIndex,
+                        duration = point,
+                        maxValue = maxPoint
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(12.dp))
-                ProgressBar(progressIndex, point)
+                ProgressBar(
+                    serial = progressIndex + 1,
+                    duration = runningTime.toFloat(),
+                    maxValue = maxPoint
+                )
             }
-
-            Spacer(modifier = Modifier.height(12.dp))
-            ProgressBar(progressIndex + 1, runningTime.toFloat())
+        }else{
+            Text(
+                text = "Progress history is not available since you don't have any history yet.",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(16.dp),
+            )
         }
     }
 }
@@ -294,7 +335,8 @@ fun  ProgressGraph(
 @Composable
 fun ProgressBar(
     serial: Int,
-    duration: Float
+    duration: Float,
+    maxValue: Float,
 ){
     Row(
         Modifier
@@ -327,35 +369,31 @@ fun ProgressBar(
                 .padding(start = 8.dp),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
+            val days = getDays(duration)
+            val hours = getHours(duration)
+            val minutes = getMinutes(duration)
+            val seconds = getSeconds(duration)
+
+            val text = buildString {
+                if (days > 0) append("${days}d ")
+                if (hours > 0) append("${hours}h ")
+                if (minutes > 0) append("${minutes}m ")
+                if (seconds > 0 || (days == 0 && hours == 0 && minutes == 0)) append("${seconds}s")
+            }
+
             Text(
-                text = "Duration: $duration",
+                text = "Duration: $text",
                 style = MaterialTheme.typography.bodySmall
             )
 
             LinearProgressIndicator(
-                progress = 0.4f,
+                progress = duration / maxValue,
                 trackColor = MaterialTheme.colorScheme.inversePrimary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(6.dp)
             )
         }
-    }
-}
-
-@Preview
-@Composable
-fun  ProgressBarPreview(){
-    QuitlyTheme {
-        //ProgressBar()
-    }
-}
-
-@Preview
-@Composable
-fun  ProgressGraphPreview(){
-    QuitlyTheme {
-        //ProgressGraph()
     }
 }
 
@@ -381,7 +419,9 @@ fun AchievementCard(){
                     style = CustomTypography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
                 )
             }
             Divider(
@@ -403,4 +443,21 @@ fun AchievementCard(){
             }
         }
     }
+}
+
+private fun getDays(seconds: Float) : Int {
+    val secondsInADay = 24 * 60 * 60
+    return (seconds / secondsInADay).toInt()
+}
+
+private fun getHours(seconds: Float) : Int {
+    return ((seconds % 86400) / 3600).toInt()
+}
+
+private fun getMinutes(seconds: Float) : Int {
+    return ((seconds % 3600) / 60).toInt()
+}
+
+private fun getSeconds(seconds: Float) : Int {
+    return (seconds % 60).toInt()
 }
