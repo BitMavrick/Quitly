@@ -19,6 +19,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.AutoGraph
+import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -184,13 +186,21 @@ fun  ProgressGraph(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-
-                Text(
-                    text = "Overview",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
+                Row(
+                    Modifier.padding(bottom = 16.dp)
+                ){
+                    Icon(
+                        Icons.Outlined.AutoGraph,
+                        tint = MaterialTheme.colorScheme.primary,
+                        contentDescription = null,
+                    )
+                    Text(
+                        text = "Overview",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
 
                 Card {
                     // Dummy Data for the chart

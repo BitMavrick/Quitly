@@ -37,6 +37,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.ui.stateModel.MainUiState
@@ -157,9 +158,13 @@ fun TimeCounter(
                 }
             }
 
-            Row(Modifier.padding(38.dp)) {
+            Row(
+                Modifier.fillMaxWidth().padding(38.dp)
+            ) {
                 Text(
-                    text = "- Believe in yourself, and you are halfway there!",
+                    text = "Believe in yourself, and you are halfway there!",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
