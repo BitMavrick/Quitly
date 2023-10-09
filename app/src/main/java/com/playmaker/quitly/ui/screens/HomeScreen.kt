@@ -42,6 +42,7 @@ import com.playmaker.quitly.ui.components.HomeAndDetailContent
 import com.playmaker.quitly.ui.components.HomeOnlyContent
 import com.playmaker.quitly.ui.components.RootDetailComponents
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.stateModel.MainViewModel
 import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.utils.ContentType
 import com.playmaker.quitly.ui.utils.DetailType
@@ -52,6 +53,7 @@ fun HomeScreen(
     navigationType: NavigationType,
     contentType: ContentType,
     uiState: MainUiState,
+    viewModel: MainViewModel,
     statesUiData: StatesUiData,
     progress: Progress,
     timeState: String,
@@ -96,6 +98,7 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                viewModel = viewModel,
                 progress = progress,
                 statesUiData = statesUiData,
                 timeState = timeState,
@@ -113,6 +116,7 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                viewModel = viewModel,
                 statesUiData = statesUiData,
                 progress = progress,
                 timeState = timeState,
@@ -139,6 +143,7 @@ private fun AppContent(
     navigationType: NavigationType,
     contentType: ContentType,
     uiState: MainUiState,
+    viewModel: MainViewModel,
     statesUiData : StatesUiData,
     progress: Progress,
     timeState: String,
@@ -168,6 +173,7 @@ private fun AppContent(
                 if(contentType == ContentType.HOME_AND_DETAIL){
                     HomeAndDetailContent(
                         uiState = uiState,
+                        viewModel = viewModel,
                         statesUiData = statesUiData,
                         timeState = timeState,
                         progress = progress,
@@ -180,7 +186,9 @@ private fun AppContent(
                 }else{
                     HomeOnlyContent(
                         uiState = uiState,
+                        viewModel = viewModel,
                         timeState = timeState,
+                        statesUiData = statesUiData,
                         onStartPress = onStartPress,
                         progress = progress,
                         onGaveUpPress = onGaveUpPress,

@@ -42,6 +42,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.stateModel.MainViewModel
+import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.theme.CustomTypography
 import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
@@ -231,7 +233,9 @@ fun ProgressHistory(
 @Composable
 fun OverviewCard(
     uiState: MainUiState,
-    progress: Progress
+    viewModel: MainViewModel,
+    statesUiData: StatesUiData,
+    progress: Progress,
 ){
     Card(
         Modifier
@@ -281,7 +285,7 @@ fun OverviewCard(
                 )
 
                 Text(
-                    text = "3 Times",
+                    text = "${statesUiData.timesList.size} Times",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )

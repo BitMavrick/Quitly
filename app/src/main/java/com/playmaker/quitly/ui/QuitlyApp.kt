@@ -48,6 +48,7 @@ fun QuitlyApp(
         navigationType = navigationType,
         contentType = contentType,
         uiState = uiState,
+        viewModel = mainViewModel,
         statesUiData = statesUiData,
         timeState = savedTime.startTime,
         progress = mainViewModel.statesProgressCard(),

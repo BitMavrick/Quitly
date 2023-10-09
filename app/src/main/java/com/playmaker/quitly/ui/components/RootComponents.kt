@@ -21,6 +21,7 @@ import com.playmaker.quitly.R.dimen.topbar_padding_vertical
 import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
+import com.playmaker.quitly.ui.stateModel.MainViewModel
 import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.utils.DetailType
 import com.playmaker.quitly.ui.utils.NavigationType
@@ -29,6 +30,8 @@ import com.playmaker.quitly.ui.utils.NavigationType
 fun HomeOnlyContent(
     uiState: MainUiState,
     progress: Progress,
+    statesUiData: StatesUiData,
+    viewModel: MainViewModel,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -78,6 +81,8 @@ fun HomeOnlyContent(
                 ) {
                     OverviewCard(
                         uiState = uiState,
+                        viewModel = viewModel,
+                        statesUiData = statesUiData,
                         progress = progress
                     )
                     ProgressCard()
@@ -93,6 +98,7 @@ fun HomeOnlyContent(
 @Composable
 fun HomeAndDetailContent(
     uiState: MainUiState,
+    viewModel: MainViewModel,
     statesUiData: StatesUiData,
     progress: Progress,
     timeState: String,
@@ -116,7 +122,9 @@ fun HomeAndDetailContent(
         ) {
             HomeOnlyContent(
                 uiState = uiState,
+                viewModel = viewModel,
                 timeState= timeState,
+                statesUiData = statesUiData,
                 progress = progress,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
@@ -140,7 +148,9 @@ fun HomeAndDetailContent(
         ) {
             HomeOnlyContent(
                 uiState = uiState,
+                viewModel = viewModel,
                 timeState = timeState,
+                statesUiData = statesUiData,
                 progress = progress,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
