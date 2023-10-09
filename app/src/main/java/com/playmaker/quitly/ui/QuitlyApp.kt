@@ -50,6 +50,7 @@ fun QuitlyApp(
         uiState = uiState,
         statesUiData = statesUiData,
         timeState = savedTime.startTime,
+        progress = mainViewModel.statesProgressCard(),
         onStartPress = {
             mainViewModel.start()
         },

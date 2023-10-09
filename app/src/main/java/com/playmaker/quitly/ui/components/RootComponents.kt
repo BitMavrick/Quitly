@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R.dimen.topbar_padding_vertical
+import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.stateModel.StatesUiData
@@ -27,6 +28,7 @@ import com.playmaker.quitly.ui.utils.NavigationType
 @Composable
 fun HomeOnlyContent(
     uiState: MainUiState,
+    progress: Progress,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -74,7 +76,10 @@ fun HomeOnlyContent(
                 Column(
                     modifier.padding(start = 16.dp, bottom = 16.dp, end = 16.dp)
                 ) {
-                    OverviewCard()
+                    OverviewCard(
+                        uiState = uiState,
+                        progress = progress
+                    )
                     ProgressCard()
                     if(navigationType == NavigationType.BOTTOM_NAVIGATION){
                         ScoreBoard(onDetailPress = onDetailPress)
@@ -89,6 +94,7 @@ fun HomeOnlyContent(
 fun HomeAndDetailContent(
     uiState: MainUiState,
     statesUiData: StatesUiData,
+    progress: Progress,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -111,6 +117,7 @@ fun HomeAndDetailContent(
             HomeOnlyContent(
                 uiState = uiState,
                 timeState= timeState,
+                progress = progress,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
                 onClearDataPress = onClearDataPress,
@@ -134,6 +141,7 @@ fun HomeAndDetailContent(
             HomeOnlyContent(
                 uiState = uiState,
                 timeState = timeState,
+                progress = progress,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
                 onClearDataPress = onClearDataPress,

@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.R
+import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.components.HomeAndDetailContent
 import com.playmaker.quitly.ui.components.HomeOnlyContent
@@ -52,6 +53,7 @@ fun HomeScreen(
     contentType: ContentType,
     uiState: MainUiState,
     statesUiData: StatesUiData,
+    progress: Progress,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -94,6 +96,7 @@ fun HomeScreen(
                 navigationType = navigationType,
                 contentType = contentType,
                 uiState = uiState,
+                progress = progress,
                 statesUiData = statesUiData,
                 timeState = timeState,
                 onStartPress = onStartPress,
@@ -111,6 +114,7 @@ fun HomeScreen(
                 contentType = contentType,
                 uiState = uiState,
                 statesUiData = statesUiData,
+                progress = progress,
                 timeState = timeState,
                 onStartPress = onStartPress,
                 onGaveUpPress = onGaveUpPress,
@@ -136,6 +140,7 @@ private fun AppContent(
     contentType: ContentType,
     uiState: MainUiState,
     statesUiData : StatesUiData,
+    progress: Progress,
     timeState: String,
     onStartPress: () -> Unit,
     onGaveUpPress: () -> Unit,
@@ -165,6 +170,7 @@ private fun AppContent(
                         uiState = uiState,
                         statesUiData = statesUiData,
                         timeState = timeState,
+                        progress = progress,
                         onStartPress = onStartPress,
                         onGaveUpPress = onGaveUpPress,
                         onClearDataPress = onClearDataPress,
@@ -176,6 +182,7 @@ private fun AppContent(
                         uiState = uiState,
                         timeState = timeState,
                         onStartPress = onStartPress,
+                        progress = progress,
                         onGaveUpPress = onGaveUpPress,
                         onClearDataPress = onClearDataPress,
                         navigationType = navigationType,
