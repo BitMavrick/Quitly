@@ -248,12 +248,12 @@ fun OverviewCard(
                 .padding(16.dp)
         ) {
             Text(
-                text = "Corporal",
+                text = viewModel.statesProgressCard().title,
                 style = CustomTypography.titleLarge,
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = "Reached 5 Days",
+                text = "Reached ${viewModel.statesProgressCard().days} Days",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -323,8 +323,7 @@ fun ProgressCard(){
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
-
-/*
+            /*
                 Text(
                     text = buildString {
                         if (days != "0") {
@@ -335,9 +334,7 @@ fun ProgressCard(){
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
-
- */
-
+            */
             }
 
             LinearProgressIndicator(
