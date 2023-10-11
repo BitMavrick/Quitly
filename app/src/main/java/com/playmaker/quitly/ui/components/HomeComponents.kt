@@ -165,7 +165,7 @@ fun TimeCounter(
                 Modifier.fillMaxWidth().padding(38.dp)
             ) {
                 Text(
-                    text = "Believe in yourself, and you are halfway there!",
+                    text = "Believe yourself, and you are halfway there!",
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium
