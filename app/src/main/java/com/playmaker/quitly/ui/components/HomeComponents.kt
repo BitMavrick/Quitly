@@ -160,7 +160,6 @@ fun TimeCounter(
                     }
                 }
             }
-
             Row(
                 Modifier.fillMaxWidth().padding(38.dp)
             ) {
