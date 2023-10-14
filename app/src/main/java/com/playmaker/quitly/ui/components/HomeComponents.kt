@@ -334,7 +334,6 @@ fun ProgressCard(){
                 )
             */
             }
-
             LinearProgressIndicator(
                 progress = 0.4f,
                 modifier = Modifier
