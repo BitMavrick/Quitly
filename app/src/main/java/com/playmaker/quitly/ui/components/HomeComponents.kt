@@ -38,14 +38,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.stateModel.MainViewModel
 import com.playmaker.quitly.ui.stateModel.StatesUiData
 import com.playmaker.quitly.ui.theme.CustomTypography
-import com.playmaker.quitly.ui.theme.QuitlyTheme
 import com.playmaker.quitly.ui.utils.DetailType
 
 @Composable
@@ -234,7 +232,6 @@ fun OverviewCard(
     uiState: MainUiState,
     viewModel: MainViewModel,
     statesUiData: StatesUiData,
-    progress: Progress,
 ){
     val currentBest = viewModel.statesProgressCard().title
     val days = viewModel.statesProgressCard().days
@@ -325,9 +322,18 @@ fun OverviewCard(
     }
 }
 
-@Preview
 @Composable
-fun ProgressCard(){
+fun ProgressCard(
+    runningTime: Long,
+    progress: Progress
+){
+    val remainingTime = progress.endTime - runningTime
+
+    val secondsInADay = 24 * 60 * 60
+    val days = (remainingTime / secondsInADay).toString()
+    val seconds = (remainingTime % 60).toString().padStart(2, '0')
+    val minutes = ((remainingTime % 3600) / 60).toString().padStart(2, '0')
+    val hours = ((remainingTime % 86400) / 3600).toString().padStart(2, '0')
 
     Card(
         Modifier
@@ -345,17 +351,11 @@ fun ProgressCard(){
                 color = MaterialTheme.colorScheme.primary,
             )
             Row(
-                Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                Modifier.padding(vertical = 4.dp),
             ){
                 Text(
-                    text = "Upcoming: Nothing",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 12.dp)
-                )
-            /*
-                Text(
                     text = buildString {
+                        append("Remaining: ")
                         if (days != "0") {
                             append("${days}d ")
                         }
@@ -364,10 +364,9 @@ fun ProgressCard(){
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
-            */
             }
             LinearProgressIndicator(
-                progress = 0.4f,
+                progress = ((runningTime.toFloat() - progress.startTime.toFloat())/(progress.endTime.toFloat() - progress.startTime.toFloat())),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(10.dp),
@@ -379,11 +378,11 @@ fun ProgressCard(){
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Current Progress",
+                    text = progress.title,
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(
-                    text = "Upcoming progress",
+                    text = progress.upcoming,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -445,21 +444,5 @@ fun ScoreBoard(
                 )
             }
         }
-    }
-}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun TimeCounterPreview(){
-//    QuitlyTheme {
-//        TimeCounter()
-//    }
-//}
-
-@Preview(showBackground = true)
-@Composable
-fun ProgressHistoryPreview(){
-    QuitlyTheme {
-        ProgressHistory(onDetailPress = { })
     }
 }
