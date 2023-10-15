@@ -20,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.AutoGraph
-import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -167,9 +166,6 @@ fun  ProgressGraph(
     statesUiData: StatesUiData,
     runningTime: Long,
 ){
-
-
-
     Card(
         Modifier
             .fillMaxWidth()
@@ -435,7 +431,8 @@ fun AchievementCard(){
                 )
             }
             Divider(
-                thickness = 3.dp
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.inversePrimary,
             )
             Row(
                 Modifier
