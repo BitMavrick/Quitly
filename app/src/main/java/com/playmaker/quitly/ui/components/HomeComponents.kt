@@ -236,6 +236,11 @@ fun OverviewCard(
     statesUiData: StatesUiData,
     progress: Progress,
 ){
+    val currentBest = viewModel.statesProgressCard().title
+    val days = viewModel.statesProgressCard().days
+    val giveUps = statesUiData.timesList.size
+    val runningTime = uiState.runningTimeSeconds
+
     Card(
         Modifier
             .fillMaxWidth()
@@ -246,16 +251,43 @@ fun OverviewCard(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(
-                text = viewModel.statesProgressCard().title,
-                style = CustomTypography.titleLarge,
-                color = MaterialTheme.colorScheme.primary
-            )
-            Text(
-                text = "Reached ${viewModel.statesProgressCard().days} Days",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
+            if(giveUps == 0){
+                Text(
+                    text = currentBest,
+                    style = CustomTypography.titleLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "Reached $days Days",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+
+            }else{
+                var maxTime = 0L
+                statesUiData.timesList.forEach{ states ->
+                    if(states.period > maxTime){
+                        maxTime = states.period
+                    }
+                }
+
+                if(runningTime > maxTime){
+                    maxTime = runningTime
+                }
+
+                val allTimeBest = viewModel.maxStatesProgress(maxTime)
+
+                Text(
+                    text = allTimeBest.title,
+                    style = CustomTypography.titleLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "Reached ${allTimeBest.days} Days",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
 
             Divider(
                 thickness = 3.dp,
@@ -271,7 +303,7 @@ fun OverviewCard(
                 )
 
                 Text(
-                    text = "New",
+                    text = currentBest,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
@@ -284,7 +316,7 @@ fun OverviewCard(
                 )
 
                 Text(
-                    text = "${statesUiData.timesList.size} Times",
+                    text = "$giveUps Times",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
