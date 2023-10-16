@@ -300,7 +300,7 @@ fun OverviewCard(
                 )
 
                 Text(
-                    text = currentBest,
+                    text = "$currentBest ($days days)",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )

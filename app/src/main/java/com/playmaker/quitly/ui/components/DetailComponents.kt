@@ -49,6 +49,8 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
+import com.playmaker.quitly.data.local.ProgressDataSource.progressList
+import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.data.model.ScreenType
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.stateModel.StatesUiData
@@ -64,6 +66,8 @@ fun RootDetailComponents(
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val progressList = progressList
+
     BackHandler {
         onBackPressed()
     }
@@ -101,7 +105,18 @@ fun RootDetailComponents(
                 Column(
                     Modifier.padding(paddingValue)
                 ) {
-                    AchievementCard()
+                    for(progress in progressList){
+                        if(uiState.days.toInt() >= progress.days){
+                            AchievementCard(
+                                color = MaterialTheme.colorScheme.tertiaryContainer,
+                                progress = progress,
+                            )
+                        }else{
+                            AchievementCard(
+                                progress = progress
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -404,11 +419,15 @@ fun ProgressBar(
 }
 
 @Composable
-fun AchievementCard(){
+fun AchievementCard(
+    color : Color = MaterialTheme.colorScheme.secondaryContainer,
+    progress : Progress
+){
     Card(
         colors = CardDefaults.cardColors(
-            //containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            containerColor = color,
         ),
+        modifier = Modifier.padding(bottom = 16.dp)
     ) {
         Column(
             modifier = Modifier
@@ -421,7 +440,7 @@ fun AchievementCard(){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(
-                    text = "Scout",
+                    text = progress.title,
                     style = CustomTypography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Center,
@@ -440,7 +459,7 @@ fun AchievementCard(){
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = "Reach 1 day",
+                    text = "Reach ${progress.days} day",
                     style = CustomTypography.bodyMedium,
                     modifier = Modifier
                         .fillMaxWidth()
