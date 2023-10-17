@@ -38,6 +38,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -58,8 +59,8 @@ fun TimeCounter(
     onStartClick: () -> Unit,
     timeState: String
 ){
-    val openGaveUpAlertDialog = remember { mutableStateOf(false) }
-    val openWipeAlertDialog = remember { mutableStateOf(false) }
+    val openGaveUpAlertDialog = rememberSaveable { mutableStateOf(false) }
+    val openWipeAlertDialog = rememberSaveable { mutableStateOf(false) }
 
     Card{
         Column {
@@ -139,7 +140,7 @@ fun TimeCounter(
                     }
                 }else{
                     OutlinedButton(
-                        onClick = { onClearDataClick() },
+                        onClick = { openWipeAlertDialog.value = true },
                         contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                     ) {
                         Icon(
@@ -170,6 +171,16 @@ fun TimeCounter(
                             onConfirmation = {
                                 onGaveUpClick()
                                 openGaveUpAlertDialog.value = false
+                            }
+                        )
+                    }
+
+                    if(openWipeAlertDialog.value){
+                        WipeAlert(
+                            onDismissRequest = { openWipeAlertDialog.value = false },
+                            onConfirmation = {
+                                onClearDataClick()
+                                openWipeAlertDialog.value = false
                             }
                         )
                     }
@@ -208,7 +219,7 @@ fun GaveUpAlert(
         },
         text = {
             Text(
-                text = "Think twice before what you are doing. You destroyed the progress you made so far. That is not what you wanted when you started.",
+                text = "Think twice before what you are doing! You are going to destroying the progress you made so far. That is not what you wanted when you started.",
             )
         },
         onDismissRequest = { onDismissRequest() },
@@ -219,6 +230,48 @@ fun GaveUpAlert(
                 }
             ) {
                 Text("Give up")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    onDismissRequest()
+                }
+            ) {
+                Text("Dismiss")
+            }
+        }
+    )
+}
+
+@Composable
+fun WipeAlert(
+    onDismissRequest: () -> Unit,
+    onConfirmation: () -> Unit,
+) {
+    AlertDialog(
+        icon = {
+            Icon(
+                Icons.Filled.Delete,
+                contentDescription = "Give up icon",
+            )
+        },
+        title = {
+            Text(text = "Erase all data?")
+        },
+        text = {
+            Text(
+                text = "Think twice before what you are doing! You are going to wipe out all the records. Are you sure about this?",
+            )
+        },
+        onDismissRequest = { onDismissRequest() },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onConfirmation()
+                }
+            ) {
+                Text("Yes, I'm sure")
             }
         },
         dismissButton = {
