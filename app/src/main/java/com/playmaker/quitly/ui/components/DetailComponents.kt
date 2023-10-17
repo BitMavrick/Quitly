@@ -106,7 +106,7 @@ fun RootDetailComponents(
                     Modifier.padding(paddingValue)
                 ) {
                     for(progress in progressList){
-                        if(uiState.days.toInt() >= progress.days){
+                        if(uiState.days.toInt() >= progress.days && uiState.runningTimeSeconds != 0L){
                             AchievementCard(
                                 color = MaterialTheme.colorScheme.tertiaryContainer,
                                 progress = progress,
