@@ -233,90 +233,105 @@ fun OverviewCard(
     viewModel: MainViewModel,
     statesUiData: StatesUiData,
 ){
-    val currentBest = viewModel.statesProgressCard().title
-    val days = viewModel.statesProgressCard().days
-    val giveUps = statesUiData.timesList.size
-    val runningTime = uiState.runningTimeSeconds
-
-    Card(
-        Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp)
-    ){
-        Column(
+    if(uiState.runningTimeSeconds == 0L){
+        Card(
             Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            if(giveUps == 0){
-                Text(
-                    text = currentBest,
-                    style = CustomTypography.titleLarge,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    text = "Reached $days Days",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-
-            }else{
-                var maxTime = 0L
-                statesUiData.timesList.forEach{ states ->
-                    if(states.period > maxTime){
-                        maxTime = states.period
-                    }
-                }
-
-                if(runningTime > maxTime){
-                    maxTime = runningTime
-                }
-
-                val allTimeBest = viewModel.maxStatesProgress(maxTime)
-
-                Text(
-                    text = allTimeBest.title,
-                    style = CustomTypography.titleLarge,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    text = "Reached ${allTimeBest.days} Days",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            }
-
-            Divider(
-                thickness = 3.dp,
-                color = MaterialTheme.colorScheme.inversePrimary,
-                modifier = Modifier.padding(vertical = 6.dp)
+                .padding(bottom = 8.dp)
+        ){
+            Text(
+                text = "Progress ranks is not available since you don't start yet.",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(16.dp),
             )
+        }
+    }else{
+        val currentBest = viewModel.statesProgressCard().title
+        val days = viewModel.statesProgressCard().days
+        val giveUps = statesUiData.timesList.size
+        val runningTime = uiState.runningTimeSeconds
 
-            Row{
-                Text(
-                    text = "Current Best: ",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 3.dp)
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+        ){
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                if(giveUps == 0){
+                    Text(
+                        text = currentBest,
+                        style = CustomTypography.titleLarge,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = "Reached $days Days",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+
+                }else{
+                    var maxTime = 0L
+                    statesUiData.timesList.forEach{ states ->
+                        if(states.period > maxTime){
+                            maxTime = states.period
+                        }
+                    }
+
+                    if(runningTime > maxTime){
+                        maxTime = runningTime
+                    }
+
+                    val allTimeBest = viewModel.maxStatesProgress(maxTime)
+
+                    Text(
+                        text = allTimeBest.title,
+                        style = CustomTypography.titleLarge,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = "Reached ${allTimeBest.days} Days",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+
+                Divider(
+                    thickness = 3.dp,
+                    color = MaterialTheme.colorScheme.inversePrimary,
+                    modifier = Modifier.padding(vertical = 6.dp)
                 )
 
-                Text(
-                    text = "$currentBest ($days days)",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
-                )
-            }
+                Row{
+                    Text(
+                        text = "Current Best: ",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(bottom = 3.dp)
+                    )
 
-            Row{
-                Text(
-                    text = "Total Give ups: ",
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                    Text(
+                        text = "$currentBest ($days days)",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                }
 
-                Text(
-                    text = "$giveUps Times",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
-                )
+                Row{
+                    Text(
+                        text = "Total Give ups: ",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+
+                    Text(
+                        text = "$giveUps Times",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                }
             }
         }
     }

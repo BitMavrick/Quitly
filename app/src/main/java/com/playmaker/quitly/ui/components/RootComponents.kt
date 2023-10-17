@@ -84,10 +84,14 @@ fun HomeOnlyContent(
                         viewModel = viewModel,
                         statesUiData = statesUiData,
                     )
-                    ProgressCard(
-                        runningTime = uiState.runningTimeSeconds,
-                        progress = progress
-                    )
+
+                    if(uiState.runningTimeSeconds != 0L){
+                        ProgressCard(
+                            runningTime = uiState.runningTimeSeconds,
+                            progress = progress
+                        )
+                    }
+
                     if(navigationType == NavigationType.BOTTOM_NAVIGATION){
                         ScoreBoard(onDetailPress = onDetailPress)
                     }
