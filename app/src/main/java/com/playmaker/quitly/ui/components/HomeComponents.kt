@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material.icons.outlined.Timer
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -33,7 +34,10 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,6 +58,9 @@ fun TimeCounter(
     onStartClick: () -> Unit,
     timeState: String
 ){
+    val openGaveUpAlertDialog = remember { mutableStateOf(false) }
+    val openWipeAlertDialog = remember { mutableStateOf(false) }
+
     Card{
         Column {
             Row(
@@ -145,7 +152,7 @@ fun TimeCounter(
                     }
 
                     Button(
-                        onClick = { onGaveUpClick() },
+                        onClick = { openGaveUpAlertDialog.value = true },
                         contentPadding = ButtonDefaults.ButtonWithIconContentPadding
                     ) {
                         Icon(
@@ -156,10 +163,22 @@ fun TimeCounter(
                         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
                         Text("Gave Up")
                     }
+
+                    if(openGaveUpAlertDialog.value){
+                        GaveUpAlert(
+                            onDismissRequest = { openGaveUpAlertDialog.value = false },
+                            onConfirmation = {
+                                onGaveUpClick()
+                                openGaveUpAlertDialog.value = false
+                            }
+                        )
+                    }
                 }
             }
             Row(
-                Modifier.fillMaxWidth().padding(38.dp)
+                Modifier
+                    .fillMaxWidth()
+                    .padding(38.dp)
             ) {
                 Text(
                     text = "Believe yourself, and you are halfway there!",
@@ -170,6 +189,48 @@ fun TimeCounter(
             }
         }
     }
+}
+
+@Composable
+fun GaveUpAlert(
+    onDismissRequest: () -> Unit,
+    onConfirmation: () -> Unit,
+) {
+    AlertDialog(
+        icon = {
+            Icon(
+                Icons.Filled.Refresh,
+                contentDescription = "Give up icon",
+            )
+        },
+        title = {
+            Text(text = "Give up now?")
+        },
+        text = {
+            Text(
+                text = "Think twice before what you are doing. You destroyed the progress you made so far. That is not what you wanted when you started.",
+            )
+        },
+        onDismissRequest = { onDismissRequest() },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onConfirmation()
+                }
+            ) {
+                Text("Give up")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    onDismissRequest()
+                }
+            ) {
+                Text("Dismiss")
+            }
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -389,7 +450,9 @@ fun ProgressCard(
             )
 
             Row(
-                Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
