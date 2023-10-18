@@ -95,13 +95,10 @@ class MainViewModel(
                 runningTimeSeconds = 0
             )
         }
-
         viewModelScope.launch {
             deleteTimeFromDatabase()
         }
     }
-
-
 
     private fun saveTime(){
         viewModelScope.launch {
@@ -176,7 +173,6 @@ class MainViewModel(
                 break
             }
         }
-
         return answer
     }
 
@@ -190,7 +186,6 @@ class MainViewModel(
                 break
             }
         }
-
         return answer
     }
 

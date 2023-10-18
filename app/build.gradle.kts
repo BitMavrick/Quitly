@@ -76,7 +76,7 @@ dependencies {
     implementation("androidx.compose.material3:material3-window-size-class")
 
     // Icon Extended
-    implementation ("androidx.compose.material:material-icons-extended:1.5.2")
+    implementation ("androidx.compose.material:material-icons-extended:1.5.3")
 
     // Ycharts
     implementation("co.yml:ycharts:2.1.0")
@@ -88,4 +88,7 @@ dependencies {
     implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+
+    // Splash screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

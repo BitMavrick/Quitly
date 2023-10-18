@@ -43,7 +43,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.playmaker.quitly.data.local.QuoteDataSource
 import com.playmaker.quitly.data.model.Progress
 import com.playmaker.quitly.ui.stateModel.MainUiState
 import com.playmaker.quitly.ui.stateModel.MainViewModel
